@@ -4,8 +4,8 @@ import '../styles/app.scss';
 
 const App:FC = ({ Component, pageProps }:AppProps) => {
   return (
-      <Component {...pageProps} />
-  )
+    <Component {...pageProps} />
+  );
 }
 
 export default App;
