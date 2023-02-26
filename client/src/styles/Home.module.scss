@@ -1,0 +1,14 @@
+.homeWrapper{
+    width: 100%;
+    background-image: url("/homepageBackground.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: white;
+    height: 100vh;
+    position: relative;
+
+    @media (max-width: 426px) {
+        height: 120vh        
+    }
+}
