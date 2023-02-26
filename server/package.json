@@ -4,8 +4,12 @@
   "description": "A revamp of the existing Laravel voting web application",
   "main": "index.js",
   "author": "Zidane Gimiga",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "license": "MIT",
   "dependencies": {
