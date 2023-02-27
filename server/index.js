@@ -10,6 +10,7 @@ const dataRes = {
 app.get('/', (req, res) => {
   res.json(dataRes)
 })
+ app.use('/auth', require('./routes/authRoutes'));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
