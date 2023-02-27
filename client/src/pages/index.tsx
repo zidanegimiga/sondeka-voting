@@ -5,7 +5,7 @@ export default function Index() {
   return (
     <div className={styles.homeWrapper}>
       <Head>
-        <title>Voting</title>
+        <title>Voting - sondeka </title>
       </Head>
       <div className={styles.marquee}>
           <h1>

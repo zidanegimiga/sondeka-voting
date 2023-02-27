@@ -12,7 +12,7 @@ class MyDocument extends Document {
         <Head>
           <meta property="og:type" content="website" key="og-type" />
           <meta property="og:url" content="" key="og-url" />
-          <meta property="og:title" content="Kalabars" key="og-title" />
+          <meta property="og:title" content="Voting Sondeka" key="og-title" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
