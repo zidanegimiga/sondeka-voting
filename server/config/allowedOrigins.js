@@ -1,7 +1,7 @@
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://www.dandrepairshop.com',
-    'https://dandrepairshop.com'
+    'https://www.youtube.com',
+    'https://vote.sondeka.org'
 ]
 
 module.exports = allowedOrigins
