@@ -1,24 +1,26 @@
-const express = require('express')
-const app = express()
-const path = require('path')
-const { logger } = require('./middleware/logger')
-const errorHandler = require('./middleware/errorHandler')
-const cookieParser = require('cookie-parser')
-const cors = require('cors')
-const corsOptions = require('./config/corsOptions')
-const PORT = process.env.PORT || 3500
+require('dotenv').config();
+const express = require('express');
+const app = express();
+const path = require('path');
+const { logger } = require('./middleware/logger');
+const errorHandler = require('./middleware/errorHandler');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const corsOptions = require('./config/corsOptions');
+const PORT = process.env.PORT || 3500;
 
-app.use(logger)
 
-app.use(cors(corsOptions))
+app.use(logger);
 
-app.use(express.json())
+app.use(cors(corsOptions));
 
-app.use(cookieParser())
+app.use(express.json());
 
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use(cookieParser());
 
-app.use('/', require('./routes/root'))
+app.use('/', express.static(path.join(__dirname, 'public')));
+
+app.use('/', require('./routes/root'));
 
 app.all('*', (req, res) => {
     res.status(404)
