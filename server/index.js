@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const path = require('path')
+const path = require('path');
 const { logger, logEvents } = require('./middlewares/logger')
 const errorHandler = require('./middlewares/errorHandler')
 const cookieParser = require('cookie-parser')
