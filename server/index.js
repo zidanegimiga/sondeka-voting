@@ -32,6 +32,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/root'))
 app.post('/signup', usersController.createNewUser)
+app.post('/:id/verify/:token/', usersController.confirmEmail)
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 
