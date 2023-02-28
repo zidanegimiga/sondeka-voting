@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import '../styles/app.scss';
 
