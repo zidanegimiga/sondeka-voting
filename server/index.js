@@ -1,4 +1,4 @@
-const variables = require('dotenv').config({path:__dirname+'/.env'})
+require('dotenv').config({path:__dirname+'/.env'})
 const express = require('express')
 const app = express()
 const path = require('path');
@@ -30,6 +30,8 @@ app.use(cookieParser())
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/root'))
+
+app.use('/auth', require('./routes/authRoutes'))
 
 app.get('/json', (req, res) => {
     res.json(resJsn)
