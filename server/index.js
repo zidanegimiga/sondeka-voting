@@ -9,6 +9,7 @@ const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConnect')
 const mongoose = require('mongoose')
+const usersController = require('./controllers/usersControllers')
 const PORT = process.env.PORT || 3500
 
 const resJsn = {
@@ -30,8 +31,9 @@ app.use(cookieParser())
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/root'))
-
+app.post('/signup', usersController.createNewUser)
 app.use('/auth', require('./routes/authRoutes'))
+app.use('/users', require('./routes/userRoutes'))
 
 app.get('/json', (req, res) => {
     res.json(resJsn)
