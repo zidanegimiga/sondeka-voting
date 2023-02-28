@@ -1,4 +1,4 @@
-const User = require('../models/User')
+const Voter = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
@@ -13,7 +13,7 @@ const login = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    const foundUser = await User.findOne({ username }).exec()
+    const foundUser = await Voter.findOne({ username }).exec()
 
     if (!foundUser) {
         return res.status(401).json({ message: 'Unauthorized' })
