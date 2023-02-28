@@ -16,12 +16,12 @@ const login = asyncHandler(async (req, res) => {
     const foundUser = await Voter.findOne({ username }).exec()
 
     if (!foundUser) {
-        return res.status(401).json({ message: 'Unauthorized' })
+        return res.status(401).json({ message: 'User not found' })
     }
 
     const match = await bcrypt.compare(password, foundUser.password)
 
-    if (!match) return res.status(401).json({ message: 'Unauthorized' })
+    if (!match) return res.status(401).json({ message: 'One of the credentials must be wrong' })
 
     const accessToken = jwt.sign(
         {
@@ -67,7 +67,7 @@ const refresh = (req, res) => {
         asyncHandler(async (err, decoded) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
 
-            const foundUser = await User.findOne({ username: decoded.username }).exec()
+            const foundUser = await Voter.findOne({ username: decoded.username }).exec()
 
             if (!foundUser) return res.status(401).json({ message: 'Unauthorized' })
 
