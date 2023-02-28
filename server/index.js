@@ -11,6 +11,11 @@ const connectDB = require('./config/dbConnect')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT || 3500
 
+const resJsn = {
+  hello: 1,
+  world: 2
+}
+
 
 connectDB()
 
@@ -25,6 +30,10 @@ app.use(cookieParser())
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/root'))
+
+app.get('/json', (req, res) => {
+    res.json(resJsn)
+})
 
 app.all('*', (req, res) => {
     res.status(404)
