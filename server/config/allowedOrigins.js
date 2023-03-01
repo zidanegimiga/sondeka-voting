@@ -1,5 +1,5 @@
 const allowedOrigins = [
-    'http://localhost:3500',
+    'localhost:3000',
     'https://www.youtube.com',
     'https://vote.sondeka.org'
 ]
