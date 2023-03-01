@@ -1,6 +1,10 @@
-const Voter = require('../models/User')
-const asyncHandler = require('express-async-handler')
-const bcrypt = require('bcrypt')
+const Voter = require('../models/User');
+const Token = require('../models/token');
+const asyncHandler = require('express-async-handler');
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const sendEmail = require('../utils/email/sendConfirmation');
+const jwt = require('jsonwebtoken')
 
 // @desc Get all users
 // @route GET /users
@@ -28,27 +32,65 @@ const createNewUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    // Check for duplicate username
-    const duplicate = await Voter.findOne({ email }).lean().exec()
+    // Check for duplicate email
+    const voter = await Voter.findOne({ email }).lean().exec()
 
-    if (duplicate) {
-        return res.status(409).json({ message: 'Duplicate email' })
+    if (voter) {
+        return res.status(409).json({ message: 'User with that e-mail address exists' })
     }
 
-    // Hash password 
-    const hashedPwd = await bcrypt.hash(password, 10) // salt rounds
+    // Hash password
+    const salt = await bcrypt.genSalt(Number(process.env.SALT)); 
+    const hashedPwd = await bcrypt.hash(password, salt) // salt rounds
 
     const userObject = { username, "password": hashedPwd, email }
 
     // Create and store new user 
     const user = await Voter.create(userObject)
 
+    const token = await Token.create({
+        userId: user._id,
+        token: crypto.randomBytes(32).toString("hex")
+    })
+
+    const baseURL = process.env.NODE_ENV === "development" ? process.env.BASE_URL_DEV : process.env.BASE_URL_PROD
+    const url = `${baseURL}/${user.id}/verify/${token.token}`;
+
+    // E-Mail details
+    const mailOptions = {
+        email: user.email,
+        subject: 'Verify - One Step Away from Casting your Vote',
+        html: `<p>Please click the following link to verify your email address:</p><p style="background-color: "#000000";padding:"6px 8px""><a href="${url}">Verify Link</a></p>`
+    }
+
     if (user) { //created 
         res.status(201).json({ message: `New user ${username} created` })
-        console.log("New user created: ", username)
+        await sendEmail(mailOptions);
     } else {
         res.status(400).json({ message: 'Invalid user data received' })
     }
+})
+
+// @desc Verify user's email
+// @route POST /users/?
+// @access Private
+const confirmEmail = asyncHandler(async (req, res) =>{
+        const user = await Voter.findOne({ _id: req.params.id });    
+        if (!user) return res.status(400).send({ message: "Invalid link" });
+        
+        const token = await Token.findOne({
+            userId: user._id,
+            token: req.params.token,
+        });
+        if (!token) return res.status(400).send({ message: "Invalid link" });
+    
+        await Voter.updateOne({ verified: true });
+        
+        await token.remove();
+        res.status(201).json({
+            message: "Email verified successfully",
+            status: "success"
+        })
 })
 
 // @desc Update a user
@@ -119,5 +161,6 @@ module.exports = {
     getAllUsers,
     createNewUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    confirmEmail
 }
