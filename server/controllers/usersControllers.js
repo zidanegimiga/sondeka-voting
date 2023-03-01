@@ -29,14 +29,20 @@ const createNewUser = asyncHandler(async (req, res) => {
 
     // Confirm data
     if (!username || !password || !email) {
-        return res.status(400).json({ message: 'All fields are required' })
+        return res.status(400).json({
+            message: 'All fields are required',
+            success: true,
+        })
     }
 
     // Check for duplicate email
     const voter = await Voter.findOne({ email }).lean().exec()
 
     if (voter) {
-        return res.status(409).json({ message: 'User with that e-mail address exists' })
+        return res.status(409).json({ 
+            message: 'User with that e-mail address exists',
+            success: false,
+        })
     }
 
     // Hash password
@@ -64,10 +70,16 @@ const createNewUser = asyncHandler(async (req, res) => {
     }
 
     if (user) { //created 
-        res.status(201).json({ message: `New user ${username} created` })
+        res.status(201).json({ 
+        message: `New user ${username} created`, 
+        success: false,
+    })
         await sendEmail(mailOptions);
     } else {
-        res.status(400).json({ message: 'Invalid user data received' })
+        res.status(400).json({ 
+            message: 'Invalid user data received',
+            success: false,
+        })
     }
 })
 
@@ -76,13 +88,19 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @access Private
 const confirmEmail = asyncHandler(async (req, res) =>{
         const user = await Voter.findOne({ _id: req.params.id });    
-        if (!user) return res.status(400).send({ message: "Invalid link" });
+        if (!user) return res.status(400).send({
+            message: "Invalid link",
+            success: false,
+        });
         
         const token = await Token.findOne({
             userId: user._id,
             token: req.params.token,
         });
-        if (!token) return res.status(400).send({ message: "Invalid link" });
+        if (!token) return res.status(400).send({
+            message: "Invalid link",
+            success: false,
+        });;
     
         await Voter.updateOne({ verified: true });
         
