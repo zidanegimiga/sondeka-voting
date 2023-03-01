@@ -3,7 +3,8 @@ const Token = require('../models/token');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const sendEmail = require('../utils/email/sendConfirmation')
+const sendEmail = require('../utils/email/sendConfirmation');
+const jwt = require('jsonwebtoken')
 
 // @desc Get all users
 // @route GET /users
@@ -62,10 +63,9 @@ const createNewUser = asyncHandler(async (req, res) => {
         html: `<p>Please click the following link to verify your email address:</p><p style="background-color: "#000000";padding:"6px 8px""><a href="${url}">Verify Link</a></p>`
     }
 
-    await sendEmail(mailOptions);
     if (user) { //created 
         res.status(201).json({ message: `New user ${username} created` })
-        console.log("New user created: ", username)
+        await sendEmail(mailOptions);
     } else {
         res.status(400).json({ message: 'Invalid user data received' })
     }
@@ -85,12 +85,12 @@ const confirmEmail = asyncHandler(async (req, res) =>{
         if (!token) return res.status(400).send({ message: "Invalid link" });
     
         await Voter.updateOne({ verified: true });
+        
         await token.remove();
-        res.status(201).json({message: "Email verified successfully"})
-
-        // if(err){
-        //     res.status(500).send({ message: "Internal Server Error" });
-        // }
+        res.status(201).json({
+            message: "Email verified successfully",
+            status: "success"
+        })
 })
 
 // @desc Update a user

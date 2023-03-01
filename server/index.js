@@ -32,9 +32,9 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/root'))
 app.post('/signup', usersController.createNewUser)
-app.post('/:id/verify/:token/', usersController.confirmEmail)
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
+app.get('/:id/verify/:token/', usersController.confirmEmail)
 
 app.get('/json', (req, res) => {
     res.json(resJsn)

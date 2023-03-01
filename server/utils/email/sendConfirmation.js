@@ -13,7 +13,7 @@ module.exports = async (options) => {
             }
         });
 
-        const {email, subject, html} = options
+        const {email, subject, html} = options;
 
         await transporter.sendMail(
             {
