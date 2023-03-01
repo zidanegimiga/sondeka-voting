@@ -23,6 +23,8 @@ const login = asyncHandler(async (req, res) => {
 
     if (!match) return res.status(401).json({ message: 'One of the credentials must be wrong' })
 
+    if(foundUser.verified !== true) return res.status(201).json({message: 'Verify your email address'})
+
     const accessToken = jwt.sign(
         {
             "UserInfo": {
@@ -44,7 +46,7 @@ const login = asyncHandler(async (req, res) => {
         httpOnly: true, //accessible only by web server 
         secure: true, //https
         sameSite: 'None', //cross-site cookie 
-        maxAge: 7 * 24 * 60 * 60 * 1000 //cookie expiry: set to match rT
+        maxAge: 7 * 24 * 60 * 60 * 1000 //cookie expiry: set to match refreshToken
     })
 
     // Send accessToken containing username and roles 
@@ -56,6 +58,7 @@ const login = asyncHandler(async (req, res) => {
 // @access Public - because access token has expired
 const refresh = (req, res) => {
     const cookies = req.cookies
+    console.log("Cookies: ", cookies)
 
     if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized' })
 
@@ -68,6 +71,7 @@ const refresh = (req, res) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
 
             const foundUser = await Voter.findOne({ username: decoded.username }).exec()
+            console.log("User: ", foundUser``)
 
             if (!foundUser) return res.status(401).json({ message: 'Unauthorized' })
 
