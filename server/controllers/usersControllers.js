@@ -53,7 +53,7 @@ const createNewUser = asyncHandler(async (req, res) => {
     })
 
     const baseURL = process.env.NODE_ENV === "development" ? process.env.BASE_URL_DEV : process.env.BASE_URL_PROD
-    const url = `${baseURL}users/${user.id}/verify/${token.token}`;
+    const url = `${baseURL}/${user.id}/verify/${token.token}`;
 
     // E-Mail details
     const mailOptions = {
@@ -63,8 +63,6 @@ const createNewUser = asyncHandler(async (req, res) => {
     }
 
     await sendEmail(mailOptions);
-    res.status(201).send({ message: "An Email sent to your account please verify" });
-
     if (user) { //created 
         res.status(201).json({ message: `New user ${username} created` })
         console.log("New user created: ", username)
@@ -77,7 +75,6 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @route POST /users/?
 // @access Private
 const confirmEmail = asyncHandler(async (req, res) =>{
-    try{
         const user = await Voter.findOne({ _id: req.params.id });    
         if (!user) return res.status(400).send({ message: "Invalid link" });
         
@@ -87,11 +84,13 @@ const confirmEmail = asyncHandler(async (req, res) =>{
         });
         if (!token) return res.status(400).send({ message: "Invalid link" });
     
-        await Voter.updateOne({ _id: user._id, verified: true });
+        await Voter.updateOne({ verified: true });
         await token.remove();
-    } catch(error){
-        res.status(500).send({ message: "Internal Server Error" });
-    }
+        res.status(201).json({message: "Email verified successfully"})
+
+        // if(err){
+        //     res.status(500).send({ message: "Internal Server Error" });
+        // }
 })
 
 // @desc Update a user
