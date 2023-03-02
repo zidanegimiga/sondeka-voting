@@ -64,7 +64,7 @@ const createNewUser = asyncHandler(async (req, res) => {
     }
 
     if (user) { //created 
-        res.status(201).json({ message: `New user ${username} created` })
+        res.status(201).json({ message: `Account for ${username} successfully created. Check email for verification link` })
         await sendEmail(mailOptions);
     } else {
         res.status(400).json({ message: 'Invalid user data received' })
