@@ -8,7 +8,6 @@ const LogInPage = () => {
   const [success, setSuccess] = useState(false);
   const [resMessage, setResMessage] = useState('');
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
     password: '',
   });
@@ -51,7 +50,7 @@ const LogInPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axiosInstance.post('/signup', formData);
+      const response = await axiosInstance.post('/auth', formData);
       console.log(response.data);
       setResMessage(response.data.message)
     } catch (error) {
@@ -71,11 +70,8 @@ const LogInPage = () => {
             <button onClick={(e)=>{e.preventDefault(); setError(null)}}>Try again</button>
         </>
       ) : (
+        <div> LOG IN
         <form onSubmit={handleSubmit} className={styles.form}>
-          <label className={styles.formLabel}>
-            Name:
-            <input type="text" name="username" value={formData.username} onChange={handleInputChange} />
-          </label>
           <label className={styles.formLabel}>
             Email:
             <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
@@ -84,8 +80,9 @@ const LogInPage = () => {
             Password:
             <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
           </label>
-          <button type="submit">Sign Up</button>
+          <button type="submit">Log In</button>
         </form>
+        </div>
       )}
     </div>
   );
