@@ -24,7 +24,7 @@ const resJsn = {
 connectDB()
 
 app.set('view engine', 'ejs')
-app.set('views', __dirname + '/server/views');
+app.set('views', __dirname + '/views');
 
 app.use(logger)
 
