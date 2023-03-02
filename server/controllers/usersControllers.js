@@ -92,17 +92,14 @@ const confirmEmail = asyncHandler(async (req, res) =>{
             userId: user._id,
             token: req.params.token,
         });
-        if (!token) return res.status(400).send({
-            message: "Invalid link",
-            success: false,
-        });;
+        if (!token) return res.status(400).render('inValidLink');
     
         await Voter.updateOne({ verified: true });
 
         console.log("User: ", user)
         
         await token.remove();
-        res.status(201).render('wmailConfirmed', )
+        res.status(201).render('emailConfirmed', )
 })
 
 // @desc Update a user
