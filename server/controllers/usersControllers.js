@@ -83,10 +83,7 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @access Private
 const confirmEmail = asyncHandler(async (req, res) =>{
         const user = await Voter.findOne({ _id: req.params.id });    
-        if (!user) return res.status(400).send({
-            message: "Invalid link",
-            success: false,
-        });
+        if (!user) return res.status(400).render('inValidLink');
         
         const token = await Token.findOne({
             userId: user._id,
