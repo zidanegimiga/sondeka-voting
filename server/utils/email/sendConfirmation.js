@@ -5,10 +5,10 @@ module.exports = async (options) => {
         const transporter = nodemailer.createTransport({
             host: process.env.EMAIL_HOST,
             service: process.env.EMAIL_SERVICE,
-            port: Number(process.env.EMAIL_PORT),
+            port: 465,
             secure: Boolean(process.env.SECURE),
             auth: {
-                user: process.env.EMAIL_USER,
+                user: "no-reply@sondeka.org",
                 pass: process.env.EMAIL_PASS
             }
         });
