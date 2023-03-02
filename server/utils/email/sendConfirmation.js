@@ -24,6 +24,6 @@ module.exports = async (options) => {
             }
         )
 
-        console.log("Email sent successfully!")
+        console.log(`Email to ${email} sent successfully!`)
     } catch(error){}
 }
