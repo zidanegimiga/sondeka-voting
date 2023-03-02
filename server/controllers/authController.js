@@ -7,13 +7,13 @@ const asyncHandler = require('express-async-handler')
 // @route POST /auth
 // @access Public
 const login = asyncHandler(async (req, res) => {
-    const { username, password } = req.body
+    const { email, password } = req.body
 
-    if (!username || !password) {
+    if (!email || !password) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    const foundUser = await Voter.findOne({ username }).exec()
+    const foundUser = await Voter.findOne({ email }).exec()
 
     if (!foundUser) {
         return res.status(401).json({ message: 'User not found' })
@@ -28,7 +28,7 @@ const login = asyncHandler(async (req, res) => {
     const accessToken = jwt.sign(
         {
             "UserInfo": {
-                "username": foundUser.username,
+                "email": foundUser.email,
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
@@ -36,7 +36,7 @@ const login = asyncHandler(async (req, res) => {
     )
 
     const refreshToken = jwt.sign(
-        { "username": foundUser.username },
+        { "email": foundUser.email },
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: '7d' }
     )
