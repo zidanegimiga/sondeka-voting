@@ -65,13 +65,13 @@ const createNewUser = asyncHandler(async (req, res) => {
     // E-Mail details
     const mailOptions = {
         email: user.email,
-        subject: 'Verify - One Step Away from Casting your Vote',
+        subject: 'Sondeka Awards 2023 - Email Verification',
         html: `<p>Please click the following link to verify your email address:</p><p style="background-color: "#000000";padding:"6px 8px""><a href="${url}">Verify Link</a></p>`
     }
 
-    if (user) { //created 
+    if (user) { //created
+        await sendEmail(mailOptions); 
         res.status(201).json({ message: `Account for ${username} successfully created. Check email for verification link` })
-        await sendEmail(mailOptions);
     } else {
         res.status(400).json({ message: 'Invalid user data received' })
     }
