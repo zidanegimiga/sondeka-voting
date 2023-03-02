@@ -23,7 +23,7 @@ const resJsn = {
 
 connectDB()
 
-app.set('view-engine', 'ejs')
+app.set('view engine', 'ejs')
 
 app.use(logger)
 
