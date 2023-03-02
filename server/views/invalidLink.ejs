@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Invalid Link - Sondeka</title>
-    <link rel="stylesheet" href="css/styleInvalidLink.css">
+    <link rel="stylesheet" href="<%= express.static('css/styleInvalidLink.css') %>">
 
   </head>
   <body>
     <div class="content-box">
         <div class="header">
-            <img src="images/sondekablack.png" class="logo"/>
+            <img src="<%= express.static('images/sondekablack.png') %>" class="logo"/>
         </div>
         <div class="photo">
-            <img src="images/skull.png" alt="Rocket Flying" class="rocket"/>
+            <img src="<%= express.static('images/skull.png') %>" alt="Rocket Flying" class="rocket"/>
         </div>
         <div class="main-text">
             OH OH! </br>
@@ -27,6 +27,5 @@
           <a href="https://vote.sondeka.org/signup" class="button">SIGNING UP</a>
         </div>
     </div>
-	<script src="index.js"></script>
   </body>
 </html>
