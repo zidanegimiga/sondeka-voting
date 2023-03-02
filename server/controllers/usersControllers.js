@@ -61,6 +61,7 @@ const createNewUser = asyncHandler(async (req, res) => {
 
     const baseURL = process.env.NODE_ENV === "development" ? process.env.BASE_URL_DEV : process.env.BASE_URL_PROD
     const url = `${baseURL}/${user.id}/verify/${token.token}`;
+    console.log("Base Url: ", baseURL)
 
     // E-Mail details
     const mailOptions = {
