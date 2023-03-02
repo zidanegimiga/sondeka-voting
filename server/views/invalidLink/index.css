@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@font-face {
+    font-family: 'Graphik LCG';
+    src: url('../fonts/GraphikLCG-Regular/GraphikLCG-Regular.eot');
+    src: url('../fonts/GraphikLCG-Regular/GraphikLCG-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/GraphikLCG-Regular/GraphikLCG-Regular.woff2') format('woff2'), url('../fonts/GraphikLCG-Regular/GraphikLCG-Regular.woff') format('woff'), url('../fonts/GraphikLCG-Regular/GraphikLCG-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'UKNumberPlate';
+    src: url('../fonts/uk-number-plate/UKNumberPlate.eot');
+    src: url('../fonts/uk-number-plate/UKNumberPlate.eot?#iefix') format('embedded-opentype'), url('../fonts/uk-number-plate/UKNumberPlate.woff2') format('woff2'), url('../fonts/uk-number-plate/UKNumberPlate.woff') format('woff'), url('../fonts/uk-number-plate/UKNumberPlate.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GraphikLCG-Semibold';
+    src: url('../fonts/GraphikLCG-Semibold/GraphikLCG-Semibold.eot');
+    src: url('../fonts/GraphikLCG-Semibold/GraphikLCG-Semibold.eot?#iefix') format('embedded-opentype'), url('../fonts/GraphikLCG-Semibold/GraphikLCG-Semibold.woff2') format('woff2'), url('../fonts/GraphikLCG-Semibold/GraphikLCG-Semibold.woff') format('woff'), url('../fonts/GraphikLCG-Semibold/GraphikLCG-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GraphikLCG-Black';
+    src: url('../fonts/GraphikLCG-Black/GraphikLCG-Black.eot');
+    src: url('../fonts/GraphikLCG-Black/GraphikLCG-Black.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/GraphikLCG-Black/GraphikLCG-Black.svg#GraphikLCG-Black') format('svg'),
+        url('../fonts/GraphikLCG-Black/GraphikLCG-Black.ttf') format('truetype'),
+        url('../fonts/GraphikLCG-Black/GraphikLCG-Black.woff') format('woff'),
+        url('../fonts/GraphikLCG-Black/GraphikLCG-Black.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #FC1010;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    padding: 1rem;
+}
+
+.content-box {
+    width: 70vw;
+    height: 80vh;
+    background: #FFCD00;
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.24), -6px -6px 8px rgba(0, 0, 0, 0.24);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.logo{
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+}
+
+.photo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    margin-top: -24px;
+}
+
+.rocket{
+    width: 10rem;
+    height: 10rem;
+}
+
+.main-text {
+    font-family: 'UKNumberPlate';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.0rem;
+    line-height: 3.0rem;
+    text-align: center;
+    color: #FC1010;
+}
+
+.subtitle{
+    font-family: 'Inter';
+    text-align: center;
+}
+
+.button{
+    font-family: 'Inter';
+    background-color: #440A80;
+    width: 25%;
+    padding: 1rem 1rem;
+    text-align: center;
+    color: white;
+    border-radius: 8px;
+    letter-spacing: 0.125em;
+    margin-top: 2.5rem;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    transition: all 0.5s ease-in-out;
+    text-decoration: none;
+}
+
+.button:hover{
+    background-color: #741bd4;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.button-group{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+@media (max-width: 769px) {
+    .main-text{
+        font-size: 1.5rem;
+        line-height: 2.5rem;        
+    }
+    .button{
+        width: 70%;
+    }    
+}
+@media (max-width: 575px) {
+    .button{
+        width: 70%;
+        font-size: 16px;
+        letter-spacing: 0.05em;
+    }    
+}
+@media (max-width: 426px) {
+    .main-text{
+        font-size: 2rem;
+    }
+    .logo{
+        width: 3rem;
+        height: 3rem;
+        margin: 1rem;
+    }
+    .content-box{
+        width: 80vw;
+        height: 95vh;
+        padding: 16px;
+    }
+    .rocket{
+        width: 8rem;
+        height: 8rem;
+    }
+    .button-group{
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .button{
+        width: 70%;
+        font-size: 14px;
+        letter-spacing: 0.05em;
+    }    
+}

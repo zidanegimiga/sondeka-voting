@@ -10,7 +10,10 @@ const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConnect')
 const mongoose = require('mongoose')
 const usersController = require('./controllers/usersControllers')
+const ejs = require('ejs');
+
 const PORT = process.env.PORT || 3500
+
 
 const resJsn = {
   hello: 1,
@@ -19,6 +22,8 @@ const resJsn = {
 
 
 connectDB()
+
+app.set('view-engine', 'ejs')
 
 app.use(logger)
 

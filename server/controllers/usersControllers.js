@@ -98,12 +98,11 @@ const confirmEmail = asyncHandler(async (req, res) =>{
         });;
     
         await Voter.updateOne({ verified: true });
+
+        console.log("User: ", user)
         
         await token.remove();
-        res.status(201).json({
-            message: "Email verified successfully",
-            status: "success"
-        })
+        res.status(201).render('wmailConfirmed', )
 })
 
 // @desc Update a user
