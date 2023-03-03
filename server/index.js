@@ -11,6 +11,7 @@ const connectDB = require('./config/dbConnect')
 const mongoose = require('mongoose')
 const usersController = require('./controllers/usersControllers')
 const ejs = require('ejs');
+csrf = require('lusca').csrf;
 
 const PORT = process.env.PORT || 3500
 
@@ -30,6 +31,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 
 app.use(cookieParser())
+app.use(csrf());
 
 app.use(express.static('./server/public'));
 app.use('/', express.static(path.join(__dirname, 'server', 'public')))
