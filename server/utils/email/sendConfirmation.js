@@ -8,7 +8,7 @@ module.exports = async (options) => {
             port: 465,
             secure: true,
             auth: {
-                user: process.env.EMAIL_USER,
+                user: "no-reply@sondeka.org",
                 pass: process.env.EMAIL_PASS
             }
         });
@@ -17,7 +17,7 @@ module.exports = async (options) => {
 
         await transporter.sendMail(
             {
-                from: process.env.EMAIL_USER,
+                from: "no-reply@sondeka.org",
                 to: email,
                 subject: subject,
                 html: html
