@@ -23,9 +23,6 @@ const resJsn = {
 
 connectDB()
 
-app.set('view engine', 'ejs')
-app.set('views', __dirname + '/views');
-
 app.use(logger)
 
 app.use(cors(corsOptions))
@@ -34,9 +31,12 @@ app.use(express.json())
 
 app.use(cookieParser())
 
+app.use(express.static('./server/public'));
 app.use('/', express.static(path.join(__dirname, 'server', 'public')))
 
 app.use('/', require('./routes/root'))
+app.use('/confirmed', require('./routes/confirmEmailRoute'))
+app.use('/invalid', require('./routes/invalidLinkRoute'))
 app.post('/signup', usersController.createNewUser)
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
