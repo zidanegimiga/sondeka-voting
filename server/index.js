@@ -11,7 +11,7 @@ const connectDB = require('./config/dbConnect')
 const mongoose = require('mongoose')
 const usersController = require('./controllers/usersControllers')
 const ejs = require('ejs');
-csrf = require('lusca').csrf;
+const csrf = require('lusca').csrf;
 
 const PORT = process.env.PORT || 3500
 
