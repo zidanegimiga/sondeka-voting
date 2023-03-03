@@ -83,23 +83,20 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @access Private
 const confirmEmail = asyncHandler(async (req, res) =>{
         const user = await Voter.findOne({ _id: req.params.id });    
-        if (!user) return res.status(400).send({
-            message: "Invalid link",
-            success: false,
-        });
+        if (!user) return res.status(400).redirect('/invalid');
         
         const token = await Token.findOne({
             userId: user._id,
             token: req.params.token,
         });
-        if (!token) return res.status(400).render('inValidLink');
+        if (!token) return res.status(400).redirect('/invalid');
     
         await Voter.updateOne({ verified: true });
 
         console.log("User: ", user)
         
         await token.remove();
-        res.status(201).render('emailConfirmed', )
+        res.status(201).redirect('/confirmed');
 })
 
 // @desc Update a user

@@ -11,6 +11,7 @@ const connectDB = require('./config/dbConnect')
 const mongoose = require('mongoose')
 const usersController = require('./controllers/usersControllers')
 const ejs = require('ejs');
+csrf = require('lusca').csrf;
 
 const PORT = process.env.PORT || 3500
 
@@ -23,8 +24,6 @@ const resJsn = {
 
 connectDB()
 
-app.set('view-engine', 'ejs')
-
 app.use(logger)
 
 app.use(cors(corsOptions))
@@ -32,10 +31,14 @@ app.use(cors(corsOptions))
 app.use(express.json())
 
 app.use(cookieParser())
+app.use(csrf());
 
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use(express.static('./server/public'));
+app.use('/', express.static(path.join(__dirname, 'server', 'public')))
 
 app.use('/', require('./routes/root'))
+app.use('/confirmed', require('./routes/confirmEmailRoute'))
+app.use('/invalid', require('./routes/invalidLinkRoute'))
 app.post('/signup', usersController.createNewUser)
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
