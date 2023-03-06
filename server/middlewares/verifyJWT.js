@@ -5,6 +5,8 @@ const verifyJWT = (req, res, next) => {
 
     if (!authHeader?.startsWith('Bearer ')) {
         return res.status(401).json({ message: 'Unauthorized' })
+        //TD:
+        // Redirect user to login/sign up when not authorized
     }
 
     const token = authHeader.split(' ')[1]
@@ -14,7 +16,8 @@ const verifyJWT = (req, res, next) => {
         process.env.ACCESS_TOKEN_SECRET,
         (err, decoded) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
-            req.user = decoded.UserInfo.username
+            req.userId = decoded.UserInfo.userId
+            req.email = decoded.UserInfo.email
             next()
         }
     )
