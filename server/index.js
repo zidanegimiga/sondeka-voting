@@ -10,7 +10,6 @@ const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConnect')
 const mongoose = require('mongoose')
 const usersController = require('./controllers/usersControllers')
-const ejs = require('ejs');
 
 const PORT = process.env.PORT || 3500
 
@@ -23,8 +22,6 @@ const resJsn = {
 
 connectDB()
 
-app.set('view-engine', 'ejs')
-
 app.use(logger)
 
 app.use(cors(corsOptions))
@@ -33,14 +30,22 @@ app.use(express.json())
 
 app.use(cookieParser())
 
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use(express.static('./server/public'));
+app.use('/', express.static(path.join(__dirname, 'server', 'public')))
 
 app.use('/', require('./routes/root'))
-app.post('/signup', usersController.createNewUser)
+app.use('/confirmed', require('./routes/confirmEmailRoute'))
+app.use('/invalid', require('./routes/invalidLinkRoute'))
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
-app.get('/:id/verify/:token/', usersController.confirmEmail)
-app.post('/vote', vote)
+app.use('/vote', require('./routes/voteRoute') )
+
+app.post('/signup', usersController.createNewUser)
+app.get('/:id/verify/:token/', usersController.confirmEmail) 
+
+app.get('/json', (req, res) => {
+    res.json(resJsn)
+})
 
 app.all('*', (req, res) => {
     res.status(404)

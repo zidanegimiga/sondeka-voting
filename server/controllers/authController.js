@@ -25,10 +25,13 @@ const login = asyncHandler(async (req, res) => {
 
     if(foundUser.verified !== true) return res.status(201).json({message: 'Verify your email address'})
 
+    const userId = foundUser._id.toString()
+
     const accessToken = jwt.sign(
         {
             "UserInfo": {
                 "email": foundUser.email,
+                "userId": userId
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
@@ -36,7 +39,7 @@ const login = asyncHandler(async (req, res) => {
     )
 
     const refreshToken = jwt.sign(
-        { "email": foundUser.email },
+        { "email": foundUser.email, "userId": userId },
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: '7d' }
     )
