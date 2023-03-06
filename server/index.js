@@ -11,7 +11,6 @@ const connectDB = require('./config/dbConnect')
 const mongoose = require('mongoose')
 const usersController = require('./controllers/usersControllers')
 const ejs = require('ejs');
-const csrf = require('lusca').csrf;
 
 const PORT = process.env.PORT || 3500
 
@@ -31,7 +30,6 @@ app.use(cors(corsOptions))
 app.use(express.json())
 
 app.use(cookieParser())
-app.use(csrf());
 
 app.use(express.static('./server/public'));
 app.use('/', express.static(path.join(__dirname, 'server', 'public')))
@@ -42,7 +40,9 @@ app.use('/invalid', require('./routes/invalidLinkRoute'))
 app.post('/signup', usersController.createNewUser)
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
-app.get('/:id/verify/:token/', usersController.confirmEmail)
+app.get('/:id/verify/:token/', usersController.confirmEmail) 
+app.get('/vote', ) 
+
 
 app.get('/json', (req, res) => {
     res.json(resJsn)
