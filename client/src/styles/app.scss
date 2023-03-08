@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 html,
 body {
@@ -9,19 +10,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 2.5rem;
-}
+// html {
+//   font-family: 'Share Tech Mono', monospace;
+//   font-size: 2.5rem;
+// }
 
-body {
-  min-height: 100vh;
-  background-color: #000;
-  color: whitesmoke;
-  display: grid;
-  place-content: center;
-  padding: 1rem;
-}
+// body {
+//   min-height: 100vh;
+//   background-color: #000;
+//   color: whitesmoke;
+//   display: grid;
+//   place-content: center;
+//   padding: 1rem;
+// }
 
 
 a {
