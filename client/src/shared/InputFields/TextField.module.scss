@@ -1,0 +1,19 @@
+.textField {
+    background: #FFFFFF;
+    border: 1px solid #C2C2C2;
+    border-radius: 8px;
+    width: 560px;
+    height: 40px;
+    outline: none;
+    margin-bottom: 24px;
+    font-size: 16px;
+    color: #4B4545;
+    font-weight: 400;
+    font-family: 'Inter';
+    letter-spacing: 0.1em;
+    padding-left: 16px;
+
+    &:focus{
+        border: 1px solid #440A80;
+    }
+}
