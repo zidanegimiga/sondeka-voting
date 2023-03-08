@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const logSchema = new mongoose.Schema({
-  voter: {
+  voterId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Voter',
     required: true

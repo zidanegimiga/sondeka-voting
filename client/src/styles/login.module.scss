@@ -1,0 +1,120 @@
+.input {
+    width: 80%
+}
+
+.formInputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.toastMessages {
+    font-size: 14px;
+    color: white;
+}
+
+.toastMessagesError {
+    font-size: 14px;
+    color: red;
+}
+
+.loginPageWrapper {
+    background-color: #FFCD00;
+    min-height: 100vh;
+    background-image: url('/loginBackground.png');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    place-content: center;
+}
+
+.containerHeader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.heading {
+    font-family: 'UKNumberPlate';
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    color: #250F36;
+    font-size: 2rem;
+    margin-top: 16px;
+}
+
+.contentContainer {
+    width: 70vw;
+    height: 80vh;
+    background-color: #fff;
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.24), -6px -6px 8px rgba(0, 0, 0, 0.24);
+    border-radius: 8px;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.passwordField {
+    display: flex;
+    position: relative;
+}
+
+.showHidePassword {
+    background: none;
+    border: none;
+    position: absolute;
+    bottom: 38%;
+    right: 4%;
+    transform: scale(90%);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+
+    &:hover{
+        transform: scale(100%);
+    }
+}
+
+.forgotPasswordText {
+    width: 100%;
+    text-align: right;
+    margin-right: 380px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.095em;
+    color: #440A80;
+    cursor: pointer;
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+.buttonContainer{
+    margin-top: 24px;
+}
+
+.signUpLink{
+    color: #4B4545;
+    font-family: 'Inter';
+    letter-spacing: 0.1em;
+    margin-top: 24px;
+
+    span{
+        cursor: pointer;
+        color: #440A80;
+        font-weight: bold;
+        &:hover{
+            text-decoration: underline;
+        }        
+    }
+}

@@ -16,49 +16,9 @@ The project's architecture is inspired by the [https://feature-sliced.design/en/
 
 It's feature-based where we could group all functional code related to an application feature inside a directory so that a developer can concentrate only on the particular directory.
 
-
-└── src/
-    ├── pages/                                          # Initializing applicationlogic
-         ├── _app.tsx                                   # ApplicationEntryPoint        
-         ├── api/                                       # API's
-         ├── index.tsx                                  # Home Page
-         ├── page-A/
-            - index.ts                                  # page entry point
-            ├── page-A.tsx                              # component entry point
-            ├── Page-Afeatures/                         # Features folder
-                ├──feature-A/                           # a feature
-                    - index.ts                          # feature entry point
-                    ├──components/                      # featureA components
-                        ├──index.ts                     # featureA components
-                        ├── component-A/                # component 4 the feature
-                            ├── index.ts                # component entry point
-                            ├── index.scss              # component styles
-                            ├── component.tsx           # component code
-                    ├──hooks/                           # hooks for the feature
-                    ├──state/                           # actions and reducers
-                        ├──feature-A.actions.js
-                        ├──feature-A.reducers.js
-        ├── styles/
-            ├──index.scss                           # connecting all styles
-            ├──normalize.scss                       # normalizing styles
-            ├──var.scss                             # Global css variables 
-                   
-    ├── shared/                                     # Shared hooks and components
-            ├──components/                          # components specific to this feature
-                  ├──index.ts                       # entry point for the components
-                  ├── component-B/                  # similar component folder structure
-               ├──hooks/                            # shared hooks
-               ├──state/                            # shared actions & reducers
-                  ├──actions.js
-                  ├──reducers.js
-            ├── constants/                          # constants
-    ├── store/                                      # redux store
-
-
-
 Basically,
 ```
-  Application --> Pages --> Features --> Components & Utilities
+  Application --> Features --> Components & Utilities
 ```
 
 Every page is split into self-contained, user-facing, reusable building blocks known as features.

@@ -13,8 +13,13 @@ const nomineeSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true
-  }
+  },
+  votes: { type: Number, default: 0 }
 });
+
+nomineeSchema.methods.incrementVotes = function() {
+  this.votes++;
+};
 
 const Nominee = mongoose.model('Nominee', nomineeSchema);
 
