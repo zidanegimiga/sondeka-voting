@@ -1,5 +1,8 @@
 import styles from "../styles/Home.module.scss";
 import Head from "next/head";
+import Nav from "shared/Nav";
+import Hero from "features/Home/Hero";
+import Categories from "features/Home/Categories";
 
 export default function Index() {
   return (
@@ -7,11 +10,11 @@ export default function Index() {
       <Head>
         <title>Voting - sondeka </title>
       </Head>
-      <div className={styles.marquee}>
-          <h1>
-            SONDEKA VOTING LINES OPENING SOON
-          </h1>
-        </div>
+      <div className={styles.pageWrapper}>
+        <Nav/>
+        <Hero/>
+        <Categories />
+      </div>
     </div>
     );
   }
