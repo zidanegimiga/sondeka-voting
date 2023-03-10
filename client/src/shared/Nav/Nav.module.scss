@@ -1,0 +1,29 @@
+.navWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 16px;
+    padding-right: 240px;
+    background: rgba(0, 0, 0, 0.575);
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+.title{
+    font-family: 'UKNumberPlate';
+    font-size: 2.5rem;
+    color: #FFCD00;
+
+    span{
+        font-family: 'Inter';
+        font-size: 1.5rem;
+        color: #fff;
+    }
+}
+
+.menuBtn{
+    transform: scale(90%);
+}
