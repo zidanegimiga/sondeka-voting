@@ -13,9 +13,40 @@
     color: white;
 }
 
+.toastMessagesContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.toastMessagesSuccess{    
+    width: 65%;
+    height: fit-content;
+    padding: 8px;
+    border: solid 1px #8cff2d;
+    background-color: #afff6d;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Inter';
+
+    p{
+        font-size: 0.75rem;
+    }
+}
+
 .toastMessagesError {
-    font-size: 14px;
-    color: red;
+    width: 65%;
+    height: fit-content;
+    padding: 8px;
+    border: solid 1px #ff0000;
+    background-color: #ff8e92;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Inter';
+
+    p{
+        font-size: 0.75rem;
+    }
 }
 
 .loginPageWrapper {

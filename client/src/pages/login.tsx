@@ -3,8 +3,9 @@ import styles from "../styles/login.module.scss";
 import axios from "axios";
 import TextField from "shared/InputFields/TextField";
 import { Hide, Show } from "features/svgIcons/showHide";
-import Logo from "features/svgIcons/logo";
+import Logo from "features/svgIcons/logoBlack";
 import Button from "shared/Button";
+import Link from 'next/link'
 
 const LogInPage = () => {
   const [loading, setLoading] = useState(false);
@@ -17,9 +18,11 @@ const LogInPage = () => {
     password: "",
   });
 
+  function cancelError(e){e.preventDefault(); setError(null)}
+
   // Create an Axios instance with interceptors
   const axiosInstance = axios.create({
-    baseURL: "https://sondeka-voting-api.cyclic.app",
+    baseURL: "http://localhost:3500",
   });
 
   axiosInstance.interceptors.request.use(
@@ -45,7 +48,7 @@ const LogInPage = () => {
     },
     (error) => {
       setLoading(false);
-      setError(error.response.data.message); // set the error message
+      setError(error.response.data); // set the error message
       return Promise.reject(error);
     }
   );
@@ -64,6 +67,7 @@ const LogInPage = () => {
       const response = await axiosInstance.post("/auth", formData);
       console.log(response.data);
       setResMessage(response.data.message);
+      
     } catch (error) {
       console.error(error);
     }
@@ -84,17 +88,13 @@ const LogInPage = () => {
               <p className={styles.toastMessages} style={{"color":"black"}}>{resMessage}</p>
             ) : 
             error ? (
-              <>
-                <p className={styles.toastMessagesError} >Error: {error}</p>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setError(null);
-                  }}
-                >
-                  Try again
-                </button>
-              </>
+              <div className={styles.toastMessagesErrorContainer}>
+                <div className={styles.toastMessagesError}>
+                  <h4>{error.title}</h4>
+                  <p>{error.description}</p>
+                  <Button color={"grey"} text="Try again" type={""} action={cancelError}/>
+                </div>
+              </div>
           ) :
           (
             <>
@@ -144,13 +144,12 @@ const LogInPage = () => {
                   <div className={styles.buttonContainer}>
                     <Button
                       text="LOG IN"
-                      action={""}
                       type="submit"
                       color="#440A80"
                     />
                   </div>
                   <div className={styles.signUpLink}>
-                    Have an account? <span>Sign Up</span>
+                    Have an account? <Link href={'/signup'}><span>Sign Up</span></Link>
                   </div>
                 </form>
               </div>
