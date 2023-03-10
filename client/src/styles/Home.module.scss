@@ -1,12 +1,9 @@
-.marquee {
-    animation: marquee 15s linear infinite;
-  }
-  
-  @keyframes marquee {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-100%);
-    }
-  }
+.pageWrapper {
+  background-color: #FFF;
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
