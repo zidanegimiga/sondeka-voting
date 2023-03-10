@@ -40,7 +40,9 @@ const createNewUser = asyncHandler(async (req, res) => {
 
     if (voter) {
         return res.status(409).json({ 
-            message: 'User with that e-mail address exists',
+            type: 'existimhEmailAddress', 
+            title: 'One Little Problem', 
+            description: 'This email address seems to exist. Sign In instead?',
             success: false,
         })
     }
@@ -121,7 +123,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
     // Allow updates to the original user 
     if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate username' })
+        return res.status(409).json({ message: 'Duplicate username'})
     }
 
     user.username = username

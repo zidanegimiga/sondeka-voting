@@ -15,15 +15,18 @@ const login = asyncHandler(async (req, res) => {
 
     const foundUser = await Voter.findOne({ email }).exec()
 
+
+    // implement internal error types; In numbers
+    // e.g 700 -> (&)
     if (!foundUser) {
-        return res.status(401).json({ message: 'User not found' })
+        return res.status(401).json({ type: 'userNotFound', title: 'One Little Problem', description: 'One or both of the credentials you entered is incorrect. For your security reasons, we cannot reveal which. ' })
     }
 
     const match = await bcrypt.compare(password, foundUser.password)
 
-    if (!match) return res.status(401).json({ message: 'One of the credentials must be wrong' })
+    if (!match) return res.status(401).json({ type: 'userNotFound', title: 'One Little Problem', description: 'One or both of the credentials you entered is incorrect. For your security reasons, we cannot reveal which. ' })
 
-    if(foundUser.verified !== true) return res.status(201).json({message: 'Verify your email address'})
+    if (foundUser.verified !== true) return res.status(201).json({ message: 'Verify your email address' })
 
     const userId = foundUser._id.toString()
 
