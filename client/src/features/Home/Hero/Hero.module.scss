@@ -1,0 +1,21 @@
+.heroWrapper {
+    background-color: #3C3C3C;
+    width: 100%;
+    height: 500px;
+    background-image: url('/hexBackground.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-family: 'Graphik LCG';
+    font-style: normal;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.21em;
+}
