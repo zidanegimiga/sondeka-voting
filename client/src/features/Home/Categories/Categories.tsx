@@ -1,12 +1,44 @@
 import styles from "./Categories.module.scss";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
-const Nav = () => {
-  return(
+const Categories = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        const res = await fetch(
+          "https://sondeka-voting-api.cyclic.app/admin/categories/allCategories"
+        );
+        const categories = await res.json();
+        setCategories(categories);
+        console.log(categories);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getCategories();
+  }, []);
+
+  return (
     <div className={styles.categoriesWrapper}>
       <h3>CATEGORIES</h3>
-      <p>Select a category you would like to cast your vote</p>        
+      <p>Select a category to cast your vote</p>
+      <div className={styles.categories}>
+        {categories?.map((category, index) => (
+          <div key={index} className={styles.category}> 
+            <Image
+              src={`/categories/${category.poster}.png`}
+              alt={category.name}
+              width={200}
+              height={200}
+            />
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 };
 
-export default Nav;
+export default Categories;

@@ -4,7 +4,7 @@ import Nav from "shared/Nav";
 import Hero from "features/Home/Hero";
 import Categories from "features/Home/Categories";
 
-export default function Index() {
+export default function Index({categories}) {
   return (
     <div className={styles.homeWrapper}>
       <Head>
@@ -17,4 +17,16 @@ export default function Index() {
       </div>
     </div>
     );
-  }
+}
+
+// export async function getStaticProps(context){
+//   const response = await fetch('https://sondeka-voting-api.cyclic.app/admin/categories/getAllCategories')
+//   const categories = response.json()
+//   console.log("Log: ", categories)
+
+//   return {
+//     props: {
+//       categories
+//     }
+//   }
+// }

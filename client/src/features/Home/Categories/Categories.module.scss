@@ -1,6 +1,6 @@
 .categoriesWrapper {
     width: 70vw;
-    height: 500px;
+    height: fit-content;
     background: white;
     margin-top: -72px;
     border-radius: 8px;
@@ -19,7 +19,23 @@
         font-family: 'Graphik LCG';
         font-style: normal;
         font-weight: 400;
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         color: #4E4E4E;
+        margin-top: -24px
+    }
+}
+
+.categories{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.category{
+    margin-top: 16px;
+    transition: all ease-in-out .5s;
+
+    &:hover{
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), -4px -4px 4px rgba(0, 0, 0, 0.25);
     }
 }
