@@ -14,6 +14,9 @@ const categorySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Nominee',
   }],
+  poster: {
+    type: String,
+  }
 });
 
 const Category = mongoose.model('Category', categorySchema);
