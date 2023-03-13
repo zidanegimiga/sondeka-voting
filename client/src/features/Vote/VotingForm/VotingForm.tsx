@@ -10,7 +10,18 @@ const VotingForm = ({data}) => {
         <h3>{data?.name}</h3>
         <p>{data?.description}</p>
         <h3>Nominees</h3>
-        <p>Make a choice by selecting the nominee you desire to vote for</p>
+        <p>Wait for voting lines to open to be able to cast your vote</p>
+        
+        {/* <form>
+          {
+            data?.nominees?.map((nominee, index)=>{
+              <div key={index}>
+                <input />
+                <label>{nominee}</label>
+              </div>
+            })
+          }
+        </form> */}
       </div>    
     </>
   )
