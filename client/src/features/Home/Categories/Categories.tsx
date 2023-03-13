@@ -33,7 +33,6 @@ const Categories = () => {
               alt={category.name}
               width={200}
               height={200}
-              layout="responsive"
               loading="lazy"
             />
           </div>
