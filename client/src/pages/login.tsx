@@ -5,7 +5,8 @@ import TextField from "shared/InputFields/TextField";
 import { Hide, Show } from "features/svgIcons/showHide";
 import Logo from "features/svgIcons/logoBlack";
 import Button from "shared/Button";
-import Link from 'next/link'
+import Link from "next/link";
+import {useRouter} from "next/router";
 
 const LogInPage = () => {
   const [loading, setLoading] = useState(false);
@@ -18,147 +19,163 @@ const LogInPage = () => {
     password: "",
   });
 
-  function cancelError(e){e.preventDefault(); setError(null)}
+  const router = useRouter();
 
-  // Create an Axios instance with interceptors
-  const axiosInstance = axios.create({
-    baseURL: "http://localhost:3500",
-  });
+  function cancelError(e) {
+    e.preventDefault();
+    setError(null);
+  }
 
-  axiosInstance.interceptors.request.use(
-    (config) => {
-      // Set loading state to true when a request is made
-      setLoading(true);
-      setError(null); // clear any previous errors
-      setSuccess(false); // clear any previous success messages
-      return config;
-    },
-    (error) => {
-      setLoading(false);
-      return Promise.reject(error);
-    }
-  );
-
-  axiosInstance.interceptors.response.use(
-    (response) => {
-      // Set loading state to false when a response is received
-      setLoading(false);
-      setSuccess(true); // set success state to true
-      return response;
-    },
-    (error) => {
-      setLoading(false);
-      setError(error.response.data); // set the error message
-      return Promise.reject(error);
-    }
-  );
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+  if (typeof window !== undefined) {
+    // Create an Axios instance with interceptors
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:3500",
     });
-  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axiosInstance.post("/auth", formData);
-      console.log(response.data);
-      setResMessage(response.data.message);
-      
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    axiosInstance.interceptors.request.use(
+      (config) => {
+        // Set loading state to true when a request is made
+        setLoading(true);
+        setError(null); // clear any previous errors
+        setSuccess(false); // clear any previous success messages
+        return config;
+      },
+      (error) => {
+        setLoading(false);
+        return Promise.reject(error);
+      }
+    );
 
-  return (
-    <div>
-      <div className={styles.loginPageWrapper}>
-        <div className={styles.contentContainer}>
-          <div className={styles.containerHeader}>
-            <Logo />
-          </div>
-          {
-            loading ? (
-              <p className={styles.toastMessages} style={{"color":"black"}}>Loading...</p>
-            ) : 
-            success ? (
-              <p className={styles.toastMessages} style={{"color":"black"}}>{resMessage}</p>
-            ) : 
-            error ? (
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        // Set loading state to false when a response is received
+        setLoading(false);
+        setSuccess(true); // set success state to true
+        return response;
+      },
+      (error) => {
+        setLoading(false);
+        setError(error.response.data); // set the error message
+        return Promise.reject(error);
+      }
+    );
+
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    };
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      try {
+        const response = await axiosInstance.post("/auth", formData);
+        console.log(response.data);
+        window.localStorage.setItem('token', `Bearer ${response.data.accessToken}` )
+        router.push('/')
+        setResMessage(response.data.message);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    return (
+      <div>
+        <div className={styles.loginPageWrapper}>
+          <div className={styles.contentContainer}>
+            <div className={styles.containerHeader}>
+              <Logo />
+            </div>
+            {loading ? (
+              <p className={styles.toastMessages} style={{ color: "black" }}>
+                Loading...
+              </p>
+            ) : success ? (
+              <p className={styles.toastMessages} style={{ color: "black" }}>
+                {resMessage}
+              </p>
+            ) : error ? (
               <div className={styles.toastMessagesErrorContainer}>
                 <div className={styles.toastMessagesError}>
                   <h4>{error.title}</h4>
                   <p>{error.description}</p>
-                  <Button color={"grey"} text="Try again" type={""} action={cancelError}/>
+                  <Button
+                    color={"grey"}
+                    text="Try again"
+                    type={""}
+                    action={cancelError}
+                  />
                 </div>
               </div>
-          ) :
-          (
-            <>
-              <div className={styles.heading}> LOG IN TO CONTINUE </div>
-              <div className={styles.form}>
-                <form onSubmit={handleSubmit} className={styles.form}>
-                  <TextField
-                    onChange={handleInputChange}
-                    value={formData.email}
-                    name={"email"}
-                    type={"text"}
-                    placeholder={"E-mail"}
-                  />
-                  <div className={styles.passwordField}>
+            ) : (
+              <>
+                <div className={styles.heading}> LOG IN TO CONTINUE </div>
+                <div className={styles.form}>
+                  <form onSubmit={handleSubmit} className={styles.form}>
                     <TextField
                       onChange={handleInputChange}
-                      value={formData.password}
-                      name={"password"}
-                      type={passwordType}
-                      placeholder={"Password"}
+                      value={formData.email}
+                      name={"email"}
+                      type={"text"}
+                      placeholder={"E-mail"}
                     />
-                    {passwordType === "text" ? (
-                      <button
-                        className={styles.showHidePassword}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setPasswordType("password");
-                        }}
-                      >
-                        <Hide />
-                      </button>
-                    ) : (
-                      <button
-                        className={styles.showHidePassword}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setPasswordType("text");
-                        }}
-                      >
-                        <Show />
-                      </button>
-                    )}
-                  </div>
-                  <div className={styles.forgotPasswordText}>
-                    Forgot Password?
-                  </div>
-                  <div className={styles.buttonContainer}>
-                    <Button
-                      text="LOG IN"
-                      type="submit"
-                      color="#440A80"
-                    />
-                  </div>
-                  <div className={styles.signUpLink}>
-                    Have an account? <Link href={'/signup'}><span>Sign Up</span></Link>
-                  </div>
-                </form>
-              </div>
-            </>
-          )}
+                    <div className={styles.passwordField}>
+                      <TextField
+                        onChange={handleInputChange}
+                        value={formData.password}
+                        name={"password"}
+                        type={passwordType}
+                        placeholder={"Password"}
+                      />
+                      {passwordType === "text" ? (
+                        <button
+                          className={styles.showHidePassword}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPasswordType("password");
+                          }}
+                        >
+                          <Hide />
+                        </button>
+                      ) : (
+                        <button
+                          className={styles.showHidePassword}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPasswordType("text");
+                          }}
+                        >
+                          <Show />
+                        </button>
+                      )}
+                    </div>
+                    <div className={styles.forgotPasswordText}>
+                      Forgot Password?
+                    </div>
+                    <div className={styles.buttonContainer}>
+                      <Button text="LOG IN" type="submit" color="#440A80" />
+                    </div>
+                    <div className={styles.signUpLink}>
+                      Have an account?{" "}
+                      <Link href={"/signup"}>
+                        <span>Sign Up</span>
+                      </Link>
+                    </div>
+                  </form>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <>Window not defined</>
+    )
+  }
 };
 
 export default LogInPage;
