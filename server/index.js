@@ -39,6 +39,7 @@ app.use('/invalid', require('./routes/invalidLinkRoute'))
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/admin/categories', require('./routes/admin/categoriesRoutes'))
+app.use('/admin/nominees', require('./routes/admin/nomineesRoutes'))
 app.use('/vote', require('./routes/voteRoute'))
 
 app.post('/signup', usersController.createNewUser)

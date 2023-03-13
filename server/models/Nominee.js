@@ -10,7 +10,16 @@ const nomineeSchema = new mongoose.Schema({
     ref: 'Category',
     required: true
   },
+  categoryName: {
+    type: String,
+    ref: 'Category',
+    required: true
+  },
   description: {
+    type: String,
+    required: true
+  },
+  poster: {
     type: String,
     required: true
   },
