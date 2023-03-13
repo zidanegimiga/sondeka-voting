@@ -1,3 +1,8 @@
+.navContainer{
+    width: 100%;
+    position: relative;
+}
+
 .navWrapper{
     width: 100%;
     display: flex;
@@ -10,6 +15,11 @@
     position: fixed;
     top: 0;
     z-index: 1;
+
+    @media (max-width: 1700px) {
+        padding-right: 120px;
+        height: 40px                
+    }
 }
 
 .title{
@@ -26,4 +36,31 @@
 
 .menuBtn{
     transform: scale(90%);
+    padding: 4px;
+    border-radius: 6px;
+
+    &:hover{
+        background-color: #3f3f3f;
+    }
+}
+
+.navOptions{
+    position: absolute;
+    width: 320px;
+    height: 160px;
+    top: 96px;
+    background-color: #fff;
+    right: 32px;
+    border-radius: 8px;
+}
+
+.navLink{
+    padding: 8px;
+    text-align: center;
+    font-family: 'Inter';
+    cursor: pointer;
+   &:hover{
+    background-color: #FFCD00;
+    border-radius: 8px;
+   }
 }
