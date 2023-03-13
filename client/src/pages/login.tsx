@@ -73,8 +73,10 @@ const LogInPage = () => {
       try {
         const response = await axiosInstance.post("/auth", formData);
         console.log(response.data);
-        window.localStorage.setItem('token', `Bearer ${response.data.accessToken}` )
-        router.push('/')
+        window.localStorage.setItem('token', `${response?.data?.accessToken}` )
+        window.localStorage.setItem('username', `${response?.data?.userDetails?.username}` )
+        window.localStorage.setItem('id', `${response?.data?.userDetails?.id}` )
+        router.push('/');
         setResMessage(response.data.message);
       } catch (error) {
         console.error(error);

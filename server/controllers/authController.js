@@ -41,6 +41,12 @@ const login = asyncHandler(async (req, res) => {
         { expiresIn: '15m' }
     )
 
+    const userDetails = {
+        email: foundUser.email,
+        id: userId,
+        username: foundUser.username
+    }
+
     const refreshToken = jwt.sign(
         { "email": foundUser.email, "userId": userId },
         process.env.REFRESH_TOKEN_SECRET,
@@ -56,7 +62,7 @@ const login = asyncHandler(async (req, res) => {
     })
 
     // Send accessToken containing username and roles 
-    res.json({ accessToken })
+    res.json({ accessToken, userDetails })
 })
 
 // @desc Refresh
