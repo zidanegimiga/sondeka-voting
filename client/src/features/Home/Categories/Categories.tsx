@@ -1,6 +1,7 @@
 import styles from "./Categories.module.scss";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/dist/client/link";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -28,13 +29,14 @@ const Categories = () => {
       <div className={styles.categories}>
         {categories?.map((category, index) => (
           <div key={index} className={styles.category}>
+            <Link href={`/vote/${category._id}`}>
             <Image
               src={`/categories/${category.poster}.png`}
               alt={category.name}
               width={200}
               height={200}
               loading="lazy"
-            />
+            /></Link>
           </div>
         ))}
       </div>
