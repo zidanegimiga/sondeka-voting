@@ -3,6 +3,7 @@ import Head from "next/head";
 import Nav from "shared/Nav";
 import Hero from "features/Home/Hero";
 import Categories from "features/Home/Categories";
+import Countdown from "features/Home/Countdown";
 
 export default function Index({categories}) {
   return (
@@ -12,7 +13,9 @@ export default function Index({categories}) {
       </Head>
       <div className={styles.pageWrapper}>
         <Nav/>
-        <Hero/>
+        <Hero>
+          <Countdown />
+        </Hero>
         <Categories />
       </div>
     </div>

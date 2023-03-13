@@ -3,74 +3,15 @@ import Logo from "features/svgIcons/logoBlack";
 import LogoWhite from "features/svgIcons/LogoWhite";
 import Menu from "features/svgIcons/menu";
 import styles from "./Hero.module.scss";
+import Countdown from '../Countdown';
 
-const Nav = () => {
-  const [votingTime, setVotingTime] = useState(false);
-  const [days, setDays] = useState(0);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    const target = new Date("4/24/2023 23:59:59");
-
-    const interval = setInterval(() => {
-      const now = new Date();
-      const difference = target.getTime() - now.getTime();
-
-      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-      setDays(d);
-
-      const h = Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      setHours(h);
-
-      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      setMinutes(m);
-
-      const s = Math.floor((difference % (1000 * 60)) / 1000);
-      setSeconds(s);
-
-      if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
-        setVotingTime(true);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+const Hero = ({children}) => {
 
   return(
     <div className={styles.heroWrapper}>
-      <div className={styles.title}>VOTING BEGINS IN</div>
-      {votingTime ? (
-        <>
-          <h1>Voting Lines Open!</h1>
-        </>
-      ) : (
-        <>
-          <div className={styles.timerWrapper}>
-            <div className={styles.timeBox}>
-              <div className={styles.time}>{days}</div>
-              <div className={styles.timeTitle}>DAYS</div>
-            </div>                        
-            <div className={styles.timeBox}>
-              <div className={styles.time}>{hours}</div>
-              <div className={styles.timeTitle}>HOURS</div>
-            </div>                        
-            <div className={styles.timeBox}>
-              <div className={styles.time}>{minutes}</div>
-              <div className={styles.timeTitle}>MINUTES</div>
-            </div>                        
-            <div className={styles.timeBox}>
-              <div className={styles.time}>{seconds}</div>
-              <div className={styles.timeTitle}>SECONDS</div>
-            </div>                        
-          </div>
-        </>
-      )}      
+      {children}      
     </div>
   )
 };
 
-export default Nav;
+export default Hero;
