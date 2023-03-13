@@ -27,12 +27,14 @@ const Categories = () => {
       <p>Select a category to cast your vote</p>
       <div className={styles.categories}>
         {categories?.map((category, index) => (
-          <div key={index} className={styles.category}> 
+          <div key={index} className={styles.category}>
             <Image
               src={`/categories/${category.poster}.png`}
               alt={category.name}
               width={200}
               height={200}
+              layout="responsive"
+              loading="lazy"
             />
           </div>
         ))}
