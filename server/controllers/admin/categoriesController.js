@@ -1,5 +1,6 @@
 const Category = require('../../models/Category');
 const asyncHandler = require('express-async-handler');
+const mongoose = require('mongoose')
 
 // @desc Get all categories
 // @route GET /admin/categories/allCategories
@@ -14,6 +15,22 @@ const getAllCategories = asyncHandler(async (req, res) => {
     }
 
     res.json(categories)
+})
+
+// @desc Get all categories
+// @route GET /admin/categories/allCategories
+// @access Private
+const getOneCategory = asyncHandler(async (req, res) => {
+    const id = req.params.categoryId;
+
+    const category = await Category.findById(id).exec()
+
+    if (!category) {
+        return res.status(400).json({ message: 'Category not found' })
+    }
+
+    res.status(200).json(category)
+
 })
 
 // @desc Create new category
@@ -115,5 +132,5 @@ const deleteCategory = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    deleteCategory, updateCategory, createNewCategory, getAllCategories
+    deleteCategory, updateCategory, createNewCategory, getAllCategories, getOneCategory
 }
