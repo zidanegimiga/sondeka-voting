@@ -3,6 +3,7 @@ import Hero from 'features/Home/Hero'
 import Head from 'next/dist/shared/lib/head'
 import React from 'react'
 import Nav from 'shared/Nav'
+import VotingForm from 'features/Vote/VotingForm'
 
 const VotingCategory = ({category}) => {
   console.log("Category: ", category)
@@ -15,6 +16,7 @@ const VotingCategory = ({category}) => {
         <Nav/>
         <Hero>
         </Hero>
+        <VotingForm data={category}/>        
       </div>
     </div>
   )
