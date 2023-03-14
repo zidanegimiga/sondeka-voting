@@ -103,7 +103,7 @@ const SignUpPage = () => {
               </div>
           ) :
           (
-            <>
+            <div>
               <div className={styles.heading}> Sign Up </div>
               <div className={styles.form}>
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -151,9 +151,9 @@ const SignUpPage = () => {
                       </button>
                     )}
                   </div>
-                  <div className={styles.forgotPasswordText}>
+                  {/* <div className={styles.forgotPasswordText}>
                     Forgot Password?
-                  </div>
+                  </div> */}
                   <div className={styles.buttonContainer}>
                     <Button
                       text="SIGN UP"
@@ -166,7 +166,7 @@ const SignUpPage = () => {
                   </div>
                 </form>
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
