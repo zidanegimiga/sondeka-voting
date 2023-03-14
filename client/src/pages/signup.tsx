@@ -5,7 +5,7 @@ import TextField from "shared/InputFields/TextField";
 import { Hide, Show } from "features/svgIcons/showHide";
 import Logo from "features/svgIcons/logoBlack";
 import Button from "shared/Button";
-import Link from 'next/link'
+import Link from 'next/link';
 
 const SignUpPage = () => {
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const SignUpPage = () => {
 
   // Create an Axios instance with interceptors
   const axiosInstance = axios.create({
-    baseURL: "http://localhost:3500",
+    baseURL: process.env.ENV_NODE == 'development' ? "http://localhost:3500" : process.env.API_URL,
   });
 
   axiosInstance.interceptors.request.use(
