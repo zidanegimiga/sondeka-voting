@@ -153,9 +153,9 @@ const LogInPage = () => {
                         </button>
                       )}
                     </div>
-                    <div className={styles.forgotPasswordText}>
+                    {/* <div className={styles.forgotPasswordText}>
                       Forgot Password?
-                    </div>
+                    </div> */}
                     <div className={styles.buttonContainer}>
                       <Button text="LOG IN" type="submit" color="#440A80" />
                     </div>
