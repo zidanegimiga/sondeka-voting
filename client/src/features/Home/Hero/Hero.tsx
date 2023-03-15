@@ -4,12 +4,16 @@ import LogoWhite from "features/svgIcons/LogoWhite";
 import Menu from "features/svgIcons/menu";
 import styles from "./Hero.module.scss";
 import Countdown from '../Countdown';
+import { useRouter } from 'next/router';
 
 const Hero = ({children}) => {
+  const router = useRouter()
 
   return(
     <div className={styles.heroWrapper}>
-      {children}      
+      {
+        router.pathname === '/' && <Countdown/>
+      }     
     </div>
   )
 };

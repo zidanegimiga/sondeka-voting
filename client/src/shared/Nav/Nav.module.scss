@@ -11,7 +11,7 @@
     padding-top: 24px;
     padding-bottom: 16px;
     padding-right: 240px;
-    background: rgba(0, 0, 0, 0.575);
+    background: #000000e3;
     position: fixed;
     top: 0;
     z-index: 1;
@@ -63,13 +63,15 @@
 }
 
 .navOptions{
-    position: absolute;
+    position: fixed;
     width: 320px;
     height: 160px;
     top: 96px;
     background-color: #fff;
+    box-shadow: 0px 4px 4px #00000040, -4px -4px 4px #00000040;
     right: 32px;
     border-radius: 8px;
+    z-index: 10;
 }
 
 .navLink{
