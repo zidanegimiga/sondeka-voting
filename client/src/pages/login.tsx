@@ -6,7 +6,7 @@ import { Hide, Show } from "features/svgIcons/showHide";
 import Logo from "features/svgIcons/logoBlack";
 import Button from "shared/Button";
 import Link from "next/link";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 const LogInPage = () => {
   const [loading, setLoading] = useState(false);
@@ -26,63 +26,65 @@ const LogInPage = () => {
     setError(null);
   }
 
-  if (typeof window !== undefined) {
-    // Create an Axios instance with interceptors
-    const axiosInstance = axios.create({
-      baseURL: `sondeka-voting-api.cyclic.app`
+  // Create an Axios instance with interceptors
+  const axiosInstance = axios.create({
+    baseURL: `sondeka-voting-api.cyclic.app`,
+  });
+
+  axiosInstance.interceptors.request.use(
+    (config) => {
+      // Set loading state to true when a request is made
+      setLoading(true);
+      setError(null); // clear any previous errors
+      setSuccess(false); // clear any previous success messages
+      return config;
+    },
+    (error) => {
+      setLoading(false);
+      return Promise.reject(error);
+    }
+  );
+
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      // Set loading state to false when a response is received
+      setLoading(false);
+      setSuccess(true); // set success state to true
+      return response;
+    },
+    (error) => {
+      setLoading(false);
+      setError(error.response.data); // set the error message
+      return Promise.reject(error);
+    }
+  );
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axiosInstance.post("/auth", formData);
+      console.log(response.data);
+      window.localStorage.setItem("token", `${response?.data?.accessToken}`);
+      window.localStorage.setItem(
+        "username",
+        `${response?.data?.userDetails?.username}`
+      );
+      window.localStorage.setItem("id", `${response?.data?.userDetails?.id}`);
+      router.push("/");
+      setResMessage(response.data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    axiosInstance.interceptors.request.use(
-      (config) => {
-        // Set loading state to true when a request is made
-        setLoading(true);
-        setError(null); // clear any previous errors
-        setSuccess(false); // clear any previous success messages
-        return config;
-      },
-      (error) => {
-        setLoading(false);
-        return Promise.reject(error);
-      }
-    );
-
-    axiosInstance.interceptors.response.use(
-      (response) => {
-        // Set loading state to false when a response is received
-        setLoading(false);
-        setSuccess(true); // set success state to true
-        return response;
-      },
-      (error) => {
-        setLoading(false);
-        setError(error.response.data); // set the error message
-        return Promise.reject(error);
-      }
-    );
-
-    const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    };
-
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      try {
-        const response = await axiosInstance.post("/auth", formData);
-        console.log(response.data);
-        window.localStorage.setItem('token', `${response?.data?.accessToken}` )
-        window.localStorage.setItem('username', `${response?.data?.userDetails?.username}` )
-        window.localStorage.setItem('id', `${response?.data?.userDetails?.id}` )
-        router.push('/');
-        setResMessage(response.data.message);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
+  if (typeof window !== undefined) {
     return (
       <div>
         <div className={styles.loginPageWrapper}>
@@ -109,7 +111,9 @@ const LogInPage = () => {
                     type={""}
                     action={cancelError}
                   /> */}
-                  <button className={styles.errorBtn} onClick={cancelError}>Try Again</button>
+                  <button className={styles.errorBtn} onClick={cancelError}>
+                    Try Again
+                  </button>
                 </div>
               </div>
             ) : (
@@ -175,9 +179,7 @@ const LogInPage = () => {
       </div>
     );
   } else {
-    return (
-      <>Window not defined</>
-    )
+    return <>Window not defined</>;
   }
 };
 
