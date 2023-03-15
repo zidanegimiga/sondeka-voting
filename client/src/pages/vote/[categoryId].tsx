@@ -14,8 +14,7 @@ const VotingCategory = ({category}) => {
       </Head>
       <div className={styles.pageWrapper}>
         <Nav/>
-        <Hero>
-        </Hero>
+        <Hero />
         <VotingForm data={category}/>        
       </div>
     </div>
