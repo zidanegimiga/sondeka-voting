@@ -28,7 +28,7 @@ const LogInPage = () => {
 
   // Create an Axios instance with interceptors
   const axiosInstance = axios.create({
-    baseURL: `sondeka-voting-api.cyclic.app`,
+    baseURL: process.env.API_URL,
   });
 
   axiosInstance.interceptors.request.use(
