@@ -14,7 +14,7 @@
 }
 
 .toastMessagesContainer {
-    width: 100%;
+    width: 100vw;
     display: flex;
     justify-content: center;
 }
@@ -35,7 +35,7 @@
 }
 
 .toastMessagesError {
-    width: 65%;
+    width: 100%;
     height: fit-content;
     padding: 8px;
     border: solid 1px #ff0000;
@@ -47,6 +47,11 @@
     p{
         font-size: 0.75rem;
     }
+}
+
+.errorBtn{
+    width: 200px;
+    padding: 8px;
 }
 
 .loginPageWrapper {
@@ -83,6 +88,10 @@
     background-color: #fff;
     box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.24), -6px -6px 8px rgba(0, 0, 0, 0.24);
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .form {

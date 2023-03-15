@@ -23,7 +23,7 @@ const SignUpPage = () => {
 
   // Create an Axios instance with interceptors
   const axiosInstance = axios.create({
-    baseURL: process.env.ENV_NODE == 'development' ? "http://localhost:3500" : process.env.API_URL,
+    baseURL: `sondeka-voting-api.cyclic.app`,
   });
 
   axiosInstance.interceptors.request.use(

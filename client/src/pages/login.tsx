@@ -29,7 +29,7 @@ const LogInPage = () => {
   if (typeof window !== undefined) {
     // Create an Axios instance with interceptors
     const axiosInstance = axios.create({
-      baseURL: "http://localhost:3500",
+      baseURL: `sondeka-voting-api.cyclic.app`
     });
 
     axiosInstance.interceptors.request.use(
@@ -103,12 +103,13 @@ const LogInPage = () => {
                 <div className={styles.toastMessagesError}>
                   <h4>{error.title}</h4>
                   <p>{error.description}</p>
-                  <Button
+                  {/*<Button
                     color={"grey"}
                     text="Try again"
                     type={""}
                     action={cancelError}
-                  />
+                  /> */}
+                  <button className={styles.errorBtn} onClick={cancelError}>Try Again</button>
                 </div>
               </div>
             ) : (
