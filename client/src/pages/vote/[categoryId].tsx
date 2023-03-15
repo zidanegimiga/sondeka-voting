@@ -25,14 +25,14 @@ const VotingCategory = ({category}) => {
 export const getStaticProps = async ({ params }) => {
   const { categoryId } = params
   // fetch the data for the category
-  const category = await fetch(`http://localhost:3500/admin/categories/${categoryId}`).then(res => res.json())
+  const category = await fetch(`https://sondeka-voting-api.cyclic.app/admin/categories/${categoryId}`).then(res => res.json())
   // return the data as props
   return { props: { category } }
 }
 
 export const getStaticPaths = async () => {
   // fetch the list of all posts
-  const categories = await fetch(`http://localhost:3500/admin/categories/allCategories`).then(res => res.json())
+  const categories = await fetch(`https://sondeka-voting-api.cyclic.app/admin/categories/allCategories`).then(res => res.json())
   // generate the paths for each category
   const paths = categories.map(category => ({ params: { categoryId: category._id } }))
   // return the paths
