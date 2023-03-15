@@ -6,7 +6,7 @@ import styles from "./Hero.module.scss";
 import Countdown from '../Countdown';
 import { useRouter } from 'next/router';
 
-const Hero = ({children}) => {
+const Hero = () => {
   const router = useRouter()
 
   return(
