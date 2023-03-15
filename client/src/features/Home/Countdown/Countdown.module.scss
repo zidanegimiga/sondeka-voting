@@ -16,6 +16,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 426px) {
+        margin-right: 20px;
+    }
 }
 
 .time {
@@ -31,10 +35,20 @@
     font-family: 'Red Hat Text';
     font-weight: 700;
     font-size: 2rem;
+
+    @media (max-width: 426px) {
+        height: 40px;
+        width: 40px;
+        font-size: 1.5rem;        
+    }
 }
 
 .timeTitle{
     margin-top: 8px;
     font-family: 'Red Hat Text';
     color: #fff;
+
+    @media (max-width: 426px) {
+        font-size: .75rem;
+    }
 }

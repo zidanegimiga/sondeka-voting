@@ -5,6 +5,7 @@ import styles from "./Nav.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Close from "features/svgIcons/close";
 
 const Nav = () => {
   const [options, showOptions] = useState(false);
@@ -26,7 +27,7 @@ const Nav = () => {
       <div className={styles.navContainer}>
         <div className={styles.navWrapper}>
           <Link href={"/"}>
-            <div>
+            <div className={styles.navLogo}>
               <LogoWhite />
             </div>
           </Link>
@@ -39,7 +40,13 @@ const Nav = () => {
               showOptions(!options);
             }}
           >
-            <Menu />
+            {
+              options === true ? (
+                <Close />
+              ) : (
+                <Menu />
+              )
+            }
           </div>
         </div>
         {options && (

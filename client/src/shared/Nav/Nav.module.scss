@@ -22,6 +22,12 @@
     }
 }
 
+.navLogo{
+    @media (max-width: 561px ){
+        display: none        
+    }
+}
+
 .title{
     font-family: 'UKNumberPlate';
     font-size: 2.5rem;
@@ -32,6 +38,14 @@
         font-size: 1.5rem;
         color: #fff;
     }
+
+    @media (max-width: 426px ){
+        font-size: 1.0rem;
+        
+        span{
+            font-size: 1.0rem;
+        }
+    }
 }
 
 .menuBtn{
@@ -41,6 +55,10 @@
 
     &:hover{
         background-color: #3f3f3f;
+    }
+
+    @media (max-width: 426px ){
+        transform: scale(80%);        
     }
 }
 
@@ -59,6 +77,7 @@
     text-align: center;
     font-family: 'Inter';
     cursor: pointer;
+
    &:hover{
     background-color: #FFCD00;
     border-radius: 8px;
