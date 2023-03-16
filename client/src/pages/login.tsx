@@ -26,39 +26,6 @@ const LogInPage = () => {
     setError(null);
   }
 
-  // Create an Axios instance with interceptors
-  const axiosInstance = axios.create({
-    baseURL: process.env.API_URL,
-  });
-
-  axiosInstance.interceptors.request.use(
-    (config) => {
-      // Set loading state to true when a request is made
-      setLoading(true);
-      setError(null); // clear any previous errors
-      setSuccess(false); // clear any previous success messages
-      return config;
-    },
-    (error) => {
-      setLoading(false);
-      return Promise.reject(error);
-    }
-  );
-
-  axiosInstance.interceptors.response.use(
-    (response) => {
-      // Set loading state to false when a response is received
-      setLoading(false);
-      setSuccess(true); // set success state to true
-      return response;
-    },
-    (error) => {
-      setLoading(false);
-      setError(error.response.data); // set the error message
-      return Promise.reject(error);
-    }
-  );
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -69,16 +36,20 @@ const LogInPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axiosInstance.post("/auth", formData);
-      console.log(response.data);
-      window.localStorage.setItem("token", `${response?.data?.accessToken}`);
-      window.localStorage.setItem(
-        "username",
-        `${response?.data?.userDetails?.username}`
-      );
-      window.localStorage.setItem("id", `${response?.data?.userDetails?.id}`);
+      setLoading(true);
+      const response = await fetch("https://sondeka-voting-api.cyclic.app/auth", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { accessToken, userDetails } = await response.json();
+      window.localStorage.setItem("token", `${accessToken}`);
+      window.localStorage.setItem("username", `${userDetails?.username}`);
+      window.localStorage.setItem("id", `${userDetails?.id}`);
+      setLoading(false)
       router.push("/");
-      setResMessage(response.data.message);
     } catch (error) {
       console.error(error);
     }
@@ -92,15 +63,7 @@ const LogInPage = () => {
             <div className={styles.containerHeader}>
               <Logo />
             </div>
-            {loading ? (
-              <p className={styles.toastMessages} style={{ color: "black" }}>
-                Loading...
-              </p>
-            ) : success ? (
-              <p className={styles.toastMessages} style={{ color: "black" }}>
-                {resMessage}
-              </p>
-            ) : error ? (
+            {error ? (
               <div className={styles.toastMessagesErrorContainer}>
                 <div className={styles.toastMessagesError}>
                   <h4>{error.title}</h4>
@@ -162,7 +125,7 @@ const LogInPage = () => {
                       Forgot Password?
                     </div> */}
                     <div className={styles.buttonContainer}>
-                      <Button text="LOG IN" type="submit" color="#440A80" />
+                      <Button text={loading ? 'Logging In...' : 'LOG IN'} type="submit" color={loading ? "#808080" : "#440A80"} />
                     </div>
                     <div className={styles.signUpLink}>
                       Have an account?{" "}

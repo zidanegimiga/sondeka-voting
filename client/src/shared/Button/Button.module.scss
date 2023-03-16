@@ -10,6 +10,10 @@
     cursor: pointer;
     transition: all 0.5s ease-in-out;
 
+    // &:disabled{
+    //     background-color: #808080;
+    // }
+
     &:hover {
         box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.25);
     }
