@@ -34,9 +34,9 @@ const vote = asyncHandler(async (req, res) => {
 
          // Create a new vote log entry
         const voteLogEntry = new VotingLog({
-            voterId: voterId,
-            categoryId: categoryId,
-            nomineeId: nomineeId,
+            voterId: mongoose.Types.ObjectId(voterId),
+            categoryId: mongoose.Types.ObjectId(categoryId),
+            nomineeId: mongoose.Types.ObjectId(nomineeId),
             timestamp: Date.now()
         });
 
