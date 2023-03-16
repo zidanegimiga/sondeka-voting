@@ -11,9 +11,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <meta property="og:type" content="website" key="og-type" />
-          <meta property="og:url" content="" key="og-url" />
+          <meta property="og:url" content="vote.sondeka.org" key="og-url" />
           <meta property="og:title" content="Voting Sondeka" key="og-title" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="icon" type="image/x-icon" href="/favicon1.ico"></link>
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
