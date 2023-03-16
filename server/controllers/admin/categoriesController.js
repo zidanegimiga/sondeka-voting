@@ -1,4 +1,5 @@
 const Category = require('../../models/Category');
+const Nominee = require('../../models/Nominee');
 const asyncHandler = require('express-async-handler');
 const mongoose = require('mongoose')
 
@@ -37,7 +38,7 @@ const getOneCategory = asyncHandler(async (req, res) => {
 // @route POST /admin/categories/newCategory
 // @access Private
 const createNewCategory = asyncHandler(async (req, res) => {
-    const { name, description, poster} = req.body
+    const { name, description, poster } = req.body
 
     // Confirm data
     if (!name || !description || !poster) {
@@ -51,9 +52,9 @@ const createNewCategory = asyncHandler(async (req, res) => {
     const category = await Category.findOne({ name }).lean().exec()
 
     if (category) {
-        return res.status(409).json({ 
-            type: 'existingCategory', 
-            title: 'One Little Problem', 
+        return res.status(409).json({
+            type: 'existingCategory',
+            title: 'One Little Problem',
             description: 'This category seems to exist.',
             success: false,
         })
@@ -78,7 +79,7 @@ const updateCategory = asyncHandler(async (req, res) => {
     const { id, name, description, poster } = req.body
 
     // Confirm data 
-    if (!id || !name ) {
+    if (!id || !name) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -94,7 +95,7 @@ const updateCategory = asyncHandler(async (req, res) => {
 
     // Allow updates to the original user 
     if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate category name'})
+        return res.status(409).json({ message: 'Duplicate category name' })
     }
 
     category.name = name
@@ -131,6 +132,23 @@ const deleteCategory = asyncHandler(async (req, res) => {
     res.json(reply)
 })
 
+// @desc Get Nominees per category
+// @route GET /admin/categories/:categoryId/nominees
+// @access Private
+const getAllNomineesPerCategory = asyncHandler(async (req, res) => {
+    try {
+        const category = await Category.findById(req.params.categoryId);
+        if (!category) {
+            return res.status(404).json({ message: 'Category not found' });
+        }
+        const nominees = await Nominee.find({ category: req.params.categoryId });
+        res.json(nominees);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+})
+
 module.exports = {
-    deleteCategory, updateCategory, createNewCategory, getAllCategories, getOneCategory
+    deleteCategory, updateCategory, createNewCategory, getAllCategories, getOneCategory, getAllNomineesPerCategory
 }
