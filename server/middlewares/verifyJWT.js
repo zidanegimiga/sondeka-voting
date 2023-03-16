@@ -17,6 +17,7 @@ const verifyJWT = (req, res, next) => {
         (err, decoded) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
             console.log("ERR: ", err)
+            console.log("Token: ", token)
             req.userId = decoded.UserInfo.userId
             req.email = decoded.UserInfo.email
             next()
