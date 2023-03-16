@@ -12,8 +12,7 @@ const Nominee = require('../models/Nominee')
 // @access Private
 const vote = asyncHandler(async (req, res) => {
     try {
-        const voterId = req.userId;
-        const { categoryId, nomineeId } = req.body;
+        const { categoryId, nomineeId, voterId } = req.body;
 
         // Is category and nominee valid?
         const category = await VotingCategory.findById(categoryId);
