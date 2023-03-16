@@ -11,6 +11,11 @@ const logSchema = new mongoose.Schema({
     ref: 'Nominee',
     required: true
   },
+  category:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true
+  },
   timestamp: {
     type: Date,
     default: Date.now,
