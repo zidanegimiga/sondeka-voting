@@ -13,9 +13,13 @@ const Nominee = require('../models/Nominee')
 const vote = asyncHandler(async (req, res) => {
     try {
         const { categoryId, nomineeId, voterId } = req.body;
+        console.log("Category Id: ", categoryId)
+        console.log("Nominee Id: ", nomineeId)
+        console.log("Voter Id: ", voterId)
 
         // Is category and nominee valid?
         const category = await VotingCategory.findById(categoryId);
+        
         if (!category) {
             return res.status(400).json({ message: 'Invalid category ID' });
         }
