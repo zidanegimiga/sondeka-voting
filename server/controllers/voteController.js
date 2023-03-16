@@ -18,19 +18,19 @@ const vote = asyncHandler(async (req, res) => {
         console.log("Voter Id: ", voterId)
 
         // Is category and nominee valid?
-        const category = await VotingCategory.findById(categoryId);
+        const category = await VotingCategory.findById(mongoose.Types.ObjectId(categoryId));
         
         if (!category) {
             return res.status(400).json({ message: 'Invalid category ID' });
         }
 
-        const nominee = await Nominee.findById(nomineeId);
+        const nominee = await Nominee.findById(mongoose.Types.ObjectId(nomineeId));
         if (!nominee || nominee.category_id.toString() !== categoryId) {
             return res.status(400).json({ message: 'Invalid nominee ID' });
         }
 
         // Has the user voted?
-        const existingVoteLogEntry = await VotingLog.findOne({ voterId: voterId, category_id: categoryId });
+        const existingVoteLogEntry = await VotingLog.findOne({ voterId: mongoose.Types.ObjectId(voterId), category_id: mongoose.Types.ObjectId(categoryId) });
         if (existingVoteLogEntry) {
             return res.status(400).json({ message: 'You have already voted in this category' });
         }

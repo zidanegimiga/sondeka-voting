@@ -17,7 +17,7 @@ const VotingForm = ({ data }) => {
           `https://sondeka-voting-api.cyclic.app/admin/categories/${data?._id}/nominees`
         );
         const nomineeData = await response.json();
-        setCategoryId(data._id)
+        console.log("CAT: ", data._id)
         setNominees(nomineeData);
       } catch (error) {
         console.error(error);
@@ -37,7 +37,7 @@ const VotingForm = ({ data }) => {
       const response = await fetch(`https://sondeka-voting-api.cyclic.app/vote`, {
         method: 'POST',
         body: JSON.stringify({
-          categoryId: categoryId,
+          categoryId: data._id,
           nomineeId: selectedNomineeId,
           voterId: voterId          
         }),
