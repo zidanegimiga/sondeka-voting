@@ -10,14 +10,14 @@ import Close from "features/svgIcons/close";
 const Nav = () => {
   const [options, showOptions] = useState(false);
   const [token, setToken] = useState<String>();
-  const router = useRouter()
+  const router = useRouter();
   function logout() {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("id");
     window.localStorage.removeItem("username");
-    setToken(null)
-    router.push('/')
-    showOptions(false)    
+    setToken(null);
+    router.push("/");
+    showOptions(false);
   }
   useEffect(() => {
     const getToken = window.localStorage.getItem("token");
@@ -42,13 +42,7 @@ const Nav = () => {
               showOptions(!options);
             }}
           >
-            {
-              options === true ? (
-                <Close />
-              ) : (
-                <Menu />
-              )
-            }
+            {options === true ? <Close /> : <Menu />}
           </div>
         </div>
         {options && (
@@ -67,9 +61,14 @@ const Nav = () => {
               </>
             )}
             {token && (
-              <div className={styles.navLink} onClick={() => logout()}>
-                <div>Log Out</div>
-              </div>
+              <>
+                <div className={styles.navLink}>
+                  <Link href={"/"}>Home</Link>
+                </div>
+                <div className={styles.navLink} onClick={() => logout()}>
+                  <div>Log Out</div>
+                </div>
+              </>
             )}
           </div>
         )}
