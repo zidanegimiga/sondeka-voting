@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/login.module.scss";
 import axios from "axios";
 import TextField from "shared/InputFields/TextField";
@@ -20,6 +20,13 @@ const LogInPage = () => {
   });
 
   const router = useRouter();
+
+  useEffect(()=>{
+    const tokenState = window.localStorage.getItem('token')
+    if(tokenState !== null || undefined){
+      router.push('/');
+    }
+  }, [])
 
   function cancelError(e) {
     e.preventDefault();

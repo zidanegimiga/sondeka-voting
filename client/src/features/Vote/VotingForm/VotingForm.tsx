@@ -5,10 +5,17 @@ import Link from "next/dist/client/link";
 
 const VotingForm = ({ data }) => {
   const [nominees, setNominees] = useState<any>();
-  const [categoryId, setCategoryId] = useState("");
   const [selectedNomineeId, setSelectedNomineeId] = useState("");
-  const [voterId, setVoterId] = useState("");
+  const [voteId, setVoterId] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState<any>();
   const [jwt, setJWT] = useState("");
+  const [formData, setFormData] = useState({
+    categoryId: data._id,
+    nomineeId: "",
+    voterId: ""
+  })
+  const [notloggedIn, setNotLoggedIn] = useState(false);
 
   useEffect(() => {
     async function getNominees() {
@@ -17,7 +24,6 @@ const VotingForm = ({ data }) => {
           `https://sondeka-voting-api.cyclic.app/admin/categories/${data?._id}/nominees`
         );
         const nomineeData = await response.json();
-        console.log("CAT: ", data._id)
         setNominees(nomineeData);
       } catch (error) {
         console.error(error);
@@ -25,59 +31,80 @@ const VotingForm = ({ data }) => {
     }
     getNominees();
     const token = window.localStorage.getItem('token');
+    if(token === null || undefined){
+      setNotLoggedIn(true)
+    }
     setJWT(token)
     const vId = window.localStorage.getItem('id');
-    setVoterId(vId)
-    console.log("Token: ", token)
+    setFormData({
+      ...formData, voterId: vId
+    })
   }, []);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    console.log("Form: ", formData)
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true)
       const response = await fetch(`https://sondeka-voting-api.cyclic.app/vote`, {
         method: 'POST',
-        body: JSON.stringify({
-          categoryId: data._id,
-          nomineeId: selectedNomineeId,
-          voterId: voterId          
-        }),
+        body: JSON.stringify(formData),
         headers: {
-          'Authorization': `Bearer ${jwt}`
+          'Authorization': `${jwt}`,
+          'Content-Type': 'application/json'
         }
       });
       const datares = await response.json();
-      console.log("Message: ", datares)
+      setLoading(false)
+      setResponse(datares)
     } catch (err) {
       console.error(err);
     }
   };
 
   if (typeof window !== undefined) {
-    console.log("Nominees: ", nominees);
     return (
       <>
         <div className={styles.votingFormWrapper}>
           <h3>{data?.name}</h3>
           <p>{data?.description}</p>
           <h3>Nominees</h3>
-          <p>Wait for voting lines to open to be able to cast your vote</p>
+          {/* <p>Wait for voting lines to open to be able to cast your vote</p> */}
 
-          <form onSubmit={handleSubmit}>
+          {
+            <form onSubmit={handleSubmit}>
             <p>Please select a nominee:</p>
             {nominees?.map((nominee) => (
-              <div key={nominee._id}>
-                <label htmlFor={nominee._id}>{nominee.name}</label>
+              <div key={nominee._id} className={styles.nomineeOption}>
                 <input
                   type="radio"
                   id={nominee._id}
-                  name="nominee"
+                  name="nomineeId"
                   value={nominee._id}
-                  onChange={(event) => setSelectedNomineeId(event.target.value)}
+                  onChange={(event) => handleInputChange(event)}
+                  disabled={notloggedIn}
+                  className={styles.radio}
                 />
+                <label htmlFor={nominee._id}>{nominee.name}</label>
               </div>
             ))}
-            <button type="submit">Submit</button>
-          </form>
+            
+            <div className={styles.btnContainer}>
+              <button className={styles.button} type="submit">{loading ? 'Submitting' : 'Submit'}</button>
+            </div>
+            
+          </form>          
+          }
+          { notloggedIn && <div className={styles.responseMessageE}>You need to <Link href={'/login'}><span>log in</span></Link> to vote</div>}
+          <div className={styles.responseMessage}>{response?.message}</div>
         </div>
       </>
     );

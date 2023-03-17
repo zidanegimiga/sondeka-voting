@@ -13,6 +13,8 @@ const Nav = () => {
   const router = useRouter()
   function logout() {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("id");
+    window.localStorage.removeItem("username");
     setToken(null)
     router.push('/')
     showOptions(false)    
