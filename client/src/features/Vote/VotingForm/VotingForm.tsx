@@ -8,7 +8,7 @@ const VotingForm = ({ data }) => {
   const [selectedNomineeId, setSelectedNomineeId] = useState("");
   const [voteId, setVoterId] = useState("");
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState<any>();
+  const [responseMessage, setResponseMessage] = useState<any>();
   const [jwt, setJWT] = useState("");
   const [formData, setFormData] = useState({
     categoryId: data._id,
@@ -64,7 +64,7 @@ const VotingForm = ({ data }) => {
       });
       const datares = await response.json();
       setLoading(false)
-      setResponse(datares)
+      setResponseMessage(datares)
     } catch (err) {
       console.error(err);
     }
@@ -104,7 +104,7 @@ const VotingForm = ({ data }) => {
           </form>          
           }
           { notloggedIn && <div className={styles.responseMessageE}>You need to <Link href={'/login'}><span>log in</span></Link> to vote</div>}
-          <div className={styles.responseMessage}>{response?.message}</div>
+          {responseMessage && <div className={styles.responseMessage}>{responseMessage?.message}</div> }
         </div>
       </>
     );
