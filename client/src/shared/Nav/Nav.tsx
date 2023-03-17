@@ -56,6 +56,9 @@ const Nav = () => {
             {!token && (
               <>
                 <div className={styles.navLink}>
+                  <Link href={"/"}>Home</Link>
+                </div>
+                <div className={styles.navLink}>
                   <Link href={"/signup"}>Sign Up</Link>
                 </div>
                 <div className={styles.navLink}>
