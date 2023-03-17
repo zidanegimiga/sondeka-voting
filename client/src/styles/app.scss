@@ -2,6 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Red+Hat+Text:wght@500;700&display=swap');
 
+@font-face {
+  font-family: "Graphik LCG";
+  src: url('../../public/fonts/GraphikLCG-Medium.eot');
+  font-weight: bold;
+  font-style: italic;
+}
+  
+@font-face {
+  font-family: "UKNumberPlate";
+  src: url('../../public/fonts/UKNumberPlate.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   margin: 0px;
