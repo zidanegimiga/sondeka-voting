@@ -1,25 +1,26 @@
 const jwt = require('jsonwebtoken')
 
 const verifyJWT = (req, res, next) => {
-    const authHeader = req.headers.authorization || req.headers.Authorization
+    const authHeader = req.headers.authorization
+    console.log("0. Authorisation: ", authHeader)
 
-    if (!authHeader?.startsWith('Bearer ')) {
-        return res.status(401).json({ message: 'Unauthorized' })
-        //TD:
-        // Redirect user to login/sign up when not authorized
-    }
-
-    const token = authHeader.split(' ')[1]
+    // if (authHeader?.startsWith('Bearer') === false) {
+    //     return res.status(401).json({ message: 'Unauthorized' })
+    //     //TD:
+    //     // Redirect user to login/sign up when not authorized
+    // }
 
     jwt.verify(
-        token,
+        authHeader,
         process.env.ACCESS_TOKEN_SECRET,
         (err, decoded) => {
-            if (err) return res.status(403).json({ message: 'Forbidden' })
-            console.log("ERR: ", err)
-            console.log("Token: ", token)
+            if (err) {
+                console.log("ERR: ", err)
+                return res.status(403).json({ message: 'Forbidden' })
+            }
             req.userId = decoded.UserInfo.userId
             req.email = decoded.UserInfo.email
+            console.log("4. JWT Verified")
             next()
         }
     )

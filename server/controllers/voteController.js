@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
+const mongoose = require('mongoose')
 
 const VotingLog = require('../models/VotingLog')
 const Voter = require('../models/User')
@@ -25,7 +26,7 @@ const vote = asyncHandler(async (req, res) => {
         }
 
         const nominee = await Nominee.findById(mongoose.Types.ObjectId(nomineeId));
-        if (!nominee || nominee.category_id.toString() !== categoryId) {
+        if (!nominee || nominee.category.toString() !== categoryId) {
             return res.status(400).json({ message: 'Invalid nominee ID' });
         }
 
@@ -38,8 +39,8 @@ const vote = asyncHandler(async (req, res) => {
          // Create a new vote log entry
         const voteLogEntry = new VotingLog({
             voterId: mongoose.Types.ObjectId(voterId),
-            categoryId: mongoose.Types.ObjectId(categoryId),
-            nomineeId: mongoose.Types.ObjectId(nomineeId),
+            category: mongoose.Types.ObjectId(categoryId),
+            nominee: mongoose.Types.ObjectId(nomineeId),
             timestamp: Date.now()
         });
 
