@@ -113,7 +113,7 @@ const SignUpPage = () => {
                       onChange={handleInputChange}
                       value={formData.email}
                       name={"email"}
-                      type={"text"}
+                      type={"email"}
                       placeholder={"E-mail"}
                     />
                     <div className={styles.passwordField}>
