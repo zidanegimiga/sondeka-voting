@@ -10,8 +10,23 @@ import Close from "features/svgIcons/close";
 const Nav = () => {
   const [options, showOptions] = useState(false);
   const [token, setToken] = useState<String>();
+  const [loading, setLoading] = useState(null)
+
   const router = useRouter();
-  function logout() {
+
+  async function logout() {
+    try{
+      setLoading(true)
+      const response = await fetch("https://sondeka-voting-api.cyclic.app/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+    } catch (err){
+      console.error(err)
+    }
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("id");
     window.localStorage.removeItem("username");
