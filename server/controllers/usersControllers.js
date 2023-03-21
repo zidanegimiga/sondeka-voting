@@ -56,6 +56,8 @@ const createNewUser = asyncHandler(async (req, res) => {
     // Create and store new user 
     const user = await Voter.create(userObject)
 
+    // Create token for email verification
+    // T.D: make this a utility function to reduce repetition
     const token = await Token.create({
         userId: user._id,
         token: crypto.randomBytes(32).toString("hex")
@@ -79,8 +81,53 @@ const createNewUser = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc Resend verification link
+// @route POST /re-verify/
+// @access Private
+const resendVerificationLink = asyncHandler(async (req, res) => {
+    const {email} = req.body
+
+    // Confirm data
+    if (!email) {
+        return res.status(400).json({
+            message: 'Provide an email address to resend the verification link',
+        })
+    }
+
+    // Check if email exists
+    const voter = await Voter.findOne({ email }).lean().exec()
+
+    if (!voter) {
+        return res.status(400).json({  
+            title: 'Non-existent email', 
+            description: 'This email address is not registered yet, sign up instead?',
+            success: false,
+        })
+    }
+
+    // Create token for email verification
+    // T.D: make this a utility function to reduce repetition
+    const token = await Token.create({
+        userId: voter._id,
+        token: crypto.randomBytes(32).toString("hex")
+    })
+
+    const baseURL = process.env.NODE_ENV === "development" ? process.env.BASE_URL_DEV : process.env.BASE_URL_PROD
+    const url = `${baseURL}/${voter._id}/verify/${token.token}`;
+
+    // E-Mail details
+    const mailOptions = {
+        email: voter.email,
+        subject: 'Sondeka Awards 2023 - Email Verification',
+        html: `<p>Please click the following link to verify your email address:</p><p style="background-color: "#000000";padding:"6px 8px""><a href="${url}">Verify Link</a></p>`
+    }
+
+    await sendEmail(mailOptions); 
+    res.status(201).json({ message: `Verification link successfully sent to ${voter.email}` })
+})
+
 // @desc Verify user's email
-// @route POST /users/?
+// @route POST /:userid/verify/:token
 // @access Private
 const confirmEmail = asyncHandler(async (req, res) =>{
         const user = await Voter.findOne({ _id: req.params.id });    
@@ -92,7 +139,13 @@ const confirmEmail = asyncHandler(async (req, res) =>{
         });
         if (!token) return res.status(400).redirect('/invalid');
     
-        await Voter.updateOne({ verified: true });
+        await Voter.findByIdAndUpdate(user._id, { verified: true }, { new: true }, (err, doc) => {
+            if (err) {
+              console.log('Error:', err);
+            } else {
+              console.log('Document:', doc);
+            }
+          });
 
         console.log("User: ", user)
         
@@ -169,5 +222,6 @@ module.exports = {
     createNewUser,
     updateUser,
     deleteUser,
-    confirmEmail
+    confirmEmail,
+    resendVerificationLink
 }
