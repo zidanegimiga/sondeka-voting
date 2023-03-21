@@ -26,7 +26,7 @@ const login = asyncHandler(async (req, res) => {
 
     if (!match) return res.status(401).json({ title: 'One Little Problem', description: 'The password you have entered is incorrect' })
 
-    if (foundUser.verified !== true) return res.status(201).json({ message: 'Verify your email address' })
+    if (foundUser.verified !== true) return res.status(401).json({ message: 'Verify your email address' })
 
     const userId = foundUser._id.toString()
 
