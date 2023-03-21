@@ -139,15 +139,17 @@ const confirmEmail = asyncHandler(async (req, res) =>{
         });
         if (!token) return res.status(400).redirect('/invalid');
     
-        await Voter.findByIdAndUpdate(user._id, { verified: true }, { new: true }, (err, doc) => {
-            if (err) {
-              console.log('Error:', err);
-            } else {
-              res.status(201).redirect('/confirmed')
-            }
-        });
+        const confirmedVoter = await Voter.findByIdAndUpdate(user._id, 
+            { verified: true }, 
+            { new: true } 
+        );
+        console.log("Email confirmed: ", confirmedVoter);
+        if(!confirmedVoter){
+           return res.status(400).json({message: "Not verified"})
+        }
         
         await token.remove();
+        res.status(201).redirect('/confirmed')
 })
 
 // @desc Update a user
