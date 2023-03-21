@@ -19,12 +19,12 @@ const login = asyncHandler(async (req, res) => {
     // implement internal error types; In numbers
     // e.g 700 -> (&)
     if (!foundUser) {
-        return res.status(401).json({ title: 'One Little Problem', description: 'One or both of the credentials you entered is incorrect. For your security reasons, we cannot reveal which. ' })
+        return res.status(401).json({ title: 'One Little Problem', description: 'The email address you entered is not connected to an account' })
     }
 
     const match = await bcrypt.compare(password, foundUser.password)
 
-    if (!match) return res.status(401).json({ title: 'One Little Problem', description: 'One or both of the credentials you entered is incorrect. For your security reasons, we cannot reveal which. ' })
+    if (!match) return res.status(401).json({ title: 'One Little Problem', description: 'The password you have entered is incorrect' })
 
     if (foundUser.verified !== true) return res.status(201).json({ message: 'Verify your email address' })
 
