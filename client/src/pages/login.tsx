@@ -51,14 +51,29 @@ const LogInPage = () => {
           "Content-Type": "application/json",
         },
       });
-      const { accessToken, userDetails } = await response.json();
-      window.localStorage.setItem("token", `${accessToken}`);
-      window.localStorage.setItem("username", `${userDetails?.username}`);
-      window.localStorage.setItem("id", `${userDetails?.id}`);
-      setLoading(false)
-      router.push("/");
-    } catch (error) {
-      console.error(error);
+
+      if(response.status === 201){
+        const { accessToken, userDetails } = await response.json();
+        window.localStorage.setItem("token", `${accessToken}`);
+        window.localStorage.setItem("username", `${userDetails?.username}`);
+        window.localStorage.setItem("id", `${userDetails?.id}`);
+        router.push("/");
+        setLoading(false)
+      }
+
+      if(response.status === 400){
+        const res = await response.json()
+        setError(res);
+        setLoading(false)
+      }
+
+      if(response.status === 401){
+        const res = await response.json()
+        setError(res);
+        setLoading(false)
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
