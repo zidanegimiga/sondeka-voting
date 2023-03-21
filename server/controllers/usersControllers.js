@@ -143,14 +143,11 @@ const confirmEmail = asyncHandler(async (req, res) =>{
             if (err) {
               console.log('Error:', err);
             } else {
-              console.log('Document:', doc);
+              res.status(201).redirect('/confirmed')
             }
-          });
-
-        console.log("User: ", user)
+        });
         
         await token.remove();
-        res.status(201).redirect('/confirmed');
 })
 
 // @desc Update a user
