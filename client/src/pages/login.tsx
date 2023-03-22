@@ -52,7 +52,7 @@ const LogInPage = () => {
         },
       });
 
-      if(response.status === 201){
+      if(response.status === 201 || 200){
         const { accessToken, userDetails } = await response.json();
         window.localStorage.setItem("token", `${accessToken}`);
         window.localStorage.setItem("username", `${userDetails?.username}`);
