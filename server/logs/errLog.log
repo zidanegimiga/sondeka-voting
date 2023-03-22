@@ -9,3 +9,5 @@
 20230301	12:24:00	817ebc28-8e24-4edd-aee4-c02179038431	Error: Cannot set headers after they are sent to the client	GET	/63ff1994ee0af331b415bea7/verify/38cd8752c4de60e7d5e665eea236682ab701752d3b0ac5392c22d7a30ecae65e	undefined
 20230301	12:33:44	d9ce3aee-d732-4d22-aeb4-1e8f4305d63e	Error: Cannot set headers after they are sent to the client	GET	/63ff1bd96504e53798222a4b/verify/cb7e5b6f4e6fea5a4841be8f231d26f96be0c404e66400eff79dda5170fb1cc7	undefined
 20230301	12:50:31	2dc3e0b7-be7b-4f22-843e-cc5adbf5839e	Error: Cannot set headers after they are sent to the client	GET	/63ff1fd29146e12da2193e06/verify/4750adda625e4c368a99281a5081cdf071bcf807963021b27a5e2d1f6feb556a	undefined
+20230322	14:32:19	2137d498-924c-4c79-914d-cad140df1497	Error: ENOENT: no such file or directory, stat 'C:\Users\Sammy\Desktop\Web Projects\sondeka-voting\server\views\test.html'	GET	/test	undefined
+20230322	14:32:19	57e24893-fee4-4874-a156-b075fd891e51	Error: ENOENT: no such file or directory, stat 'C:\Users\Sammy\Desktop\Web Projects\sondeka-voting\server\views\test.html'	GET	/test	undefined

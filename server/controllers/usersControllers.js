@@ -69,8 +69,13 @@ const createNewUser = asyncHandler(async (req, res) => {
     // E-Mail details
     const mailOptions = {
         email: user.email,
-        subject: 'Sondeka Awards 2023 - Email Verification',
-        html: `<p>Please click the following link to verify your email address:</p><p style="background-color: "#000000";padding:"6px 8px""><a href="${url}">Verify Link</a></p>`
+        subject: 'Verify your Sondeka Awards 2023 account',
+        template: 'verificationEmail',
+        context: {
+            username: user.username,
+            email: user.email,
+            url: url
+        }
     }
 
     if (user) { //created
@@ -119,7 +124,11 @@ const resendVerificationLink = asyncHandler(async (req, res) => {
     const mailOptions = {
         email: voter.email,
         subject: 'Sondeka Awards 2023 - Email Verification',
-        html: `<p>Please click the following link to verify your email address:</p><p style="background-color: "#000000";padding:"6px 8px""><a href="${url}">Verify Link</a></p>`
+        emailTemplate: 'verificationEmail',
+        context: {
+            username: voter.username,
+            url: url
+        }
     }
 
     await sendEmail(mailOptions); 

@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Email address confirmation</title>
+    <link rel="stylesheet" href="css/confirmEmail.css">
+</head>
+
+{{!-- <style>
+    body {
+        display: flex;
+        justify-content: center;
+        background-color: #d3d3d3;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+        border: 1px solid white;
+        background-color: #ffffff;
+        border-radius: 8px;
+        width: 60%;
+        padding-bottom: 48px;
+        height: fit-content;
+        position: relative;
+    }
+
+    .container-header {
+        border-radius: 8px 8px 0 0;
+        background-color: #1E1E1E;
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container-content {
+        padding: 24px
+    }
+
+    .btn-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 24px;
+    }
+
+    .verification-btn {
+        width: 50%;
+        color: white;
+        text-decoration: none;
+        background-color: #440A80;
+        padding: 8px 16px;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .email {
+        font-weight: 600;
+    }
+
+    .footer {
+        width: 100%;
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer p {
+        margin: 12px;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .footer p a {
+        text-decoration: none;
+        color: #474747;
+    }
+
+    .footer p a:hover {
+        text-decoration: underline;
+    }
+
+    .footer p:hover {
+        transform: translateY(-15%);
+    }
+
+    @media (max-width: 769px) {
+        .container {
+            width: 85%;
+        }
+    }
+</style> --}}
+
+<body style="display: flex; justify-content: center;background-color: #d3d3d3; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <div style="border: 1px solid white; background-color: #ffffff; border-radius: 8px; width: 60%; padding-bottom: 48px; height: fit-content; position: relative;">
+        <div style="    border-radius: 8px 8px 0 0; background-color: #1E1E1E; padding: 16px; display: flex; justify-content: center;">
+            <img src="images/sondekaWhiteLogo.png" class="logo" />
+        </div>
+        <div style="padding: 24px">
+            <h1>Hi {{username}}</h1>
+            <p>Thank you for signing up to participate as a voter for the Sondeka 2023 Awards with the email address:
+                <span style="font-weight: 600;">{{email}}</span>
+            </p>
+            <div style="width: 100%; display: flex;  justify-content: center; margin-top: 24px;">
+                <a href={{url}} style="width: 50%; color: white;text-decoration: none; background-color: #440A80; padding: 8px 16px; display: flex; justify-content: center; cursor: pointer; font-weight: 600;"> 
+                    <div> Verify Email </div>
+                </a>
+            </div>
+        </div>
+
+        <div style="width: 100%; display: flex;  position: absolute;  bottom: 0;  justify-content: center; align-items: center;">
+            <p style=" margin: 12px; transition: all 0.5s ease-in-out;">
+                <a href="https://sondeka.org/awards" style="text-decoration: none;  color: #474747;">Sondeka Website</a>
+            </p>
+            <p style=" margin: 12px; transition: all 0.5s ease-in-out;">
+                <a style="text-decoration: none;  color: #474747;">Creatives Garage</a>
+            </p>
+            <p style=" margin: 12px; transition: all 0.5s ease-in-out;">
+                <a style="text-decoration: none;  color: #474747;">Privacy policy</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

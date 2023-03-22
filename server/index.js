@@ -45,6 +45,9 @@ app.use('/vote', require('./routes/voteRoute'))
 app.post('/signup', usersController.createNewUser)
 app.get('/:id/verify/:token/', usersController.confirmEmail) 
 app.post('/reverify', usersController.resendVerificationLink) 
+app.get('/test', (req, res)=>{
+    res.sendFile(path.join(__dirname, 'views', 'test.html'))
+}) 
 
 app.get('/json', (req, res) => {
     res.json(resJsn)

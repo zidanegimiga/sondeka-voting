@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #d3d3d3;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    border: 1px solid white;
+    background-color: #ffffff;
+    border-radius: 8px;
+    width: 60%;
+    padding-bottom: 48px;
+    height: fit-content;
+    position: relative;
+}
+
+.container-header {
+    border-radius: 8px 8px 0 0;
+    background-color: #1E1E1E;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.container-content {
+    padding: 24px
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.verification-btn {
+    width: 50%;
+    color: white;
+    text-decoration: none;
+    background-color: #440A80;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.email {
+    font-weight: 600;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer p {
+    margin: 12px;
+    transition: all 0.5s ease-in-out;
+}
+
+.footer p a {
+    text-decoration: none;
+    color: #474747;
+}
+
+.footer p a:hover {
+    text-decoration: underline;
+}
+
+.footer p:hover {
+    transform: translateY(-15%);
+}
+
+@media (max-width: 769px) {
+    .container {
+        width: 85%;
+    }
+}
