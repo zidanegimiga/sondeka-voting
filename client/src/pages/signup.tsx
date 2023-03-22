@@ -90,7 +90,7 @@ const SignUpPage = () => {
               </div>
             ) : 
             success ? (
-              <div className={styles.toastMessagesContainer}>
+              <div className={styles.toastMessagesErrorContainer}>
                 <div className={styles.toastMessagesSuccess}>
                   {/* <h4>{res.title}</h4> */}
                   <p>{successResp.message}</p>
