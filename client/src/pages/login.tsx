@@ -52,12 +52,11 @@ const LogInPage = () => {
         },
       });
 
-      if(response.status === 201 || 200){
-        const { accessToken, userDetails } = await response.json();
-        window.localStorage.setItem("token", `${accessToken}`);
-        window.localStorage.setItem("username", `${userDetails?.username}`);
-        window.localStorage.setItem("id", `${userDetails?.id}`);
-        router.push("/");
+      console.log("Response: ", response)
+      
+      if(response.status === 401){
+        const res = await response.json()
+        setError(res);
         setLoading(false)
       }
 
@@ -67,11 +66,15 @@ const LogInPage = () => {
         setLoading(false)
       }
 
-      if(response.status === 401){
-        const res = await response.json()
-        setError(res);
+      if(response.status === 201 || 200){
+        const { accessToken, userDetails } = await response.json();
+        window.localStorage.setItem("token", `${accessToken}`);
+        window.localStorage.setItem("username", `${userDetails?.username}`);
+        window.localStorage.setItem("id", `${userDetails?.id}`);
+        router.push("/");
         setLoading(false)
       }
+
     } catch (err) {
       console.error(err);
     }
