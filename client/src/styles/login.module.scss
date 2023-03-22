@@ -13,7 +13,7 @@
     color: white;
 }
 
-.toastMessagesContainer {
+.toastMessagesErrorContainer {
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -35,7 +35,7 @@
 }
 
 .toastMessagesError {
-    width: 100%;
+    width: 50%;
     height: fit-content;
     padding: 8px;
     border: solid 1px #ff0000;
@@ -50,8 +50,12 @@
 }
 
 .errorBtn{
-    width: 200px;
+    width: 60%;
     padding: 8px;
+    background-color: #440A80;
+    border-radius: 8px;
+    color: white;
+    outline: none;
 }
 
 .loginPageWrapper {
