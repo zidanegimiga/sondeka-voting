@@ -20,12 +20,12 @@ const AuthProvider: FC = ({ children }) => {
 
   const login = (newToken: string) => {
     setToken(newToken);
-    localStorage.setItem("token", newToken);
+    localStorage.setItem("admin-token", newToken);
   };
 
   const logout = () => {
     setToken("");
-    localStorage.removeItem("token");
+    localStorage.removeItem("admin-token");
   };
 
   const isAuthenticated = !!token;
