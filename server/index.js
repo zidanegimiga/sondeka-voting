@@ -51,16 +51,14 @@ app.get('/test', (req, res) => {
 
 app.get('/pdf/ditoro', (req, res) => {
     const options = {
-        root: path.join(__dirname, 'public', 'resources'),
-        dotfiles: 'deny',
         headers: {
             'x-timestamp': Date.now(),
             'x-sent': true,
-            'Content-Type': 'application/pdf'
+            'content-type': 'application/pdf'
         }
     }
-    const fileName = 'ditoro.pdf'
-    res.sendFile(fileName, options, (err) =>{
+    const filePath = path.join(__dirname, 'public', 'resources', 'ditoro.pdf')
+    res.sendFile(filePath, options, (err) =>{
         if(err){
             next(err)
         } else{
