@@ -62,7 +62,7 @@ app.get('/pdf/ditoro', (req, res) => {
         if(err){
             next(err)
         } else{
-            console.log("Sent PDF: ", fileName)
+            console.log("Sent PDF: ", filePath)
         }
     });
 })
