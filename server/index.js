@@ -49,11 +49,6 @@ app.get('/test', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'test.html'))
 })
 
-app.get('/soso', (req, res) => {
-    console.log("DNAME: ", __dirname);
-    res.send("OK OK")
-})
-
 app.get('/pdf/ditoro', (req, res) => {
     const options = {
         root: path.join(__dirname, 'public', 'resources'),
