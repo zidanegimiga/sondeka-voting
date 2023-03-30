@@ -49,8 +49,8 @@ app.get('/test', (req, res)=>{
     res.sendFile(path.join(__dirname, 'views', 'test.html'))
 }) 
 
-app.get('/json', (req, res) => {
-    res.json(resJsn)
+app.get('/pdf/ditoro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'resources', 'ditoro.pdf'))
 })
 
 app.all('*', (req, res) => {
