@@ -55,7 +55,8 @@ app.get('/pdf/ditoro', (req, res) => {
         dotfiles: 'deny',
         headers: {
             'x-timestamp': Date.now(),
-            'x-sent': true
+            'x-sent': true,
+            'Content-Type': 'application/pdf'
         }
     }
     const fileName = 'ditoro.pdf'
