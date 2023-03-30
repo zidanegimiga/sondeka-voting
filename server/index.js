@@ -50,7 +50,12 @@ app.get('/test', (req, res)=>{
 }) 
 
 app.get('/pdf/ditoro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'resources', 'ditoro.pdf'))
+    try{
+        res.sendFile(path.join(__dirname, 'public', 'resources', 'ditoro.pdf'));
+        console.log("Pdf file displayed ")
+    } catch(error){
+        console.error(error)
+    }
 })
 
 app.all('*', (req, res) => {
