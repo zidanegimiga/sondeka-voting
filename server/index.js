@@ -1,4 +1,4 @@
-require('dotenv').config({path:__dirname+'/.env'})
+require('dotenv').config({ path: __dirname + '/.env' })
 const express = require('express')
 const app = express()
 const path = require('path');
@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 3500
 
 
 const resJsn = {
-  hello: 1,
-  world: 2
+    hello: 1,
+    world: 2
 }
 
 
@@ -43,19 +43,34 @@ app.use('/admin/nominees', require('./routes/admin/nomineesRoutes'))
 app.use('/vote', require('./routes/voteRoute'))
 
 app.post('/signup', usersController.createNewUser)
-app.get('/:id/verify/:token/', usersController.confirmEmail) 
-app.post('/reverify', usersController.resendVerificationLink) 
-app.get('/test', (req, res)=>{
+app.get('/:id/verify/:token/', usersController.confirmEmail)
+app.post('/reverify', usersController.resendVerificationLink)
+app.get('/test', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'test.html'))
-}) 
+})
+
+app.get('/soso', (req, res) => {
+    console.log("DNAME: ", __dirname);
+    res.send("OK OK")
+})
 
 app.get('/pdf/ditoro', (req, res) => {
-    try{
-        res.sendFile(path.join(__dirname, 'public', 'resources', 'ditoro.pdf'));
-        console.log("Pdf file displayed ")
-    } catch(error){
-        console.error(error)
+    const options = {
+        root: path.join(__dirname, 'public', 'resources'),
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
     }
+    const fileName = 'ditoro.pdf'
+    res.sendFile(fileName, options, (err) =>{
+        if(err){
+            next(err)
+        } else{
+            console.log("Sent PDF: ", fileName)
+        }
+    });
 })
 
 app.all('*', (req, res) => {
