@@ -1,0 +1,46 @@
+.cardWrapper{
+    background-color: #2d2d2d;
+    width: 25%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    h2{
+        color: #FFCD00;
+        font-family: 'UKNumberPlate';
+        font-size: 32px;
+    }
+
+    &:hover{
+        box-shadow: 0px 8px 8px 2px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 769px) {
+        width: 70%;
+        margin-bottom: 32px;
+    }
+}
+
+.titleWrapper{
+    display: flex;
+    margin-top: 24px;
+    align-items: center;
+
+    p{
+        color: white;
+        font-family: 'Graphik LCG';
+        font-size: 24px;
+    }
+}
+
+.iconWrapper{
+    @media (max-width: 1600px) {
+        transform: scale(80%);
+        margin-right: 8px;       
+    }
+}
