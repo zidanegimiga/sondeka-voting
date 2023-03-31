@@ -15,19 +15,19 @@ const Dashboard = () => {
             title="Voters"
             number={"115K"}
             icon={<Voters />}
-            link={"/admin/voters"}
+            link={"/protected/admin/voters"}
           />
           <StatsCard
             title="Nominees"
             number={"115K"}
             icon={<Nominees />}
-            link={"/admin/nominees"}
+            link={"/protected/admin/nominees"}
           />
           <StatsCard
             title="Categories"
             number={"115K"}
             icon={<Categories />}
-            link={"/admin/categories"}
+            link={"/protected/admin/categories"}
           />
         </div>
       </div>
