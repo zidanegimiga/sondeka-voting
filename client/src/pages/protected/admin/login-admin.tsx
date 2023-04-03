@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import styles from "../styles/login.module.scss";
+import styles from '../../../styles/login.module.scss'
 import { AuthContext } from "admin-auth-context";
 import Logo from "features/svgIcons/logoBlack";
 import { Hide, Show } from "features/svgIcons/showHide";

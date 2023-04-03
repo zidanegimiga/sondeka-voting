@@ -1,0 +1,36 @@
+.pageWrapper {
+    background-color: #1e1e1e;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.pageContent{
+    width: 100vw;
+    background-image: url('/hexBackground.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top: 148px;
+
+    h1{
+        text-align: center;
+        color: rgb(232, 232, 232);
+        margin-bottom: 72px;
+        font-family: 'Graphik LCG';
+    }
+}
+
+.statsCardsWrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+
+    @media (max-width: 769px) {
+        flex-direction: column;
+        align-items: center;        
+    }
+}
