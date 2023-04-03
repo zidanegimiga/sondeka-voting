@@ -24,6 +24,7 @@
     "express-async-handler": "^1.2.0",
     "express-handlebars": "^7.0.2",
     "express-rate-limit": "^6.7.0",
+    "express-session": "^1.17.3",
     "fs": "^0.0.1-security",
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^9.0.0",
