@@ -11,3 +11,18 @@
 20230301	12:50:31	2dc3e0b7-be7b-4f22-843e-cc5adbf5839e	Error: Cannot set headers after they are sent to the client	GET	/63ff1fd29146e12da2193e06/verify/4750adda625e4c368a99281a5081cdf071bcf807963021b27a5e2d1f6feb556a	undefined
 20230322	14:32:19	2137d498-924c-4c79-914d-cad140df1497	Error: ENOENT: no such file or directory, stat 'C:\Users\Sammy\Desktop\Web Projects\sondeka-voting\server\views\test.html'	GET	/test	undefined
 20230322	14:32:19	57e24893-fee4-4874-a156-b075fd891e51	Error: ENOENT: no such file or directory, stat 'C:\Users\Sammy\Desktop\Web Projects\sondeka-voting\server\views\test.html'	GET	/test	undefined
+20230404	10:24:59	756051f5-47ed-49fc-ae6b-792c68517857	Error: ENOENT: no such file or directory, stat 'C:\Users\Sammy\Desktop\Web Projects\sondeka-voting\server\views\test.html'	GET	/test	undefined
+20230404	10:24:59	a9424b43-c57f-4d80-aef0-ba6f6bb021ef	Error: ENOENT: no such file or directory, stat 'C:\Users\Sammy\Desktop\Web Projects\sondeka-voting\server\views\test.html'	GET	/test	undefined
+20230404	11:47:57	19ecde08-9049-43c8-83a6-766123a19367	ReferenceError: username is not defined	POST	/admin/authentication/login	undefined
+20230404	12:02:25	adf63f30-3e3b-4ff7-85fb-9b82dd9100f7	ReferenceError: email is not defined	POST	/admin/authentication/login	undefined
+20230404	12:03:23	f43984ea-9c67-424d-9424-f788488098f4	ReferenceError: username is not defined	POST	/admin/authentication/login	undefined
+20230404	12:06:36	c6407f11-7c5d-4190-b3fb-77a45f48a402	Error: Cannot set headers after they are sent to the client	GET	/admin/authentication/logout	undefined
+20230404	12:08:24	8bbcaa5d-88e0-454d-b4de-128fe1878d4f	Error: Cannot set headers after they are sent to the client	GET	/admin/authentication/logout	undefined
+20230404	12:23:04	f756fff5-4025-4007-af49-696d5aa68c22	CastError: Cast to ObjectId failed for value "tester" (type string) at path "_id" for model "Category"	GET	/admin/categories/tester	undefined
+20230404	12:25:46	c78191be-cc12-42cd-b882-07557e5a938e	CastError: Cast to ObjectId failed for value "tester" (type string) at path "_id" for model "Category"	GET	/admin/categories/tester	undefined
+20230404	12:34:33	c5ff1aaa-3715-4247-bdb8-0f5796a0c9c9	TypeError: Cannot read properties of undefined (reading 'admin')	GET	/admin/categories/tester	undefined
+20230404	12:36:17	f1fa9700-acc1-41b1-a9d7-ee88f65055a8	Error: Cannot set headers after they are sent to the client	GET	/admin/categories/tester	undefined
+20230404	12:38:12	a6aff706-9ac4-4b4d-a1aa-a3a75f8e3ef8	Error: Cannot set headers after they are sent to the client	GET	/admin/categories/tester	undefined
+20230404	13:52:52	3a77d5f0-7cc6-4bde-82ca-38bd087ca3d9	TypeError: Cannot read properties of undefined (reading 'split')	GET	/admin/categories/tester	undefined
+20230404	13:53:57	4a2febcc-ee22-4baf-902e-28c6f7fc60a7	ReferenceError: sessions is not defined	GET	/admin/categories/tester	undefined
+20230404	14:03:13	9ccf24b6-6d2d-4ff8-9031-f49f99cf5faa	ReferenceError: sessionsId is not defined	GET	/admin/categories/tester	undefined

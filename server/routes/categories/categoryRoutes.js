@@ -6,11 +6,8 @@ const categoriesController = require('../../controllers/admin/categoriesControll
  * router.use(verifyJWT) 
 */
 
-router.route('/newCategory').post(categoriesController.createNewCategory);
 router.route('/allCategories').get(categoriesController.getAllCategories);
 router.route('/:categoryId').get(categoriesController.getOneCategory);
 router.route('/:categoryId/nominees').get(categoriesController.getAllNomineesPerCategory);
-router.route('/updateCategory').patch(categoriesController.updateCategory);
-router.route('/deleteCategory').delete(categoriesController.deleteCategory);
 
 module.exports = router;

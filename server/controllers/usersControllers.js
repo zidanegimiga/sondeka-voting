@@ -4,7 +4,6 @@ const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const sendEmail = require('../utils/email/sendConfirmation');
-const jwt = require('jsonwebtoken')
 
 // @desc Get all users
 // @route GET /users
