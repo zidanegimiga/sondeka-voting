@@ -25,6 +25,7 @@ const login = asyncHandler(async (req, res) => {
 
 const logout = asyncHandler(async (req, res) => {
   req.session.destroy();
+  res.clearCookie('adminAuth');
   res.status(200).json({message: "Logged out successfully"});
 })
 
