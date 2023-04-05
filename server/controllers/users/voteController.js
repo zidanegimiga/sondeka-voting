@@ -3,10 +3,10 @@ const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const mongoose = require('mongoose')
 
-const VotingLog = require('../models/VotingLog')
-const Voter = require('../models/User')
-const VotingCategory = require('../models/Category')
-const Nominee = require('../models/Nominee')
+const VotingLog = require('../../models/VotingLog')
+const Voter = require('../../models/User')
+const VotingCategory = require('../../models/Category')
+const Nominee = require('../../models/Nominee')
 
 // @desc Vote
 // @route POST /vote

@@ -1,9 +1,9 @@
-const Voter = require('../models/User');
-const Token = require('../models/token');
+const Voter = require('../../models/User');
+const Token = require('../../models/token');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const sendEmail = require('../utils/email/sendConfirmation');
+const sendEmail = require('../../utils/email/sendConfirmation');
 
 // @desc Get all users
 // @route GET /users

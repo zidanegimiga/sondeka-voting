@@ -11,7 +11,7 @@ const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConnect')
 const MongoStore = require("connect-mongo")
 const mongoose = require('mongoose')
-const usersController = require('./controllers/usersControllers')
+const usersController = require('./controllers/users/usersControllers')
 
 const PORT = process.env.PORT || 3500;
 

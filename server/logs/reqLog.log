@@ -162,3 +162,6 @@
 20230404	17:25:03	16dd6c3f-cd3e-446f-9721-756efad6bd11	GET	/admin/categories/testing	undefined
 20230404	17:26:09	cfb496cd-476c-49fa-b663-06c0a2442ff3	GET	/admin/categories/testing	undefined
 20230404	17:26:47	ef7a1825-99d1-4e6e-8614-0c4d19e887f9	GET	/admin/authentication/logout	undefined
+20230405	16:59:29	d67f3e9a-5c28-42f8-ba82-9e19645ec08a	GET	/admin/categories/allCategories	undefined
+20230405	16:59:46	085a5a45-d96f-46c7-9271-a7da8f5ecf6e	GET	/admin/authentication/logout	undefined
+20230405	16:59:55	28129303-73fe-4ff4-8b46-d9bcfa01f46b	GET	/admin/categories/allCategories	undefined
