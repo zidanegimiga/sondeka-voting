@@ -1,4 +1,3 @@
-const asyncHandler = require('express-async-handler');
 const session = require('express-session')
 const MongoStore = require("connect-mongo")
 

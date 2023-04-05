@@ -1,4 +1,3 @@
-const session = require('express-session');
 const Category = require('../../models/Category');
 const Nominee = require('../../models/Nominee');
 const asyncHandler = require('express-async-handler');
