@@ -2,23 +2,6 @@ const session = require('express-session');
 const Category = require('../../models/Category');
 const Nominee = require('../../models/Nominee');
 const asyncHandler = require('express-async-handler');
-const mongoose = require('mongoose')
-
-const testing = asyncHandler(async (req, res) => {
-    if (req.session.cookie.expires > new Date()) {
-        // Get all categories from MongoDB
-        const categories = await Category.find({}).lean();
-
-        // If no categories 
-        if (!categories?.length) {
-            return res.status(400).json({ message: 'No categories found' })
-        }
-        console.log("Session: ", req,session)
-        res.status(200).json(categories)
-    } else {
-        res.status(401).json({message: "Error"})
-    }
-})
 
 // @desc Get all categories
 // @route GET /admin/categories/allCategories
@@ -173,5 +156,4 @@ module.exports = {
     getAllCategories,
     getOneCategory,
     getAllNomineesPerCategory,
-    testing
 }
