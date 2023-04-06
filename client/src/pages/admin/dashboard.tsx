@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "shared/Nav/Nav";
 import { Categories, Voters, Nominees } from "features/svgIcons/AdminStatsCard";
-import styles from "../../../styles/dashboard.module.scss";
+import styles from "../../styles/dashboard.module.scss";
 import StatsCard from "shared/StatsCard";
 
 const Dashboard = () => {
@@ -9,7 +9,7 @@ const Dashboard = () => {
     <div className={styles.pageWrapper}>
       <Nav />
       <div className={styles.pageContent}>
-        <h1>Hi, Admin </h1>
+        <h1>Categories </h1>
         <div className={styles.statsCardsWrapper}>
           <StatsCard
             title="Voters"

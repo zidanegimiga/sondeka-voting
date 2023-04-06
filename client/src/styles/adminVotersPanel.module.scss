@@ -1,0 +1,128 @@
+.pageWrapper {
+    background-color: #1e1e1e;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.pageContent {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/hexBackground.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top: 148px;
+}
+
+.contentWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+
+    h1 {
+        color: rgb(232, 232, 232);
+        font-family: 'Graphik LCG';
+    }
+
+    @media (max-width: 376px) {
+        flex-direction: column;       
+    }
+}
+
+.count {
+    display: flex;
+    align-items: center;
+    font-family: 'Graphik LCG';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 125%;
+    color: #929292;
+
+    span {
+        margin-left: 8px;
+        color: #FFFFFF;
+        font-weight: 400;
+        font-size: 16px;
+    }
+}
+
+.tableWrapper {
+    width: 100%;
+
+    @media (max-width: 426px) {
+        display: none;       
+    }
+}
+
+.styledTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+
+    thead tr {
+        color: #ffffff;
+        text-align: left;
+    }
+
+    th, td{
+        padding: 12px 15px;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #4d4d4d;
+        color: rgb(196, 196, 196);
+        cursor: pointer;
+
+        &:hover{
+            background-color: #4d4d4d5d;            
+        }
+    }
+
+    tbody tr:nth-of-type(even) {
+        
+    }
+
+    tbody tr:last-of-type {
+        border-bottom: 2px solid #ffcc00b2;
+    }
+
+    // tbody tr.activeRow {
+    //     font-weight: bold;
+    //     color: #009879;
+    // }
+}
+
+.headRow{
+    border-bottom: #ffffff solid 2px;
+}
+
+.warning{
+    display: none;
+
+    @media (max-width: 426px) {
+        display: flex;
+        text-align: center;
+        font-size: 14px;
+        line-height: 20px;
+        color: rgb(221, 221, 221);
+        font-family: 'Graphik LCG';
+        font-weight: 300;       
+    }
+}

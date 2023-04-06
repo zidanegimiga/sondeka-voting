@@ -1,0 +1,12 @@
+.contentWrapper {
+    background: #2D2D2D;
+    border-radius: 8px;
+    width: 80%;
+    height: 100%;
+    padding: 24px;
+
+    @media (max-width: 789px) {
+        width: 90%;
+        overflow-y: scroll;        
+    }
+}
