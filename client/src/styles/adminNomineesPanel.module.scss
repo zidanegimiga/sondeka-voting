@@ -38,7 +38,7 @@
     }
 
     @media (max-width: 376px) {
-        flex-direction: column;       
+        flex-direction: column;
     }
 }
 
@@ -64,7 +64,7 @@
     width: 100%;
 
     @media (max-width: 426px) {
-        display: none;       
+        display: none;
     }
 }
 
@@ -81,7 +81,8 @@
         text-align: left;
     }
 
-    th, td{
+    th,
+    td {
         padding: 12px 15px;
     }
 
@@ -90,14 +91,12 @@
         color: rgb(196, 196, 196);
         cursor: pointer;
 
-        &:hover{
-            background-color: #4d4d4d5d;            
+        &:hover {
+            background-color: #4d4d4d5d;
         }
     }
 
-    tbody tr:nth-of-type(even) {
-        
-    }
+    tbody tr:nth-of-type(even) {}
 
     tbody tr:last-of-type {
         border-bottom: 2px solid #ffcc00b2;
@@ -109,11 +108,11 @@
     // }
 }
 
-.headRow{
+.headRow {
     border-bottom: #ffffff solid 2px;
 }
 
-.warning{
+.warning {
     display: none;
 
     @media (max-width: 426px) {
@@ -123,26 +122,6 @@
         line-height: 20px;
         color: rgb(221, 221, 221);
         font-family: 'Graphik LCG';
-        font-weight: 300;       
+        font-weight: 300;
     }
-}
-
-// Categories
-.categoriesGrid{
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    width: 100%;
-    row-gap: 24px;
-    column-gap: 28px;
-}
-
-.categoryCard{
-    border-radius: 8px;
-    background: #d9d9d91a;
-    text-align: center;
-    align-items: center;
-}
-
-.nomineeImage{
-    width: 100%;
 }
