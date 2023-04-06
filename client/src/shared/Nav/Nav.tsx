@@ -11,6 +11,7 @@ const Nav = () => {
   const [options, showOptions] = useState(false);
   const [token, setToken] = useState<String>();
   const [loading, setLoading] = useState(null)
+  const [admin, setAdmin] = useState(true)
 
   const router = useRouter();
 
@@ -81,6 +82,27 @@ const Nav = () => {
                   <Link href={"/"}>Home</Link>
                 </div>
                 <div className={styles.navLink} onClick={() => logout()}>
+                  <div>Log Out</div>
+                </div>
+              </>
+            )}
+            {admin && (
+              <>
+                <hr/>
+                <p style={{textAlign: "center", fontFamily: "GraphiK LCG", color: "#FFCD00"}}> Admin Actions</p>
+                <div className={styles.navLink}>
+                  <Link href={"/admin/dashboard"}>Dashboard</Link>
+                </div>
+                <div className={styles.navLink}>
+                  <Link href={"/admin/categories"}>Categories</Link>
+                </div>
+                <div className={styles.navLink}>
+                  <Link href={"/admin/voters"}>Voters</Link>
+                </div>
+                <div className={styles.navLink}>
+                  <Link href={"/admin/voters"}>Nominees</Link>
+                </div>
+                <div className={styles.navLink} onClick={() => {setAdmin(false); showOptions(false)}}>
                   <div>Log Out</div>
                 </div>
               </>
