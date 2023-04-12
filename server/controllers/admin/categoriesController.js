@@ -18,7 +18,7 @@ const getAllCategories = asyncHandler(async (req, res) => {
 })
 
 // @desc Get all categories
-// @route GET /admin/categories/allCategories
+// @route GET /admin/categories/:categoryId
 // @access Private
 const getOneCategory = asyncHandler(async (req, res) => {
     const id = req.params.categoryId;

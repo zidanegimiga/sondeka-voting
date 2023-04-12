@@ -20,7 +20,7 @@ router.route('/authentication/logout').get(adminAuthController.logout);
 
 // CATEGORIES
 router.route('/categories/newCategory').post(sessionAuthenticator, createNewCategory);
-router.route('/categories/allCategories').get(sessionAuthenticator, getAllCategories);
+router.route('/categories/allCategories').get(getAllCategories);
 router.route('/categories/:categoryId').get(getOneCategory);
 router.route('/categories/:categoryId/nominees').get(getAllNomineesPerCategory);
 router.route('/categories/updateCategory').patch(sessionAuthenticator, updateCategory);
