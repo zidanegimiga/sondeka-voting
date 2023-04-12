@@ -15,7 +15,7 @@ const Nav = () => {
 
   const router = useRouter();
 
-  async function logout() {
+  async function logoutNormalUser() {
     try{
       setLoading(true)
       const response = await fetch("https://sondeka-voting-api.cyclic.app/auth/logout", {
@@ -35,6 +35,26 @@ const Nav = () => {
     router.push("/");
     showOptions(false);
   }
+  
+  async function logoutAdmin() {
+    try{
+      setLoading(true)
+      const response = await fetch("http://localhost:3500/admin/authentication/logout", {
+        method: "GET"
+      });
+      console.log("Logout Admin: ", response)
+
+    } catch (err){
+      console.error(err)
+    }
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("id");
+    window.localStorage.removeItem("username");
+    setToken(null);
+    router.push("/");
+    showOptions(false);
+  }
+  
   useEffect(() => {
     const getToken = window.localStorage.getItem("token");
     setToken(getToken);
@@ -81,7 +101,7 @@ const Nav = () => {
                 <div className={styles.navLink}>
                   <Link href={"/"}>Home</Link>
                 </div>
-                <div className={styles.navLink} onClick={() => logout()}>
+                <div className={styles.navLink} onClick={() => logoutNormalUser()}>
                   <div>Log Out</div>
                 </div>
               </>
@@ -102,7 +122,7 @@ const Nav = () => {
                 <div className={styles.navLink}>
                   <Link href={"/admin/voters"}>Nominees</Link>
                 </div>
-                <div className={styles.navLink} onClick={() => {setAdmin(false); showOptions(false)}}>
+                <div className={styles.navLink} onClick={() => {logoutAdmin(); showOptions(false)}}>
                   <div>Log Out</div>
                 </div>
               </>
