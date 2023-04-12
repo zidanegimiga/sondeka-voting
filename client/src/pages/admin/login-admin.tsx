@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import styles from '../../../styles/login.module.scss'
-import { AuthContext } from "admin-auth-context";
+import styles from '../../styles/login.module.scss'
+// import { AuthContext } from "admin-auth-context";
 import Logo from "features/svgIcons/logoBlack";
 import { Hide, Show } from "features/svgIcons/showHide";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import Button from "shared/Button";
 import TextField from "shared/InputFields";
 
 const AdminLoginPage = () => {
-  const { token, login } = useContext(AuthContext);
+  // const { token, login } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,14 +18,14 @@ const AdminLoginPage = () => {
   const [resMessage, setResMessage] = useState("");
   const [passwordType, setPasswordType] = useState("password");
   const [formData, setFormData] = useState({
-    email: "",
+    name: "",
     password: "",
   });
 
   const handleLogin = () => {
     // Replace this with your actual authentication logic
     const newToken = "your generated token";
-    login(newToken);
+    // login(newToken);
   };
 
   const router = useRouter();
@@ -47,7 +47,7 @@ const AdminLoginPage = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://sondeka-voting-api.cyclic.app/auth/admin",
+        "http://localhost:3500/admin/authentication/login",
         {
           method: "POST",
           body: JSON.stringify(formData),
@@ -73,7 +73,7 @@ const AdminLoginPage = () => {
 
       if (response.status === 201 || 200) {
         const { accessToken } = await response.json();
-        login(accessToken)
+        // login(accessToken)
         setLoading(false);
         router.push("/admin/dashboard");
       }
@@ -85,9 +85,9 @@ const AdminLoginPage = () => {
   if (typeof window !== undefined) {
     return (
       <div>
-        {token ? (
+        {/* {token ? (
           <></>
-        ) : (
+        ) : ( */}
           <div className={styles.loginPageWrapper}>
             <div className={styles.contentContainer}>
               <div className={styles.containerHeader}>
@@ -116,10 +116,10 @@ const AdminLoginPage = () => {
                     <form onSubmit={handleSubmit} className={styles.form}>
                       <TextField
                         onChange={handleInputChange}
-                        value={formData.email}
-                        name={"email"}
+                        value={formData.name}
+                        name={"name"}
                         type={"text"}
-                        placeholder={"E-mail"}
+                        placeholder={"Name"}
                       />
                       <div className={styles.passwordField}>
                         <TextField
@@ -173,7 +173,7 @@ const AdminLoginPage = () => {
               )}
             </div>
           </div>
-        )}
+        {/* )} */}
       </div>
     );
   } else {
