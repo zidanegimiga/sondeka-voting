@@ -130,7 +130,7 @@
 // Categories
 .categoriesGrid{
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 30% 30% 30%;
     width: 100%;
     row-gap: 24px;
     column-gap: 28px;
@@ -145,4 +145,5 @@
 
 .nomineeImage{
     width: 100%;
+    height: auto;
 }
