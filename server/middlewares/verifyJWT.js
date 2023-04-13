@@ -13,7 +13,7 @@ const verifyJWT = (req, res, next) => {
             }
             req.userId = decoded.UserInfo.userId
             req.email = decoded.UserInfo.email
-            console.log("4. JWT Verified")
+            console.log("JWT Verified")
             next()
         }
     )
