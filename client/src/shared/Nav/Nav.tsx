@@ -4,14 +4,16 @@ import Menu from "features/svgIcons/menu";
 import styles from "./Nav.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Close from "features/svgIcons/close";
+import { AuthContext } from "admin-auth-context";
 
 const Nav = () => {
   const [options, showOptions] = useState(false);
-  const [token, setToken] = useState<String>();
+  const [normalUsertoken, setNormalUserToken] = useState<String>();
   const [loading, setLoading] = useState(null)
   const [admin, setAdmin] = useState(true)
+  const { token, logout, isAdminAuthenticated } = useContext(AuthContext);
 
   const router = useRouter();
 
@@ -31,7 +33,7 @@ const Nav = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("id");
     window.localStorage.removeItem("username");
-    setToken(null);
+    setNormalUserToken(null);
     router.push("/");
     showOptions(false);
   }
@@ -47,17 +49,14 @@ const Nav = () => {
     } catch (err){
       console.error(err)
     }
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("id");
-    window.localStorage.removeItem("username");
-    setToken(null);
+    logout()
     router.push("/");
     showOptions(false);
   }
   
   useEffect(() => {
     const getToken = window.localStorage.getItem("token");
-    setToken(getToken);
+    setNormalUserToken(getToken);
   }, []);
 
   if (typeof window !== undefined) {
@@ -106,7 +105,7 @@ const Nav = () => {
                 </div>
               </>
             )}
-            {admin && (
+            {isAdminAuthenticated && (
               <>
                 <hr/>
                 <p style={{textAlign: "center", fontFamily: "GraphiK LCG", color: "#FFCD00"}}> Admin Actions</p>
