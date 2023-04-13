@@ -1,27 +1,32 @@
-import { createContext, FC, useState } from "react";
+import { createContext, FC, useState, useEffect } from "react";
 
 interface AuthContextType {
   token: string;
   login: (newToken: string) => void;
   logout: () => void;
-  isAuthenticated: boolean;
+  isAdminAuthenticated: boolean;
 }
 
 export const AuthContext = createContext<AuthContextType>({
   token: "",
   login: () => {},
   logout: () => {},
-  isAuthenticated: false,
+  isAdminAuthenticated: false,
 });
 
 // @ts-ignore
 const AuthProvider: FC = ({ children }) => {
   const [token, setToken] = useState("");
 
+  useEffect(()=>{
+    const accessToken = window.localStorage.getItem('admin-token')
+    setToken(accessToken)
+    console.log("Loaded: ", token)
+  }, [])
+
   const login = (newToken: string) => {
     setToken(newToken);
     localStorage.setItem("admin-token", newToken);
-    console.log("Authenticated")
   };
 
   const logout = () => {
@@ -29,10 +34,10 @@ const AuthProvider: FC = ({ children }) => {
     localStorage.removeItem("admin-token");
   };
 
-  const isAuthenticated = !!token;
+  const isAdminAuthenticated = !!token
 
   return (
-    <AuthContext.Provider value={{ token, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ token, login, logout, isAdminAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
