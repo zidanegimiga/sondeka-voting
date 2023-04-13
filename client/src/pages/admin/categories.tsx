@@ -1,30 +1,42 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "admin-auth-context";
 import Nav from "shared/Nav/Nav";
 import styles from "../../styles/adminVotersPanel.module.scss";
 import Image from "next/image";
 import AdminContentWrapper from "shared/AdminContentWrapper/AdminContentWrapper";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(null);
+  const { token, login, isAdminAuthenticated } = useContext(AuthContext);
+  const router = useRouter()
 
   useEffect(() => {
     const fetchAllCategories = async () => {
+      const accessToken = window.localStorage.getItem("admin-token");
+      console.log("Is Authenticated: ", isAdminAuthenticated);
       const res = await fetch(
-        "http://localhost:3500/admin/categories/allCategories"
+        "http://localhost:3500/admin/categories/allCategories",
+        {
+          headers: {
+            authorization: accessToken,
+          },
+        }
       );
       const data = await res.json();
       if (data && data.message === "Forbiden!") {
-        setIsAdmin(false);
         setCategories([]);
       } else {
         setCategories(data);
-        console.log("Type: ", typeof data[0]._id);
       }
     };
-    fetchAllCategories();
+    if(isAdminAuthenticated){
+      fetchAllCategories()
+    } else {
+      router.push('/admin/login-admin')
+    }
   }, []);
 
   return (
