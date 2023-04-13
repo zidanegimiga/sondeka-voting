@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import styles from "../../styles/login.module.scss";
 import { AuthContext } from "admin-auth-context";
+import styles from "../../styles/login.module.scss";
 import Logo from "features/svgIcons/logoBlack";
 import { Hide, Show } from "features/svgIcons/showHide";
 import Link from "next/link";
@@ -68,9 +68,9 @@ const AdminLoginPage = () => {
 
       if (response.status === 201 || 200) {
         const { accessToken } = await response.json();
-        // login(accessToken)
+        login(accessToken)
         setLoading(false);
-        // router.push("/admin/dashboard");
+        router.push("/admin/dashboard");
       }
     } catch (err) {
       console.error(err);
@@ -107,7 +107,7 @@ const AdminLoginPage = () => {
                 </div>
               ) : (
                 <>
-                  <div className={styles.heading}> LOG IN TO CONTINUE </div>
+                  <div className={styles.heading}> ADMIN - LOG IN TO CONTINUE </div>
                   <div className={styles.form}>
                     <form onSubmit={handleSubmit} className={styles.form}>
                       <TextField
