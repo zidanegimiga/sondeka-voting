@@ -16,7 +16,7 @@ module.exports = async (options) => {
             }
         });
 
-        const { email, subject, emailtemplate, context } = options;
+        const { email, subject, context } = options;
 
         //path to the views folder
         const viewsPath = path.join(__dirname, '../../views')
