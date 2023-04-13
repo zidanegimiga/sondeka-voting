@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import styles from '../../styles/login.module.scss'
-// import { AuthContext } from "admin-auth-context";
+import styles from "../../styles/login.module.scss";
+import { AuthContext } from "admin-auth-context";
 import Logo from "features/svgIcons/logoBlack";
 import { Hide, Show } from "features/svgIcons/showHide";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import Button from "shared/Button";
 import TextField from "shared/InputFields";
 
 const AdminLoginPage = () => {
-  // const { token, login } = useContext(AuthContext);
+  const { token, login } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,12 +21,6 @@ const AdminLoginPage = () => {
     name: "",
     password: "",
   });
-
-  const handleLogin = () => {
-    // Replace this with your actual authentication logic
-    const newToken = "your generated token";
-    // login(newToken);
-  };
 
   const router = useRouter();
 
@@ -42,6 +36,7 @@ const AdminLoginPage = () => {
       [name]: value,
     });
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -75,7 +70,7 @@ const AdminLoginPage = () => {
         const { accessToken } = await response.json();
         // login(accessToken)
         setLoading(false);
-        router.push("/admin/dashboard");
+        // router.push("/admin/dashboard");
       }
     } catch (err) {
       console.error(err);
@@ -85,14 +80,15 @@ const AdminLoginPage = () => {
   if (typeof window !== undefined) {
     return (
       <div>
-        {/* {token ? (
+        {token ? (
           <></>
-        ) : ( */}
+        ) : (
           <div className={styles.loginPageWrapper}>
             <div className={styles.contentContainer}>
               <div className={styles.containerHeader}>
                 <Logo />
               </div>
+
               {error ? (
                 <div className={styles.toastMessagesErrorContainer}>
                   <div className={styles.toastMessagesError}>
@@ -173,7 +169,7 @@ const AdminLoginPage = () => {
               )}
             </div>
           </div>
-        {/* )} */}
+        )}
       </div>
     );
   } else {

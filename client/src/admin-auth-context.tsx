@@ -21,6 +21,7 @@ const AuthProvider: FC = ({ children }) => {
   const login = (newToken: string) => {
     setToken(newToken);
     localStorage.setItem("admin-token", newToken);
+    console.log("Authenticated")
   };
 
   const logout = () => {

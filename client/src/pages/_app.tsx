@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { SessionProvider } from "next-auth/react"
-// import AuthProvider from "admin-auth-context";
+import AuthProvider from "admin-auth-context";
 import { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import "../styles/app.scss";
@@ -8,8 +7,7 @@ import "../styles/app.scss";
 const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
     //@ts-ignore
-    // <AuthProvider>
-      <SessionProvider session={session}>
+    <AuthProvider>
         <NextNProgress
           color="#29D"
           startPosition={0.3}
@@ -17,9 +15,8 @@ const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) 
           height={3}
           showOnShallow={true}
         />
-        <Component {...pageProps} />;
-      </SessionProvider>
-    // </AuthProvider>
+        <Component {...pageProps} />
+    </AuthProvider>
   );
 };
 
