@@ -13,8 +13,12 @@ const {
 } = require('../../controllers/admin/categoriesController');
 const loginLimiter = require('../../middlewares/loginLimiter');
 const verifyJWT = require('../../middlewares/verifyJWT');
+const getDashboardCounts = require('../../controllers/admin/dashboardController');
 
 // router.use(configureAdminSession())
+
+// Dashboard
+router.route('/dashboard').get( getDashboardCounts );
 
 // Authentication
 router.route('/authentication/login').post(loginLimiter, adminAuthController.login);
