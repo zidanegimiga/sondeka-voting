@@ -21,7 +21,6 @@ const AuthProvider: FC = ({ children }) => {
   useEffect(()=>{
     const accessToken = window.localStorage.getItem('admin-token')
     setToken(accessToken)
-    console.log("Loaded: ", token)
   }, [])
 
   const login = (newToken: string) => {
