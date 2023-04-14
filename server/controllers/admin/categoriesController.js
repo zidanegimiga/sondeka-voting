@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const Category = require('../../models/Category');
 const Nominee = require('../../models/Nominee');
 const asyncHandler = require('express-async-handler');
@@ -141,7 +142,11 @@ const getAllNomineesPerCategory = asyncHandler(async (req, res) => {
             return res.status(404).json({ message: 'Category not found' });
         }
         const nominees = await Nominee.find({ category: req.params.categoryId });
-        res.json(nominees);
+        if(nominees){
+            res.json(nominees);
+        } else{
+            res.status(401).json({message: "Nominee not found"})
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Internal server error' });
