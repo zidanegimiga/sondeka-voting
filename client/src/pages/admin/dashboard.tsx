@@ -1,10 +1,47 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Nav from "shared/Nav/Nav";
 import { Categories, Voters, Nominees } from "features/svgIcons/AdminStatsCard";
 import styles from "../../styles/dashboard.module.scss";
 import StatsCard from "shared/StatsCard";
+import { type } from "os";
+
+interface DashboardDigits {
+  Voters: number,
+  Categories: number,
+  Nominees: number
+}
+
+type DashboardCounts = {
+  [key in keyof DashboardDigits]?: number;
+};
 
 const Dashboard = () => {
+  const [dashboardCount, setDashboardCount] = useState<DashboardCounts>({});
+  const [error, setError] = useState(false);
+
+  useEffect(()=>{
+    const accessToken = window.localStorage.getItem('admin-auth')
+    const getDashboardDigits = async () =>{
+      try{
+        const res = await fetch('http://localhost:3500/admin/dashboard', {
+          headers: {
+            authorization: accessToken,
+          },
+        })
+        const data = await res.json()
+        console.log(data)
+        if (data && data.message === "Forbiden!") {
+          setDashboardCount({});
+        } else {
+          setDashboardCount(data);
+        }
+      } catch(err){  
+        console.log(err);
+        setError(true);    
+      }
+    }
+    getDashboardDigits()
+  }, [])
   return (
     <div className={styles.pageWrapper}>
       <Nav />
@@ -13,19 +50,19 @@ const Dashboard = () => {
         <div className={styles.statsCardsWrapper}>
           <StatsCard
             title="Voters"
-            number={"115K"}
+            number={dashboardCount.Voters}
             icon={<Voters />}
             link={"/admin/voters"}
           />
           <StatsCard
             title="Nominees"
-            number={"115K"}
+            number={dashboardCount.Nominees}
             icon={<Nominees />}
             link={"/admin/nominees"}
           />
           <StatsCard
             title="Categories"
-            number={"115K"}
+            number={dashboardCount.Categories}
             icon={<Categories />}
             link={"/admin/categories"}
           />
