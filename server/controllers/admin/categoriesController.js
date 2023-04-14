@@ -1,7 +1,7 @@
+const { default: mongoose } = require('mongoose');
 const Category = require('../../models/Category');
 const Nominee = require('../../models/Nominee');
 const asyncHandler = require('express-async-handler');
-const mongoose = require('mongoose')
 
 // @desc Get all categories
 // @route GET /admin/categories/allCategories
@@ -19,7 +19,7 @@ const getAllCategories = asyncHandler(async (req, res) => {
 })
 
 // @desc Get all categories
-// @route GET /admin/categories/allCategories
+// @route GET /admin/categories/:categoryId
 // @access Private
 const getOneCategory = asyncHandler(async (req, res) => {
     const id = req.params.categoryId;
@@ -142,7 +142,11 @@ const getAllNomineesPerCategory = asyncHandler(async (req, res) => {
             return res.status(404).json({ message: 'Category not found' });
         }
         const nominees = await Nominee.find({ category: req.params.categoryId });
-        res.json(nominees);
+        if(nominees){
+            res.json(nominees);
+        } else{
+            res.status(401).json({message: "Nominee not found"})
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Internal server error' });
@@ -150,5 +154,10 @@ const getAllNomineesPerCategory = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    deleteCategory, updateCategory, createNewCategory, getAllCategories, getOneCategory, getAllNomineesPerCategory
+    deleteCategory,
+    updateCategory,
+    createNewCategory,
+    getAllCategories,
+    getOneCategory,
+    getAllNomineesPerCategory,
 }

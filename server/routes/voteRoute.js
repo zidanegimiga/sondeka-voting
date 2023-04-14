@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const verifyJWT = require('../middlewares/verifyJWT')
-const voteController = require('../controllers/voteController');
+const voteController = require('../controllers/users/voteController');
 
 router.use(verifyJWT)
 

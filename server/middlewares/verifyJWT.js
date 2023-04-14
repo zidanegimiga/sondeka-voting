@@ -2,13 +2,6 @@ const jwt = require('jsonwebtoken')
 
 const verifyJWT = (req, res, next) => {
     const authHeader = req.headers.authorization
-    console.log("0. Authorisation: ", authHeader)
-
-    // if (authHeader?.startsWith('Bearer') === false) {
-    //     return res.status(401).json({ message: 'Unauthorized' })
-    //     //TD:
-    //     // Redirect user to login/sign up when not authorized
-    // }
 
     jwt.verify(
         authHeader,
@@ -20,7 +13,7 @@ const verifyJWT = (req, res, next) => {
             }
             req.userId = decoded.UserInfo.userId
             req.email = decoded.UserInfo.email
-            console.log("4. JWT Verified")
+            console.log("JWT Verified")
             next()
         }
     )

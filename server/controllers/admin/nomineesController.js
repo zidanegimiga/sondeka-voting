@@ -1,7 +1,6 @@
 const Nominee = require('../../models/Nominee');
 const Category = require('../../models/Category');
 const asyncHandler = require('express-async-handler');
-const mongoose = require('mongoose')
 
 // @desc Get all nominees
 // @route GET /admin/nominees/allNominees

@@ -1,4 +1,4 @@
-const Voter = require('../models/User')
+const Voter = require('../../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
@@ -70,7 +70,6 @@ const login = asyncHandler(async (req, res) => {
 // @access Public - because access token has expired
 const refresh = (req, res) => {
     const cookies = req.cookies
-    console.log("Cookies: ", cookies)
 
     if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized' })
 
@@ -83,7 +82,6 @@ const refresh = (req, res) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
 
             const foundUser = await Voter.findOne({ username: decoded.username }).exec()
-            console.log("User: ", foundUser``)
 
             if (!foundUser) return res.status(401).json({ message: 'Unauthorized' })
 
