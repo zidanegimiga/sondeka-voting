@@ -80,9 +80,6 @@ const AdminLoginPage = () => {
   if (typeof window !== undefined) {
     return (
       <div>
-        {token ? (
-          <></>
-        ) : (
           <div className={styles.loginPageWrapper}>
             <div className={styles.contentContainer}>
               <div className={styles.containerHeader}>
@@ -169,7 +166,6 @@ const AdminLoginPage = () => {
               )}
             </div>
           </div>
-        )}
       </div>
     );
   } else {
