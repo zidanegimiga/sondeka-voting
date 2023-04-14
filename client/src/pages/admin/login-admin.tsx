@@ -42,7 +42,7 @@ const AdminLoginPage = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:3500/admin/authentication/login",
+        `${process.env.API_URL}/admin/authentication/login`,
         {
           method: "POST",
           body: JSON.stringify(formData),

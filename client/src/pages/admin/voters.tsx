@@ -14,7 +14,7 @@ const Voters = () => {
     const categoryId = router.query.categoryId;
 
     const fetchVotersData = async () => {
-      const res = await fetch(`http://localhost:3500/admin/voters/allVoters`, {
+      const res = await fetch(`${process.env.API_URL}/admin/voters/allVoters`, {
         headers: {
           authorization: accessToken,
         },

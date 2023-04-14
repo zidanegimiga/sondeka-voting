@@ -21,7 +21,7 @@ const AdminCategories = () => {
       console.log("Is Authenticated: ", isAdminAuthenticated);
       try {
         const res = await fetch(
-          "http://localhost:3500/admin/categories/allCategories",
+          `${process.env.API_URL}/admin/categories/allCategories`,
           {
             headers: {
               authorization: accessToken,

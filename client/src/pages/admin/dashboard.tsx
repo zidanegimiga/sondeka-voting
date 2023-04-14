@@ -23,7 +23,7 @@ const Dashboard = () => {
     const accessToken = window.localStorage.getItem('admin-auth')
     const getDashboardDigits = async () =>{
       try{
-        const res = await fetch('http://localhost:3500/admin/dashboard', {
+        const res = await fetch(`${process.env.API_URL}/admin/dashboard`, {
           headers: {
             authorization: accessToken,
           },

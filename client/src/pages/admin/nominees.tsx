@@ -15,7 +15,7 @@ const Dashboard = () => {
 
     const fetchNomineesData = async () => {
       const res = await fetch(
-        `http://localhost:3500/admin/nominees/allNominees`,
+        `${process.env.API_URL}/admin/nominees/allNominees`,
         {
           headers: {
             authorization: accessToken,
