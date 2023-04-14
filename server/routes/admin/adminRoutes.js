@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const adminAuthController = require('../../controllers/admin/adminAuthController');
+const votersController = require('../../controllers/admin/votersController')
 const {sessionAuthenticator, configureAdminSession} = require('../../middlewares/adminSessionMiddleware');
 const nomineesController = require('../../controllers/admin/nomineesController')
 const {
@@ -38,5 +39,9 @@ router.route('/nominees/allNominees').get(verifyJWT, nomineesController.getAllNo
 router.route('/nominees/:nomineeId').get(verifyJWT, nomineesController.getOneNominee);
 router.route('/nominees/updateNominee').patch(verifyJWT, nomineesController.updateNominee);
 router.route('/nominees/deleteNominee').delete(verifyJWT, nomineesController.deleteNominee);
+
+// Voters
+router.route('/voters/allVoters').get(verifyJWT, votersController.getAllVoters);
+
 
 module.exports = router;
