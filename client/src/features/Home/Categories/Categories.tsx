@@ -10,7 +10,7 @@ const Categories = () => {
     async function getCategories() {
       try {
         const res = await fetch(
-          "https://sondeka-voting-api.cyclic.app/admin/categories/allCategories",
+          "https://sondeka-voting-api.cyclic.app/categories/allCategories",
           { cache: "force-cache" }
         );
         const categories = await res.json();
