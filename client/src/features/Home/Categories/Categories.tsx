@@ -15,7 +15,6 @@ const Categories = () => {
         );
         const categories = await res.json();
         setCategories(categories);
-        console.log(categories);
       } catch (err) {
         console.log(err);
       }
