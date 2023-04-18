@@ -35,14 +35,19 @@ module.exports = async (options) => {
             })
         }
 
-        await transporter.sendMail(message, (err, info) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(`Email to ${email} from ${process.env.EMAIL_USER} sent successfully!`)
-            }
-        })
-    } catch (error) { 
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(message, (err, info) => {
+                if (err) {
+                    console.log(err);
+                    reject(err)
+                } else {
+                    resolve(info)
+                    console.log(`Email to ${email} from ${process.env.EMAIL_USER} sent successfully!`)
+                }
+            })
+        });
+
+    } catch (error) {
         console.log(error)
     }
 }
