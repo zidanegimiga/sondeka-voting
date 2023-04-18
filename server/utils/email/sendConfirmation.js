@@ -35,6 +35,8 @@ module.exports = async (options) => {
             })
         }
 
+        console.log("Email: ", context.email)
+
         await new Promise((resolve, reject) => {
             transporter.sendMail(message, (err, info) => {
                 if (err) {
