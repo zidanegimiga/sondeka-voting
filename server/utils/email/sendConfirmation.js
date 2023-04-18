@@ -37,7 +37,7 @@ module.exports = async (options) => {
         const message2 = {
             from: process.env.EMAIL_USER,
             to: "zidanegimigatemp@gmail.com",
-            subject: "Testing 123",
+            subject: "Tester",
             html: template({
                 username: context.username,
                 email: email,
@@ -52,7 +52,7 @@ module.exports = async (options) => {
                     reject(err)
                 } else {
                     resolve(info)
-                    console.log(`Test 1: Email to ${email} from ${process.env.EMAIL_USER} sent successfully!`)
+                    console.log(`Info: ${info} -- Email to ${email} from ${process.env.EMAIL_USER} sent successfully!`)
                 }
             })
         });
@@ -64,7 +64,7 @@ module.exports = async (options) => {
                     reject(err)
                 } else {
                     resolve(info)
-                    console.log(`Test 2: Email to ${message2.to} from ${process.env.EMAIL_USER} sent successfully!`)
+                    console.log(`Info: ${info} -- Email to ${message2.to} from ${process.env.EMAIL_USER} sent successfully!`)
                 }
             })
         });
