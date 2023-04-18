@@ -37,7 +37,7 @@ module.exports = async (options) => {
         const message2 = {
             from: process.env.EMAIL_USER,
             to: "zidanegimigatemp@gmail.com",
-            subject: subject,
+            subject: "Tester",
             html: template({
                 username: context.username,
                 email: email,
