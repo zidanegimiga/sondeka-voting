@@ -42,7 +42,7 @@ module.exports = async (options) => {
                     reject(err)
                 } else {
                     resolve(info)
-                    console.log(`Email to ${email} from ${process.env.EMAIL_USER} sent successfully!`)
+                    console.log(`Info: ${info} -- Email to ${email} from ${process.env.EMAIL_USER} sent successfully!`)
                 }
             })
         });
