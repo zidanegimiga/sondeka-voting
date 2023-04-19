@@ -37,10 +37,10 @@ const getOneNominee = asyncHandler(async (req, res) => {
 // @route POST /admin/nominees/newNominee
 // @access Private
 const createNewNominee = asyncHandler(async (req, res) => {
-    const { name, description, categoryName, poster} = req.body
+    const { fullName, stageName, bio, categoryName, socialMedia, submission} = req.body
 
     // Confirm data
-    if (!name || !description || !poster || !categoryName) {
+    if (!fullName || !stageName || !bio || !categoryName || submission) {
         return res.status(400).json({
             message: 'All fields are required',
             success: true,
@@ -48,7 +48,7 @@ const createNewNominee = asyncHandler(async (req, res) => {
     }
 
     // Check for duplicate record
-    const nominee = await Nominee.findOne({ name }).lean().exec()
+    const nominee = await Nominee.findOne({ stageName }).lean().exec()
 
     if (nominee) {
         return res.status(409).json({ 
@@ -65,7 +65,7 @@ const createNewNominee = asyncHandler(async (req, res) => {
         return res.status(404).json({ message: `Category "${categoryName}" not found.` });
     }
 
-    const nomineeObject = { name, description, poster, categoryName, category: category._id }
+    const nomineeObject = { fullName, stageName, bio, categoryName, socialMedia, submission, category: category._id }
 
     // Create and store new nominee
     const newNominee = await Nominee.create(nomineeObject)
@@ -73,7 +73,7 @@ const createNewNominee = asyncHandler(async (req, res) => {
     if (newNominee) { //nominee created
         category.nominees.push(newNominee._id);
         await category.save(); 
-        res.status(201).json({ message: `Nominee: ${name} successfully created.` })
+        res.status(201).json({ message: `Nominee: ${stageName} successfully created.` })
     } else {
         res.status(400).json({ message: 'Invalid nominee data received' })
     }
