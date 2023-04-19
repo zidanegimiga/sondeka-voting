@@ -9,6 +9,10 @@ const nomineeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  categoryName: {
+    type: String,
+    required: true
+  },
   bio: {
     type: String,
     required: true,
