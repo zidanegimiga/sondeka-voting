@@ -30,6 +30,10 @@ const nomineeSchema = new mongoose.Schema({
       type: String,
       required: false,
     },
+    other: [{
+      type: String,
+      required: false,
+    }]
   },
   submission: {
     title: {
