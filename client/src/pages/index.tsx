@@ -13,7 +13,7 @@ export default function Index({categories}) {
       <div className={styles.pageWrapper}>
         <Nav/>
         <Hero />
-        <Categories />
+        {/* <Categories /> */}
 
       </div>
     </div>

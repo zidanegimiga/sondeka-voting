@@ -1,14 +1,87 @@
 .heroWrapper {
-    background-color: #3C3C3C;
     width: 100vw;
-    height: 400px;
-    background-image: url('/hexBackground.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding-top: 240px;
+    overflow-x: hidden;    
 }
+
+.layer1{
+    position: relative;
+    display: flex;
+    font-family: 'UKNumberPlate';
+    font-size: 200px;
+}
+
+.strokedText{
+  -webkit-text-fill-color: white; 
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: '#4e4e4e';
+}
+
+.layer1Left{
+    margin-left: -124px;
+    margin-right: 64px;
+}
+
+.layer1Main{
+    text-align: right;
+    margin-right: 64px;
+}
+
+.layer1Element{
+    margin-right: 64px;
+}
+
+.layer1Right{
+}
+
+
+// ---------------------------------------
+
+.layer2{
+    display: flex;
+    font-family: 'UKNumberPlate';
+    font-size: 200px;
+    align-items: center;
+    margin-left: -440px;
+}
+
+.layer2Left{
+    margin-right: 56px;
+}
+
+
+.layer2Description{
+    font-size: 32px;
+    text-align: right;
+    font-family: 'Graphik LCG';
+    color: #FFCD00;
+}
+
+.layer2Main{
+    margin-right: 40px;
+    margin-left: 56px;
+}
+
+.layer2Right{
+    width: 1%;
+}
+
+
+// ---------------------------------------
+
+.layer3{
+    display: flex;
+    font-family: 'UKNumberPlate';
+    font-size: 200px;
+    align-items: center;
+    margin-left: -320px;
+}
+
+.layer3Left{
+    margin-right: 72px;
+}
+
+.layer3Element{
+    margin-right: 48px;
+}
+
