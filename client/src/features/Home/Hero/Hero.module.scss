@@ -1,7 +1,16 @@
 .heroWrapper {
     width: 100vw;
+    height: 300vh;
     padding-top: 240px;
-    overflow-x: hidden;    
+    overflow-x: hidden;
+    
+    @media (max-width: 1441px) {
+        padding-top: 200px;        
+    }
+
+    @media (max-width: 1025px) {
+        padding-top: 180px;
+    }
 }
 
 .layer1{
@@ -9,6 +18,14 @@
     display: flex;
     font-family: 'UKNumberPlate';
     font-size: 200px;
+
+    @media (max-width: 1441px) {
+        font-size: 160px;       
+    }
+
+    @media (max-width: 1025px) {
+        font-size: 120px;       
+    }
 }
 
 .strokedText{
@@ -20,15 +37,27 @@
 .layer1Left{
     margin-left: -124px;
     margin-right: 64px;
+
+    @media (max-width: 1025px) {
+        margin-left: -56px;  
+        margin-right: 32px;             
+    }
 }
 
 .layer1Main{
     text-align: right;
     margin-right: 64px;
+    @media (max-width: 1025px) {
+        margin-right: 40px;
+    }
 }
 
 .layer1Element{
     margin-right: 64px;
+    @media (max-width: 1025px) {
+        transform: scale(70%) translateY(-16%);
+        margin-right: 20px;
+    }
 }
 
 .layer1Right{
@@ -43,6 +72,17 @@
     font-size: 200px;
     align-items: center;
     margin-left: -440px;
+
+    @media (max-width: 1441px) {
+        font-size: 160px;       
+    }
+
+    @media (max-width: 1025px) {
+        font-size: 120px;
+        line-height: 10%;
+        margin-left: -280px;
+        margin-top: -40px;       
+    }
 }
 
 .layer2Left{
@@ -55,11 +95,21 @@
     text-align: right;
     font-family: 'Graphik LCG';
     color: #FFCD00;
+    line-height: 110%;
+
+    @media (max-width: 1025px) {
+        font-size: 20px;        
+    }
 }
 
 .layer2Main{
     margin-right: 40px;
     margin-left: 56px;
+
+    @media (max-width: 1025px) {
+        margin-right: 32px;
+        margin-left: 32px;
+    }
 }
 
 .layer2Right{
@@ -75,6 +125,15 @@
     font-size: 200px;
     align-items: center;
     margin-left: -320px;
+
+    @media (max-width: 1441px) {
+        font-size: 160px;
+        margin-left: -280px;       
+    }
+
+    @media (max-width: 1025px) {
+        font-size: 120px;       
+    }
 }
 
 .layer3Left{
@@ -83,5 +142,10 @@
 
 .layer3Element{
     margin-right: 48px;
+
+    @media (max-width: 1025px) {
+        transform: scale(80%) translateY(0%);
+        margin-right: 20px;
+    }
 }
 

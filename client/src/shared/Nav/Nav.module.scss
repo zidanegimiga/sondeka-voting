@@ -1,10 +1,11 @@
 .navContainer {
     width: 100%;
+    display: flex;
+    justify-content: center;
     position: relative;
 }
 
 .navWrapper {
-    width: 80%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -12,17 +13,22 @@
     padding-bottom: 16px;
     padding-right: 24px;
     background: #474747;
-    position: fixed;
-    left: 10%;
-    top: 2%;
+    width: 80%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
     border-radius: 20px;
     z-index: 1;
+    position: fixed;
+    top: 4%;
 
     @media (max-width: 1700px) {
         padding-right: 120px;
         height: 40px
     }
+    @media (max-width: 1024px) {
+        padding: 24px 32px;
+        width: 85%;
+    }
+
 }
 
 .navLogo {
@@ -35,6 +41,10 @@
     display: flex;
     justify-content: space-between;
     gap: 80px;
+
+    @media (max-width: 1025px) {
+        gap: 24px
+    }
 }
 
 .centerItem {
@@ -47,7 +57,8 @@
     font: 2.5rem;
 }
 
-.centerItem::before, .centerItem::after{
+.centerItem::before,
+.centerItem::after {
     content: '';
     position: absolute;
     left: 0;
@@ -58,17 +69,18 @@
     transition: transform 0.25s;
 }
 
-.centerItem::before{
+.centerItem::before {
     top: -8px;
     transform-origin: left;
 }
 
-.centerItem::after{
+.centerItem::after {
     bottom: -8px;
     transform-origin: right;
 }
 
-.centerItem:hover::after, .centerItem:hover::before{
+.centerItem:hover::after,
+.centerItem:hover::before {
     transform: scaleX(1);
 }
 
