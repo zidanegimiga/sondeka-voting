@@ -7,3 +7,32 @@
   flex-direction: column;
   align-items: center;
 }
+
+.scroller{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-top: 120px;
+  padding-left: 196px;
+  padding-right: 80px;
+}
+
+.iconWrapper{
+  background-color: black;
+  border-radius: 50%;
+  padding: 6px;
+}
+
+.scrollText{
+  font-family: 'Graphik lcg';
+  font-size: 32px;
+  margin-left: 32px;
+}
+
+.divider{
+  background-color: black;
+  width: 70%;
+  height: 2px;
+  margin-left: 32px;
+}
