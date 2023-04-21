@@ -3,6 +3,7 @@ import AuthProvider from "admin-auth-context";
 import { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import "../styles/app.scss";
+import { Analytics } from '@vercel/analytics/react';
 
 const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
@@ -16,6 +17,7 @@ const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) 
           showOnShallow={true}
         />
         <Component {...pageProps} />
+        <Analytics />
     </AuthProvider>
   );
 };
