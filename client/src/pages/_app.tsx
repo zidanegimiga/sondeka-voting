@@ -1,14 +1,19 @@
+//@ts-nocheck
 import { FC } from "react";
 import AuthProvider from "admin-auth-context";
 import { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import "../styles/app.scss";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
+import { SessionProvider } from "next-auth/react";
 
-const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
+const App: FC = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) => {
   return (
-    //@ts-ignore
-    <AuthProvider>
+    <SessionProvider session={session}>
+      <AuthProvider>
         <NextNProgress
           color="#29D"
           startPosition={0.3}
@@ -18,7 +23,8 @@ const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) 
         />
         <Component {...pageProps} />
         <Analytics />
-    </AuthProvider>
+      </AuthProvider>
+    </SessionProvider>
   );
 };
 
