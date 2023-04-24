@@ -2,9 +2,9 @@
     width: 100vw;
     padding-top: 240px;
     overflow-x: hidden;
-    
+
     @media (max-width: 1441px) {
-        padding-top: 200px;        
+        padding-top: 160px;
     }
 
     @media (max-width: 1025px) {
@@ -12,60 +12,60 @@
     }
 }
 
-.layer1{
+.layer1 {
     position: relative;
     display: flex;
     font-family: 'UKNumberPlate';
     font-size: 200px;
+    margin-left: -124px;
 
     @media (max-width: 1441px) {
-        font-size: 160px;       
+        margin-left: -0px;
+        font-size: 100px;
     }
 
     @media (max-width: 1025px) {
-        font-size: 120px;       
+        font-size: 120px;
+        margin-left: -56px;
+        margin-right: 32px;
     }
 }
 
-.strokedText{
-  -webkit-text-fill-color: white; 
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: '#4e4e4e';
+.strokedText {
+    -webkit-text-fill-color: #e4e4e4;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #b3b3b3;
 }
 
-.layer1Left{
-    margin-left: -124px;
+.layer1Left {
     margin-right: 64px;
-
-    @media (max-width: 1025px) {
-        margin-left: -56px;  
-        margin-right: 32px;             
-    }
 }
 
-.layer1Main{
+.layer1Main {
     text-align: right;
     margin-right: 64px;
+
     @media (max-width: 1025px) {
         margin-right: 40px;
     }
 }
 
-.layer1Element{
+.layer1Element {
     margin-right: 64px;
-    @media (max-width: 1025px) {
+
+    @media (max-width: 1441px) {
         transform: scale(70%) translateY(-16%);
-        margin-right: 20px;
+        margin-right: 24px;
+        margin-left: -40px;
     }
 }
 
-.layer1Right{
-}
+.layer1Right {}
 
 
 // ---------------------------------------
 
-.layer2{
+.layer2 {
     display: flex;
     font-family: 'UKNumberPlate';
     font-size: 200px;
@@ -73,35 +73,49 @@
     margin-left: -440px;
 
     @media (max-width: 1441px) {
-        font-size: 160px;       
+        font-size: 100px;
+        margin-left: -200px;
+        margin-top: -40px;
     }
 
     @media (max-width: 1025px) {
         font-size: 120px;
         line-height: 10%;
         margin-left: -280px;
-        margin-top: -40px;       
     }
 }
 
-.layer2Left{
+.layer2Left {
     margin-right: 56px;
 }
 
 
-.layer2Description{
+.layer2Description {
     font-size: 32px;
     text-align: right;
     font-family: 'Graphik LCG';
     color: #FFCD00;
     line-height: 110%;
 
+    mark {
+        -webkit-animation: 4.5s highlight 1.5s 1 normal forwards;
+        animation: 4.5s highlight 1.5s 1 normal forwards;
+        background-color: none;
+        background: linear-gradient(90deg, #FFCD00 50%, rgba(255, 255, 255, 0) 50%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+    }
+
+    @media (max-width: 1441px) {
+        font-size: 20px;
+    }
+
     @media (max-width: 1025px) {
-        font-size: 20px;        
+        font-size: 20px;
     }
 }
 
-.layer2Main{
+.layer2Main {
     margin-right: 40px;
     margin-left: 56px;
 
@@ -111,14 +125,14 @@
     }
 }
 
-.layer2Right{
+.layer2Right {
     width: 1%;
 }
 
 
 // ---------------------------------------
 
-.layer3{
+.layer3 {
     display: flex;
     font-family: 'UKNumberPlate';
     font-size: 200px;
@@ -126,25 +140,51 @@
     margin-left: -320px;
 
     @media (max-width: 1441px) {
-        font-size: 160px;
-        margin-left: -280px;       
+        font-size: 100px;
+        margin-left: -120px;
     }
 
     @media (max-width: 1025px) {
-        font-size: 120px;       
+        font-size: 120px;
     }
 }
 
-.layer3Left{
+.layer3Left {
     margin-right: 72px;
+
+    @media (max-width: 1441px) {
+        margin-right: 10px;
+    }
 }
 
-.layer3Element{
+.layer3Element {
     margin-right: 48px;
 
-    @media (max-width: 1025px) {
-        transform: scale(80%) translateY(0%);
+    @media (max-width: 1441px) {
+        transform: scale(70%) translateY(0%);
         margin-right: 20px;
     }
 }
 
+.layer3Right {
+    display: none;
+
+    @media (max-width: 1441px) {
+        display: inline;
+        margin-left: 40px;
+    }
+}
+
+// --------------------------------------------------------------Animations---------------------------------------------------------------------------
+
+@-webkit-keyframes highlight {
+    to {
+        background-position: 0 0;
+    }
+}
+
+@keyframes highlight {
+    to {
+        background-position: 0 0;
+    }
+}

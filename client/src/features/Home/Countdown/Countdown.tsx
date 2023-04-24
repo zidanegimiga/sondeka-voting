@@ -40,7 +40,6 @@ const Countdown = () => {
   }, []);
   return (
     <>
-      <div className={styles.title}>VOTING BEGINS IN</div>
       {votingTime ? (
         <>
           <h1>Voting Lines Open!</h1>

@@ -1,5 +1,5 @@
 .pageWrapper {
-  background-color: #FFF;
+  background-color: #e4e4e4;
   width: 100vw;
   min-height: 100vh;
   position: relative;
@@ -16,12 +16,25 @@
   padding-top: 120px;
   padding-left: 196px;
   padding-right: 80px;
+
+  @media (max-width: 1441px) {
+    padding-top: 28px;
+    padding-right: 64px;    
+    padding-left: 164px;    
+  }
 }
 
 .iconWrapper {
-  background-color: black;
+  background-color: #292929;
   border-radius: 50%;
-  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+
+  @media (max-width: 1441px) {
+    transform: scale(80%);
+  }
 }
 
 .scrollText {
@@ -38,12 +51,18 @@
 }
 
 .countdownContainer {
-  margin-top: 300px;
+  padding-top: 380px;    
+  padding-bottom: 380px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 1441px) {
+    padding-top: 300px;    
+    padding-bottom: 300px;    
+  }
 
 }
 
@@ -56,6 +75,10 @@
   text-align: center;
   letter-spacing: 0.15em;
   color: #3C3C3C;
+
+  @media (max-width: 1441px) {
+    font-size: 40px;    
+  }
 }
 
 .subLogo{
@@ -69,5 +92,28 @@
 
 .sondekaTitle{
   color: #FFCD00;
-  font-family: '';  
+  font-family: 'UKNumberPlate'; 
+  font-size: 48px;
+  
+  span{
+    color: #292929;
+    font-family: 'Graphik LCG';
+    font-size: 32px;
+    font-weight: 300;
+  }
+}
+
+.footerLayer1{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-family: 'Cabin';
+  font-size: 30px;
+  gap: 72px;  
+}
+
+.socials{
+  display: flex;
+  justify-content: center;
+  border-top: solid 2px black;
 }

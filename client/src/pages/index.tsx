@@ -5,6 +5,7 @@ import Hero from "features/Home/Hero";
 import Categories from "features/Home/Categories";
 import DownArrow from "features/svgIcons/downArrow";
 import Countdown from "features/Home/Countdown/Countdown";
+import Link from 'next/link'
 
 export default function Index({data}) {
   return (
@@ -28,6 +29,14 @@ export default function Index({data}) {
         </div>
         <div className={styles.subLogo}>
           <div className={styles.sondekaTitle}> 5OND3KA <span>| AWARDS 2023</span></div>
+        </div>
+        <div className={styles.footerLayer1}>
+          <Link href={'/privacy'}> <p>Privacy Policy</p> </Link>
+          <Link href={'https://creativesgarage.org'}> <p> Creatives Garage </p> </Link>
+          <p><a href = "mailto: awesome@creativesgarage.org">awesome@creativesgarage.org</a></p>
+        </div>
+        <div className={styles.socials}>
+          
         </div>
         {/* <Categories /> */}
       </div>
