@@ -1,68 +1,104 @@
-.navContainer{
+.navContainer {
     width: 100%;
+    display: flex;
+    justify-content: center;
     position: relative;
 }
 
-.navWrapper{
-    width: 100%;
+.navWrapper {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding-top: 24px;
     padding-bottom: 16px;
-    padding-right: 240px;
-    background: #000000e3;
-    position: fixed;
-    top: 0;
+    padding-right: 24px;
+    background: #474747;
+    width: 80%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
+    border-radius: 20px;
     z-index: 1;
+    position: fixed;
+    top: 4%;
 
     @media (max-width: 1700px) {
         padding-right: 120px;
-        height: 40px                
+        height: 40px
+    }
+    @media (max-width: 1024px) {
+        padding: 24px 32px;
+        width: 85%;
+    }
+
+}
+
+.navLogo {
+    @media (max-width: 561px) {
+        display: none
     }
 }
 
-.navLogo{
-    @media (max-width: 561px ){
-        display: none        
+.centerItems {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+
+    @media (max-width: 1025px) {
+        gap: 24px
     }
 }
 
-.title{
-    font-family: 'UKNumberPlate';
-    font-size: 2.5rem;
-    color: #FFCD00;
-
-    span{
-        font-family: 'Inter';
-        font-size: 1.5rem;
-        color: #fff;
-    }
-
-    @media (max-width: 426px ){
-        font-size: 1.0rem;
-        
-        span{
-            font-size: 1.0rem;
-        }
-    }
+.centerItem {
+    color: white;
+    font-family: 'Graphik LCG';
+    display: inline-block;
+    position: relative;
+    padding: 4px;
+    cursor: pointer;
+    font: 2.5rem;
 }
 
-.menuBtn{
+.centerItem::before,
+.centerItem::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #FFCD00;
+    transform: scaleX(0);
+    transition: transform 0.25s;
+}
+
+.centerItem::before {
+    top: -8px;
+    transform-origin: left;
+}
+
+.centerItem::after {
+    bottom: -8px;
+    transform-origin: right;
+}
+
+.centerItem:hover::after,
+.centerItem:hover::before {
+    transform: scaleX(1);
+}
+
+.menuBtn {
     transform: scale(90%);
     padding: 4px;
     border-radius: 6px;
 
-    &:hover{
+    &:hover {
         background-color: #3f3f3f;
     }
 
-    @media (max-width: 426px ){
-        transform: scale(80%);        
+    @media (max-width: 426px) {
+        transform: scale(80%);
     }
 }
 
-.navOptions{
+.navOptions {
     position: fixed;
     width: 320px;
     height: fit-content;
@@ -75,18 +111,18 @@
 
     @media (max-width: 426px) {
         right: 16px;
-        width: 160px;        
+        width: 160px;
     }
 }
 
-.navLink{
+.navLink {
     padding: 8px;
     text-align: center;
     font-family: 'Inter';
     cursor: pointer;
 
-   &:hover{
-    background-color: #FFCD00;
-    border-radius: 8px;
-   }
+    &:hover {
+        background-color: #FFCD00;
+        border-radius: 8px;
+    }
 }

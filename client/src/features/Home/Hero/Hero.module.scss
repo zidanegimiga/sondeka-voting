@@ -1,14 +1,150 @@
 .heroWrapper {
-    background-color: #3C3C3C;
     width: 100vw;
-    height: 400px;
-    background-image: url('/hexBackground.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    padding-top: 240px;
+    overflow-x: hidden;
+    
+    @media (max-width: 1441px) {
+        padding-top: 200px;        
+    }
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @media (max-width: 1025px) {
+        padding-top: 180px;
+    }
 }
+
+.layer1{
+    position: relative;
+    display: flex;
+    font-family: 'UKNumberPlate';
+    font-size: 200px;
+
+    @media (max-width: 1441px) {
+        font-size: 160px;       
+    }
+
+    @media (max-width: 1025px) {
+        font-size: 120px;       
+    }
+}
+
+.strokedText{
+  -webkit-text-fill-color: white; 
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: '#4e4e4e';
+}
+
+.layer1Left{
+    margin-left: -124px;
+    margin-right: 64px;
+
+    @media (max-width: 1025px) {
+        margin-left: -56px;  
+        margin-right: 32px;             
+    }
+}
+
+.layer1Main{
+    text-align: right;
+    margin-right: 64px;
+    @media (max-width: 1025px) {
+        margin-right: 40px;
+    }
+}
+
+.layer1Element{
+    margin-right: 64px;
+    @media (max-width: 1025px) {
+        transform: scale(70%) translateY(-16%);
+        margin-right: 20px;
+    }
+}
+
+.layer1Right{
+}
+
+
+// ---------------------------------------
+
+.layer2{
+    display: flex;
+    font-family: 'UKNumberPlate';
+    font-size: 200px;
+    align-items: center;
+    margin-left: -440px;
+
+    @media (max-width: 1441px) {
+        font-size: 160px;       
+    }
+
+    @media (max-width: 1025px) {
+        font-size: 120px;
+        line-height: 10%;
+        margin-left: -280px;
+        margin-top: -40px;       
+    }
+}
+
+.layer2Left{
+    margin-right: 56px;
+}
+
+
+.layer2Description{
+    font-size: 32px;
+    text-align: right;
+    font-family: 'Graphik LCG';
+    color: #FFCD00;
+    line-height: 110%;
+
+    @media (max-width: 1025px) {
+        font-size: 20px;        
+    }
+}
+
+.layer2Main{
+    margin-right: 40px;
+    margin-left: 56px;
+
+    @media (max-width: 1025px) {
+        margin-right: 32px;
+        margin-left: 32px;
+    }
+}
+
+.layer2Right{
+    width: 1%;
+}
+
+
+// ---------------------------------------
+
+.layer3{
+    display: flex;
+    font-family: 'UKNumberPlate';
+    font-size: 200px;
+    align-items: center;
+    margin-left: -320px;
+
+    @media (max-width: 1441px) {
+        font-size: 160px;
+        margin-left: -280px;       
+    }
+
+    @media (max-width: 1025px) {
+        font-size: 120px;       
+    }
+}
+
+.layer3Left{
+    margin-right: 72px;
+}
+
+.layer3Element{
+    margin-right: 48px;
+
+    @media (max-width: 1025px) {
+        transform: scale(80%) translateY(0%);
+        margin-right: 20px;
+    }
+}
+

@@ -7,3 +7,67 @@
   flex-direction: column;
   align-items: center;
 }
+
+.scroller {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-top: 120px;
+  padding-left: 196px;
+  padding-right: 80px;
+}
+
+.iconWrapper {
+  background-color: black;
+  border-radius: 50%;
+  padding: 6px;
+}
+
+.scrollText {
+  font-family: 'Graphik lcg';
+  font-size: 32px;
+  margin-left: 32px;
+}
+
+.divider {
+  background-color: black;
+  width: 70%;
+  height: 2px;
+  margin-left: 32px;
+}
+
+.countdownContainer {
+  margin-top: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.countdownContainerTitle {
+  font-family: 'Graphik LCG';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 130%;
+  text-align: center;
+  letter-spacing: 0.15em;
+  color: #3C3C3C;
+}
+
+.subLogo{
+  width: 100%;
+  padding: 32px 0;
+  display: flex;
+  justify-content: center;
+  border-top: solid 2px black; 
+  border-bottom: solid 2px black; 
+}
+
+.sondekaTitle{
+  color: #FFCD00;
+  font-family: '';  
+}

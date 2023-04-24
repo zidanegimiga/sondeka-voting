@@ -46,8 +46,14 @@ const Nav = () => {
               <LogoWhite />
             </div>
           </Link>
-          <div className={styles.title}>
+          {/* <div className={styles.title}>
             50ND3KA <span> | AWARDS 2023</span>
+          </div> */}
+          <div className={styles.centerItems}>
+            <div className={styles.centerItem}><Link href={'dd'}>  HOME </Link></div>
+            <div className={styles.centerItem}><Link href={'dd'}>  NOMINEES </Link></div>
+            <div className={styles.centerItem}><Link href={'dd'}>  CATEGORIES </Link></div>
+            <div className={styles.centerItem}><Link href={'dd'}>  SONDEKA.ORG </Link></div>
           </div>
           {/* <>{session.user.name}</> */}
           <div
@@ -59,6 +65,7 @@ const Nav = () => {
             {options === true ? <Close /> : <Menu />}
           </div>
         </div>
+
         {options && (
           <div className={styles.navOptions}>
             {status === "unauthenticated" && (
