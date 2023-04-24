@@ -7,24 +7,23 @@ import "../styles/app.scss";
 import { Analytics } from "@vercel/analytics/react";
 import { SessionProvider } from "next-auth/react";
 
-const App: FC = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) => {
+const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
-    <SessionProvider session={session}>
-      <AuthProvider>
-        <NextNProgress
-          color="#29D"
-          startPosition={0.3}
-          stopDelayMs={200}
-          height={3}
-          showOnShallow={true}
-        />
-        <Component {...pageProps} />
-        <Analytics />
-      </AuthProvider>
-    </SessionProvider>
+    <>
+      <NextNProgress
+        color="#29D"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+        showOnShallow={true}
+      />
+      <SessionProvider session={session}>
+        <AuthProvider>
+          <Component {...pageProps} />
+          <Analytics />
+        </AuthProvider>
+      </SessionProvider>
+    </>
   );
 };
 
