@@ -33,3 +33,5 @@ yarn-error.log*
 
 # Dev Log files
 *.log
+
+example.js

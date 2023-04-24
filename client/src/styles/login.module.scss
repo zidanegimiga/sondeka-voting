@@ -84,11 +84,15 @@
     color: #250F36;
     font-size: 2rem;
     margin-top: 16px;
+
+    @media (max-width: 321px) {
+        font-size: 28px;                
+    }
 }
 
 .contentContainer {
     width: 80vw;
-    height: 90vh;
+    height: 75vh;
     background-color: #fff;
     box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.24), -6px -6px 8px rgba(0, 0, 0, 0.24);
     border-radius: 8px;
@@ -96,6 +100,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 426px) {
+        width: 85vw;
+    }
+
+    @media (max-width: 321px) {
+        width: 89vw;
+        height: 50vh;                
+    }
 }
 
 .form {
@@ -165,5 +178,55 @@
         &:hover{
             text-decoration: underline;
         }        
+    }
+}
+
+.googleButton{
+    margin-top: 200px;
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 24px;
+    box-shadow: 0px -1px 4px #00000040, -2px 4px 4px #00000040, 2px 4px 4px #00000040, 0px 4px 4px #00000040;
+    font-family: 'Graphik LCG';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 480px;
+    cursor: pointer;
+    
+    @media (max-width: 426px) {
+        width: 320px;
+        margin-top: 100px;                
+    }
+
+    @media (max-width: 376px) {
+        width: 280px;
+        padding: 8px 16px;                
+    }
+    @media (max-width: 321px) {
+        width: 240px;
+        padding: 8px 16px;                
+    }
+}
+
+.googleIconWrapper{
+    
+    @media (max-width: 426px) {
+        transform: scale(80%);               
+    }    
+}
+
+.googleButtonText{
+    margin-left: 24px;
+    font-size: 1.5rem;
+
+    @media (max-width: 426px) {
+        font-size: 1.1rem;                
+    }
+
+    @media (max-width: 376px) {
+        font-size: 20x;
+        margin-left: 0px;                
     }
 }
