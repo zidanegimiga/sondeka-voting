@@ -27,7 +27,7 @@
 .statsCardsWrapper{
     display: flex;
     justify-content: space-around;
-    align-items: baseline;
+    align-items: center;
 
     @media (max-width: 769px) {
         flex-direction: column;

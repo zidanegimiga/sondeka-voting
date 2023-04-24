@@ -3,23 +3,11 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/dist/client/link";
 
-const Categories = () => {
+const Categories = ({data}) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    async function getCategories() {
-      try {
-        const res = await fetch(
-          "https://sondeka-voting-api.cyclic.app/categories/allCategories",
-          { cache: "force-cache" }
-        );
-        const categories = await res.json();
-        setCategories(categories);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getCategories();
+    setCategories(data)
   }, []);
 
   return (
