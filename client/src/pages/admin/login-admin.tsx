@@ -42,7 +42,7 @@ const AdminLoginPage = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${process.env.API_URL}/admin/authentication/login`,
+        `https://sondeka-voting-api.cyclic.app/admin/authentication/login`,
         {
           method: "POST",
           body: JSON.stringify(formData),

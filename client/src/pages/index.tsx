@@ -6,7 +6,7 @@ import Categories from "features/Home/Categories";
 import DownArrow from "features/svgIcons/downArrow";
 import Countdown from "features/Home/Countdown/Countdown";
 
-export default function Index({categories}) {
+export default function Index({data}) {
   return (
     <div className={styles.homeWrapper}>
       <Head>
@@ -30,8 +30,18 @@ export default function Index({categories}) {
           <div className={styles.sondekaTitle}> 5OND3KA <span>| AWARDS 2023</span></div>
         </div>
         {/* <Categories /> */}
-
       </div>
     </div>
     );
+}
+
+export const getServerSideProps = async () => {
+  const res = await fetch("https://sondeka-voting-api.cyclic.app/categories/allCategories")
+  const data = await res.json()
+
+  return {
+    props: {
+      data,
+    },
+  }
 }

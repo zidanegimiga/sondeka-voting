@@ -7,36 +7,19 @@ import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import Close from "features/svgIcons/close";
 import { AuthContext } from "admin-auth-context";
+import { useSession, getSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
+import type { UserData } from "types/userData";
 
 const Nav = () => {
   const [options, showOptions] = useState(false);
-  const [normalUsertoken, setNormalUserToken] = useState<String>();
   const [loading, setLoading] = useState(null)
-  const [admin, setAdmin] = useState(true)
+  const [admin, setAdmin] = useState(true);
   const { token, logout, isAdminAuthenticated } = useContext(AuthContext);
 
+  const { data: session, status } = useSession()
+
   const router = useRouter();
-
-  async function logoutNormalUser() {
-    try{
-      setLoading(true)
-      const response = await fetch("https://sondeka-voting-api.cyclic.app/auth/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-    } catch (err){
-      console.error(err)
-    }
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("id");
-    window.localStorage.removeItem("username");
-    setNormalUserToken(null);
-    router.push("/");
-    showOptions(false);
-  }
   
   async function logoutAdmin() {
     try{
@@ -53,11 +36,6 @@ const Nav = () => {
     router.push("/");
     showOptions(false);
   }
-  
-  useEffect(() => {
-    const getToken = window.localStorage.getItem("token");
-    setNormalUserToken(getToken);
-  }, []);
 
   if (typeof window !== undefined) {
     return (
@@ -77,6 +55,7 @@ const Nav = () => {
             <div className={styles.centerItem}><Link href={'dd'}>  CATEGORIES </Link></div>
             <div className={styles.centerItem}><Link href={'dd'}>  SONDEKA.ORG </Link></div>
           </div>
+          {/* <>{session.user.name}</> */}
           <div
             className={styles.menuBtn}
             onClick={() => {
@@ -89,7 +68,7 @@ const Nav = () => {
 
         {options && (
           <div className={styles.navOptions}>
-            {!token && (
+            {status === "unauthenticated" && (
               <>
                 <div className={styles.navLink}>
                   <Link href={"/"}>Home</Link>
@@ -98,16 +77,16 @@ const Nav = () => {
                   <Link href={"/signup"}>Sign Up</Link>
                 </div>
                 <div className={styles.navLink}>
-                  <Link href={"/login"}>Log In</Link>
+                  <Link href={"/oAuthLogin"}>Log In</Link>
                 </div>
               </>
             )}
-            {token && (
+            {status === "authenticated" && (
               <>
                 <div className={styles.navLink}>
                   <Link href={"/"}>Home</Link>
                 </div>
-                <div className={styles.navLink} onClick={() => logoutNormalUser()}>
+                <div className={styles.navLink} onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}>
                   <div>Log Out</div>
                 </div>
               </>

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const [nomineesData, setNomineesData] = useState([]);
+  const [message, setMessage] = useState("")
   const router = useRouter();
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const Dashboard = () => {
 
     const fetchNomineesData = async () => {
       const res = await fetch(
-        `${process.env.API_URL}/admin/nominees/allNominees`,
+        `https://sondeka-voting-api.cyclic.app/admin/nominees/allNominees`,
         {
           headers: {
             authorization: accessToken,
@@ -28,8 +29,9 @@ const Dashboard = () => {
 
       if (data && data.message === "Forbiden!") {
         setNomineesData([]);
-      } else {
-        setNomineesData(data);
+      } else if (data && data.message === "No nominees found"){
+        setNomineesData([])
+        setMessage(data?.message)
       }
     };
 
@@ -46,7 +48,7 @@ const Dashboard = () => {
               <h1>Nominees</h1>
               <div className={styles.count}>
                 <p>Voters Count:</p>
-                <span>{nomineesData.length + 1}</span>
+                <span>{nomineesData?.length + 1}</span>
               </div>
             </div>
             <div className={styles.warning}>
@@ -66,40 +68,43 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {nomineesData.map((nominee, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>
-                        <div
-                          className={styles.nomineePictureWrapper}
-                          style={{ display: "flex" }}
-                        >
-                          <Image
-                            src={"/nominee.png"}
-                            width={60}
-                            height={72}
-                            alt="nominee"
-                          />
-                          <div
-                            className={styles.nomineeDetails}
-                            style={{ marginLeft: "16px" }}
-                          >
-                            <p
-                              className={styles.nomineeName}
-                              style={{ fontWeight: "700", color: "white" }}
+                  {message ? 
+                    <p style={{color: 'white'}}>{message}</p> : (
+                      nomineesData?.map((nominee, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>
+                            <div
+                              className={styles.nomineePictureWrapper}
+                              style={{ display: "flex" }}
                             >
-                              {nominee.name}
-                            </p>
-                            <p className={styles.nomineeEmail}>
-                              {nominee.description.slice(0, 20)}...
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>{nominee.categoryName}</td>
-                      <td>{nominee.votes}</td>
-                    </tr>
-                  ))}
+                              <Image
+                                src={"/nominee.png"}
+                                width={60}
+                                height={72}
+                                alt="nominee"
+                              />
+                              <div
+                                className={styles.nomineeDetails}
+                                style={{ marginLeft: "16px" }}
+                              >
+                                <p
+                                  className={styles.nomineeName}
+                                  style={{ fontWeight: "700", color: "white" }}
+                                >
+                                  {nominee.name}
+                                </p>
+                                <p className={styles.nomineeEmail}>
+                                  {nominee.description.slice(0, 20)}...
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>{nominee.categoryName}</td>
+                          <td>{nominee.votes}</td>
+                        </tr>
+                      ))
+                    )}
                 </tbody>
               </table>
             </div>
