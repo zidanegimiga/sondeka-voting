@@ -3,15 +3,20 @@
     display: flex;
     justify-content: center;
     position: relative;
+    @media (max-width: 769px) {
+        padding-right: 32px;
+        padding-left: 16px;
+    }
 }
 
 .navWrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding-top: 24px;
     padding-bottom: 16px;
     padding-right: 24px;
+    padding-left: 24px;
     background: #474747;
     width: 80%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
@@ -20,21 +25,27 @@
     position: fixed;
     top: 4%;
 
-    @media (max-width: 1700px) {
+    @media (max-width: 1701px) {
         padding-right: 120px;
+        padding-left: 120px;
         height: 40px
     }
     @media (max-width: 1024px) {
-        padding: 24px 32px;
-        width: 85%;
+        padding-right: 80px;
+        padding-left: 80px;       
+    }
+    @media (max-width: 769px) {
+        width: 70%;
+    }
+    @media (max-width: 426px) {
+        width: 90%;
+        padding-right: 16px;
+        padding-left: 16px;
     }
 
 }
 
 .navLogo {
-    @media (max-width: 561px) {
-        display: none
-    }
 }
 
 .centerItems {
@@ -43,7 +54,10 @@
     gap: 80px;
 
     @media (max-width: 1025px) {
-        gap: 24px
+        gap: 24px;
+    }
+    @media (max-width: 769px) {
+        display: none;
     }
 }
 
@@ -102,12 +116,16 @@
     position: fixed;
     width: 320px;
     height: fit-content;
-    top: 96px;
+    top: 120px;
     background-color: #fff;
     box-shadow: 0px 4px 4px #00000040, -4px -4px 4px #00000040;
     right: 32px;
     border-radius: 8px;
     z-index: 10;
+
+    @media (max-width: 769px) {
+        top: 140px;
+    }
 
     @media (max-width: 426px) {
         right: 16px;
@@ -124,5 +142,13 @@
     &:hover {
         background-color: #FFCD00;
         border-radius: 8px;
+    }
+}
+
+.mobileNavLinks{
+    display: none;
+
+    @media (max-width: 769px) {
+        display: block;        
     }
 }
