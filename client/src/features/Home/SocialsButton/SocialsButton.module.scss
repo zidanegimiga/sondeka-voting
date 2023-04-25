@@ -1,0 +1,60 @@
+.socialsWrapper {
+    position: relative;
+}
+
+.socialsWrapper :is(.button, .link) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: #FFF;
+    color: #151515;
+    border-radius: 50%;
+    padding: 6px;
+}
+
+.button {
+    position: absolute;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.active .button,
+.button:hover {
+    outline: 3px solid #0561ee;
+    outline-offset: -4px;
+}
+
+.item {
+	position: absolute;
+	list-style: none;
+	transition: transform 0.5s;
+	transition-delay: var(--d);
+}
+
+.socialsWrapper.active .item:nth-child(1) {
+	transform: translateX(-65px);
+}
+
+.socialsWrapper.active .item:nth-child(2) {
+	transform: translateY(-65px);
+}
+.socialsWrapper.active .item:nth-child(3) {
+	transform: translateX(65px);
+}
+.link:hover {
+	color: #fff;
+	transition: background-color 0.5s;
+}
+.instagram:hover {
+	background-image: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+.twitter:hover {
+	background-color: #1da1f2;
+}
+.facebook:hover {
+	background-color: #fffc00;
+	color: inherit;
+}

@@ -6,6 +6,7 @@ import Categories from "features/Home/Categories";
 import DownArrow from "features/svgIcons/downArrow";
 import Countdown from "features/Home/Countdown/Countdown";
 import Link from 'next/link'
+import SocialsButton from '../features/Home/SocialsButton'
 
 export default function Index({data}) {
   return (
@@ -35,9 +36,9 @@ export default function Index({data}) {
           <Link href={'https://creativesgarage.org'}> <p> Creatives Garage </p> </Link>
           <p><a href = "mailto: awesome@creativesgarage.org">awesome@creativesgarage.org</a></p>
         </div>
-        <div className={styles.socials}>
-          
-        </div>
+        {/* <div className={styles.socials}>
+          <SocialsButton />          
+        </div> */}
         {/* <Categories /> */}
       </div>
     </div>

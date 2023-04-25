@@ -8,7 +8,7 @@ import { ListItemProps } from "types/cssProperty";
 const Categories = () => {
   const [activeElement, setActiveElement] = useState<boolean>(false)
   const toggleOptions = () =>{
-
+    setActiveElement(!activeElement)
   }
   return (
     <div className={activeElement === true ? styles.socialsWrapper + ' ' + styles.active : styles.socialsWrapper }>

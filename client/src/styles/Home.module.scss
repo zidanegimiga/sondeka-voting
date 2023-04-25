@@ -113,7 +113,9 @@
 }
 
 .socials{
-  display: flex;
-  justify-content: center;
+  display: grid;
+	place-items: center;
+  width: 100vw;
+  height: 400px;
   border-top: solid 2px black;
 }
