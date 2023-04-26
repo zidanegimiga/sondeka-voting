@@ -2,36 +2,55 @@ import styles from "./SocialsButton.module.scss";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/dist/client/link";
-import { Facebook, Instagram, Share, Twitter } from "features/svgIcons/SocialMediaIcons";
+import {
+  Close,
+  Facebook,
+  Instagram,
+  Share,
+  Twitter,
+} from "features/svgIcons/SocialMediaIcons";
 import { ListItemProps } from "types/cssProperty";
 
 const Categories = () => {
-  const [activeElement, setActiveElement] = useState<boolean>(false)
-  const toggleOptions = () =>{
-    setActiveElement(!activeElement)
-  }
+  const [activeElement, setActiveElement] = useState<boolean>(false);
+  const [instagramElementHover, setInstagramElementHover] = useState<boolean>(false);
+  const [twitterElementHover, setTwitterElementHover] = useState<boolean>(false);
+  const [facebookElementHover, setFacebookElementHover] = useState<boolean>(false);
+  const toggleOptions = () => {
+    setActiveElement(!activeElement);
+  };
   return (
-    <div className={activeElement === true ? styles.socialsWrapper + ' ' + styles.active : styles.socialsWrapper }>
-      <button className={styles.button}>
-        <Share />
-      </button>
-      <ul className={styles.list}>
-        <li className={styles.item}>
-          <a href="#" className={styles.link + " " + styles.instagram}>
-            <Instagram />
-          </a>
-        </li>
-        <li className={styles.item} style={{}}>
-          <a href="#" className={styles.link + " " + styles.twitter}>
-            <Twitter />
-          </a>
-        </li>
-        <li className={styles.item} style={{}}>
-          <a href="#" className={styles.link + " " + styles.facebook}>
-            <Facebook />
-          </a>
-        </li>
-      </ul>
+    <div className={activeElement ? styles.active + ' ' + styles.socialsWrapper : styles.socialsWrapper }>
+      <div className={styles.layer1}>
+        <div
+          onMouseEnter={()=>{setInstagramElementHover(true)}}
+          onMouseLeave={()=>{setInstagramElementHover(false)}}
+          className={activeElement ? styles.instagramActive : styles.instagram}
+        >
+          <Instagram hover={instagramElementHover}/>
+        </div>
+        <div
+          className={styles.shareButton}
+          onClick={(e) => {
+            e.preventDefault();
+            toggleOptions();
+          }}
+        >
+          {activeElement ? <Close /> : <Share />}
+        </div>
+        <div 
+        onMouseEnter={()=>{setTwitterElementHover(true)}}
+        onMouseLeave={()=>{setTwitterElementHover(false)}}
+        className={activeElement ? styles.twitterActive : styles.twitter}>
+          <Twitter hover={twitterElementHover}/>
+        </div>
+      </div>
+      <div 
+      onMouseEnter={()=>{setFacebookElementHover(true)}}
+      onMouseLeave={()=>{setFacebookElementHover(false)}}
+      className={activeElement ? styles.facebookActive : styles.facebook}>
+        <Facebook hover={facebookElementHover}/>
+      </div>
     </div>
   );
 };

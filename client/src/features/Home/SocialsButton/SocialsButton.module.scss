@@ -1,60 +1,98 @@
 .socialsWrapper {
-    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.socialsWrapper :is(.button, .link) {
-    display: inline-flex;
+.layer1 {
+    display: flex;
     align-items: center;
+}
+
+.shareButton {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 50%;
+    border: solid 2px black;
+    display: flex;
     justify-content: center;
+    align-items: center;
     width: 64px;
     height: 64px;
-    background-color: #FFF;
-    color: #151515;
-    border-radius: 50%;
-    padding: 6px;
-}
-
-.button {
-    position: absolute;
-    border: none;
-    cursor: pointer;
     z-index: 10;
+    cursor: pointer;
 }
 
-.active .button,
-.button:hover {
+.active .shareButton,
+.shareButton:hover {
     outline: 3px solid #0561ee;
     outline-offset: -4px;
 }
 
-.item {
-	position: absolute;
-	list-style: none;
-	transition: transform 0.5s;
-	transition-delay: var(--d);
+.instagram {
+    transform: translateX(105%);
+    transition: all .5s;
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
 }
 
-.socialsWrapper.active .item:nth-child(1) {
-	transform: translateX(-65px);
+.instagramActive {
+    transform: translateX(-45%);
+    transition: all .5s;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    
+    &:hover {
+        cursor: pointer;
+        background: linear-gradient(37.16deg, #FFCD00 14.08%, #F24E1E 44.9%, #C90679 72.05%, #440A80 92.8%);
+    }
 }
 
-.socialsWrapper.active .item:nth-child(2) {
-	transform: translateY(-65px);
+.twitter {
+    transform: translateX(-105%);
+    transition: all .5s;
 }
-.socialsWrapper.active .item:nth-child(3) {
-	transform: translateX(65px);
+
+.twitterActive {
+    transform: translateX(45%);
+    transition: all .5s;
+    padding: 12px;
+    border: solid 1px #010101;
+    border-radius: 50%;
+    transition: all .5s;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #1D9BF0;
+    }
 }
-.link:hover {
-	color: #fff;
-	transition: background-color 0.5s;
+
+.facebook {
+    transform: translateY(-105%);
+    transition: all .5s;
 }
-.instagram:hover {
-	background-image: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+
+.facebookActive {
+    transform: translateY(40%);
+    transition: all .5s;
+    padding: 12px;
+    border-radius: 50%;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #1D9BF0;
+    }
 }
-.twitter:hover {
-	background-color: #1da1f2;
-}
-.facebook:hover {
-	background-color: #fffc00;
-	color: inherit;
+
+.instagram,
+.twitter,
+.facebook {
+    z-index: 2;
 }

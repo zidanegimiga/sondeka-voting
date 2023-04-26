@@ -109,13 +109,28 @@
   justify-content: center;
   font-family: 'Cabin';
   font-size: 30px;
-  gap: 72px;  
+  gap: 72px;
+
+  p{
+    transition: all 1.5s;
+  }
+  
+  p:hover{
+    text-decoration: underline;
+  }
 }
 
 .socials{
-  display: grid;
-	place-items: center;
   width: 100vw;
-  height: 400px;
   border-top: solid 2px black;
+  padding: 48px 16px;
+}
+
+.socialsTitle{
+  text-align: center;
+  color: #292929;
+  font-family: 'Graphik LCG';
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 48px;  
 }
