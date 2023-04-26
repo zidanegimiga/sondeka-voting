@@ -1,4 +1,3 @@
-import Logo from "features/svgIcons/logoBlack";
 import LogoWhite from "features/svgIcons/LogoWhite";
 import Menu from "features/svgIcons/menu";
 import styles from "./Nav.module.scss";
@@ -9,13 +8,11 @@ import Close from "features/svgIcons/close";
 import { AuthContext } from "admin-auth-context";
 import { useSession, getSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
-import type { UserData } from "types/userData";
 
 const Nav = () => {
   const [options, showOptions] = useState(false);
   const [loading, setLoading] = useState(null);
-  const [admin, setAdmin] = useState(true);
-  const { token, logout, isAdminAuthenticated } = useContext(AuthContext);
+  const { logout, isAdminAuthenticated } = useContext(AuthContext);
 
   const { data: session, status } = useSession();
 
@@ -62,7 +59,7 @@ const Nav = () => {
               <Link href={"dd"}> CATEGORIES </Link>
             </div>
             <div className={styles.centerItem}>
-              <Link href={"dd"}> SONDEKA.ORG </Link>
+              <a href="https://www.sondeka.org" target="blank" style={{textDecoration: "none"}}> SONDEKA.ORG </a>
             </div>
           </div>
           {/* <>{session.user.name}</> */}
@@ -85,10 +82,10 @@ const Nav = () => {
                 </div>
                 <div className={styles.mobileNavLinks}>
                   <div className={styles.navLink}>
-                    <Link href={"/"}>Nominees</Link>
+                    <Link href={"#"}>Nominees</Link>
                   </div>
                   <div className={styles.navLink}>
-                    <Link href={"/"}>Categories</Link>
+                    <Link href={"/#"}>Categories</Link>
                   </div>
                 </div>
                 <div className={styles.navLink}>
