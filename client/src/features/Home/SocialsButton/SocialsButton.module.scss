@@ -48,9 +48,11 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    border: solid 2px #010101;
     
     &:hover {
         cursor: pointer;
+        border: none;
         background: linear-gradient(37.16deg, #FFCD00 14.08%, #F24E1E 44.9%, #C90679 72.05%, #440A80 92.8%);
     }
 }
@@ -71,6 +73,7 @@
     &:hover {
         cursor: pointer;
         background-color: #1D9BF0;
+        border: none
     }
 }
 
@@ -84,10 +87,12 @@
     transition: all .5s;
     padding: 12px;
     border-radius: 50%;
+    border: solid 1px #010101;
 
     &:hover {
         cursor: pointer;
         background-color: #1D9BF0;
+        border: none;
     }
 }
 
