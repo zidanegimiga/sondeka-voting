@@ -22,7 +22,7 @@ const Nav = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:3500/admin/authentication/logout",
+        "https://sondeka-voting-api.cyclic.app//admin/authentication/logout",
         {
           method: "GET",
         }
@@ -45,9 +45,6 @@ const Nav = () => {
               <LogoWhite />
             </div>
           </Link>
-          {/* <div className={styles.title}>
-            50ND3KA <span> | AWARDS 2023</span>
-          </div> */}
           <div className={styles.centerItems}>
             <div className={styles.centerItem}>
               <Link href={"/"}> HOME </Link>
