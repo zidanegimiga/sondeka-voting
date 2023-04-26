@@ -50,19 +50,18 @@ const Nav = () => {
           </div> */}
           <div className={styles.centerItems}>
             <div className={styles.centerItem}>
-              <Link href={"dd"}> HOME </Link>
+              <Link href={"/"}> HOME </Link>
             </div>
             <div className={styles.centerItem}>
-              <Link href={"dd"}> NOMINEES </Link>
+              <Link href={"#"}> NOMINEES </Link>
             </div>
             <div className={styles.centerItem}>
-              <Link href={"dd"}> CATEGORIES </Link>
+              <Link href={"#"}> CATEGORIES </Link>
             </div>
             <div className={styles.centerItem}>
               <a href="https://www.sondeka.org" target="blank" style={{textDecoration: "none"}}> SONDEKA.ORG </a>
             </div>
           </div>
-          {/* <>{session.user.name}</> */}
           <div
             className={styles.menuBtn}
             onClick={() => {
