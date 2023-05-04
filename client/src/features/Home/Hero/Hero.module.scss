@@ -10,6 +10,9 @@
     @media (max-width: 1025px) {
         padding-top: 180px;
     }
+    @media (max-width: 450px) {
+        padding-top: 120px;
+    }
 }
 
 .layer1 {
@@ -40,6 +43,10 @@
         margin-left: -200px;
         margin-right: 0px;
     }
+    @media (max-width: 450px) {
+        display: none;
+    }
+    
 }
 
 .strokedText {
@@ -102,6 +109,10 @@
         font-size: 64px;
         margin-left: -200px;
         margin-top: -80px;
+    }
+
+    @media (max-width: 450px) {
+        display: none;
     }
 }
 
@@ -195,6 +206,9 @@
         margin-left: -30px;
         margin-top: -8px;
     }
+    @media (max-width: 450px) {
+        display: none;
+    }
 }
 
 .layer3Left {
@@ -242,6 +256,30 @@
         display: none;
     }    
 }
+
+.heroMobile{
+    display: none;
+    font-family: 'UKNumberPlate';
+    font-weight: 400;
+    font-size: 2.5rem;
+    line-height: 100%;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+
+    @media (max-width: 450px) {
+        display: inline-block;
+    }
+
+    @media (max-width: 320px) {
+        font-size: 2rem;
+    }
+}
+
+.layer3MobileElement{
+    transform: scale(80%);
+}
+
 
 // --------------------------------------------------------------Animations---------------------------------------------------------------------------
 

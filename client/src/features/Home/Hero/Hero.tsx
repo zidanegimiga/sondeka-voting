@@ -72,6 +72,13 @@ const Hero = () => {
           SOND3KA
         </div>
       </div>
+      <div className={styles.heroMobile}>
+        <h1>Sond3ka</h1>
+        <h1>Awards</h1>
+        <div className={styles.layer3Mobile}>
+        <h1>2023</h1><div className={styles.layer3MobileElement}><Layer3Element/></div>
+        </div>
+      </div>
     </div>
   );
 };
