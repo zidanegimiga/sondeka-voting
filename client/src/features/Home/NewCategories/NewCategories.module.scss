@@ -1,0 +1,110 @@
+.carousel {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+}
+  
+  .carouselItem {
+    --items: 10;
+    --width: clamp(150px, 30vw, 300px);
+    --height: clamp(200px, 40vw, 400px);
+    --x: calc(var(--active) * 800%);
+    --y: calc(var(--active) * 200%);
+    --rot: calc(var(--active) * 120deg);
+    --opacity: calc(var(--zIndex) / var(--items) * 3 - 2);
+    overflow: hidden;
+    position: absolute;
+    z-index: var(--zIndex);
+    width: var(--width);
+    height: var(--height);
+    margin: calc(var(--height) * -0.5) 0 0 calc(var(--width) * -0.5);
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    transform-origin: 0% 100%;
+    box-shadow: 0 10px 50px 10px rgba(0, 0, 0, 0.5);
+    background: black;
+    pointer-events: all;
+    transform: translate(var(--x), var(--y)) rotate(var(--rot));
+    transition: transform 0.8s cubic-bezier(0, 0.02, 0, 1);
+  }
+  .carouselItem .carouselBox {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.8s cubic-bezier(0, 0.02, 0, 1);
+    opacity: var(--opacity);
+    font-family: "Orelo-sw-db", serif;
+  }
+  .carouselItem .carouselBox:before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5));
+  }
+  .carouselItem .title {
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    bottom: 20px;
+    left: 20px;
+    transition: opacity 0.8s cubic-bezier(0, 0.02, 0, 1);
+    font-size: clamp(20px, 3vw, 30px);
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  }
+  .carouselItem .num {
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    top: 10px;
+    left: 20px;
+    transition: opacity 0.8s cubic-bezier(0, 0.02, 0, 1);
+    font-size: clamp(20px, 10vw, 80px);
+  }
+  .carouselItem img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    pointer-events: none;
+  }
+  
+
+  .cursor {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    --size: 40px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: calc(var(--size) * -0.5) 0 0 calc(var(--size) * -0.5);
+    transition: transform 0.85s cubic-bezier(0, 0.02, 0, 1);
+    display: none;
+    pointer-events: none;
+  }
+  @media (pointer: fine) {
+    .cursor {
+      display: block;
+    }
+  }
+  
+  .cursor2 {
+    --size: 2px;
+    transition-duration: 0.7s;
+  }

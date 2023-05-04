@@ -9,6 +9,7 @@ import Link from "next/link";
 import SocialsButton from "../features/Home/SocialsButton";
 import Cursor from "shared/Cursor";
 import { useState, useEffect } from "react";
+import NewCategories from "features/Home/NewCategories/NewCategories";
 
 export default function Index({ data }) {
   return (
