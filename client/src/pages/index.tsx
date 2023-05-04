@@ -50,7 +50,7 @@ export default function Index({ data }) {
           </p>
         </div>
         <div className={styles.socials}>
-          <div className={styles.socialsTitle}>SOCIALS</div>
+          <div className={styles.socialsTitle}>CHECK OUR SOCIALS OUT</div>
           <SocialsButton />
         </div>
         {/* <Categories /> */}
