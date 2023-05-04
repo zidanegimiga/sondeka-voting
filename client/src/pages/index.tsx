@@ -7,6 +7,8 @@ import DownArrow from "features/svgIcons/downArrow";
 import Countdown from "features/Home/Countdown/Countdown";
 import Link from "next/link";
 import SocialsButton from "../features/Home/SocialsButton";
+import Cursor from "shared/Cursor";
+import { useState, useEffect } from "react";
 
 export default function Index({ data }) {
   return (
@@ -15,6 +17,7 @@ export default function Index({ data }) {
         <title>Voting - sondeka </title>
       </Head>
       <div className={styles.pageWrapper}>
+        <Cursor/>
         <Nav />
         <Hero />
         <div className={styles.scroller}>
