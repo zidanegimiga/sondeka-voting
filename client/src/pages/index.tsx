@@ -9,16 +9,16 @@ import Link from "next/link";
 import SocialsButton from "../features/Home/SocialsButton";
 import Cursor from "shared/Cursor";
 import { useState, useEffect } from "react";
-import NewCategories from "features/Home/NewCategories/NewCategories";
+import CategoryItem from "features/Home/CategoryItem/CategoryItem";
 
-export default function Index({ data }) {
+export default function Index({data}) {
+  console.log(data)
   return (
     <div className={styles.homeWrapper}>
       <Head>
         <title>Voting - sondeka </title>
       </Head>
       <div className={styles.pageWrapper}>
-        <Cursor/>
         <Nav />
         <Hero />
         <div className={styles.scroller}>
@@ -31,6 +31,21 @@ export default function Index({ data }) {
         <div className={styles.countdownContainer}>
           <div className={styles.countdownContainerTitle}>VOTING BEGINS IN</div>
           <Countdown />
+        </div>
+        <div className={styles.categories}>
+          <div className={styles.categoriesTitle}>CATEGORIES</div>
+          {data.map((category, index) => {
+            return (
+              <CategoryItem
+                key={index}
+                title={category.name}
+                description={category.description}
+                backgroundImage={category.poster}
+                color={category.color}
+                link={category._id}
+              />
+            );
+          })}
         </div>
         <div className={styles.subLogo}>
           <div className={styles.sondekaTitle}>
@@ -57,7 +72,6 @@ export default function Index({ data }) {
           <div className={styles.socialsTitle}>CHECK OUR SOCIALS OUT</div>
           <SocialsButton />
         </div>
-        {/* <Categories /> */}
       </div>
     </div>
   );

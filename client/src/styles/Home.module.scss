@@ -19,8 +19,8 @@
 
   @media (max-width: 1441px) {
     padding-top: 28px;
-    padding-right: 64px;    
-    padding-left: 164px;    
+    padding-right: 64px;
+    padding-left: 164px;
   }
 }
 
@@ -51,7 +51,7 @@
 }
 
 .countdownContainer {
-  padding-top: 380px;    
+  padding-top: 380px;
   padding-bottom: 380px;
   width: 100%;
   display: flex;
@@ -60,8 +60,8 @@
   align-items: center;
 
   @media (max-width: 1441px) {
-    padding-top: 300px;    
-    padding-bottom: 300px;    
+    padding-top: 300px;
+    padding-bottom: 300px;
   }
 
 }
@@ -77,22 +77,22 @@
   color: #3C3C3C;
 
   @media (max-width: 1441px) {
-    font-size: 40px;    
+    font-size: 40px;
   }
 }
 
-.subLogo{
+.subLogo {
   width: 100%;
   padding: 32px 0;
   display: flex;
   justify-content: center;
-  border-top: solid 2px black; 
-  border-bottom: solid 2px black; 
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
 }
 
-.sondekaTitle{
+.sondekaTitle {
   color: #FFCD00;
-  font-family: 'UKNumberPlate'; 
+  font-family: 'UKNumberPlate';
   font-size: 48px;
 
   @media (max-width: 450px) {
@@ -101,8 +101,8 @@
     align-items: center;
     gap: 16px;
   }
-  
-  span{
+
+  span {
     color: #292929;
     font-family: 'Graphik LCG';
     font-size: 32px;
@@ -114,7 +114,7 @@
   }
 }
 
-.footerLayer1{
+.footerLayer1 {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -122,11 +122,11 @@
   font-size: 30px;
   gap: 72px;
 
-  p{
+  p {
     transition: all 1.5s;
   }
-  
-  p:hover{
+
+  p:hover {
     text-decoration: underline;
   }
 
@@ -138,22 +138,37 @@
   }
 }
 
-.socials{
+.socials {
   width: 100vw;
   border-top: solid 2px black;
   padding: 48px 16px;
 }
 
-.socialsTitle{
+.socialsTitle {
   text-align: center;
   color: #292929;
   font-family: 'Graphik LCG';
   font-size: 32px;
   font-weight: 300;
   margin-bottom: 48px;
-  
+
   @media (max-width: 450px) {
     font-size: 28px;
-    font-weight: 500;    
+    font-weight: 500;
   }
+}
+
+.categories {
+  width: 100vw;
+  padding-top: 80px;
+  padding-bottom: 160px;
+}
+
+.categoriesTitle {
+  text-align: center;
+  color: #292929;
+  font-family: 'Graphik LCG';
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 80px;
 }
