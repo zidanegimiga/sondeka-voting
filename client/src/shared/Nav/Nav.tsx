@@ -49,9 +49,9 @@ const Nav = () => {
             <div className={styles.centerItem}>
               <Link href={"/"}> HOME </Link>
             </div>
-            <div className={styles.centerItem}>
+            {/* <div className={styles.centerItem}>
               <Link href={"#"}> NOMINEES </Link>
-            </div>
+            </div> */}
             <div className={styles.centerItem}>
               <Link href={"#categories"}> CATEGORIES </Link>
             </div>
