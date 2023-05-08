@@ -37,14 +37,22 @@
   
   .titleContainer {
     width: 40%;
-    font-family: 'Graphik LCG - regular';
-    line-height: 130%;
-    text-align: left;
-    letter-spacing: 0.21em;
-    color: #1E1E1E;
+    h2{
+      font-family: 'Graphik LCG - regular';
+      line-height: 130%;
+      text-align: left;
+      letter-spacing: 0.21em;
+      color: #1E1E1E;
+
+      @media (max-width: 1025px) {
+        line-height: 150%;
+      }
+      @media (max-width: 426px) {
+        font-size: 24px;
+      }
+    }
 
     @media (max-width: 1025px) {
-      line-height: 150%;
       width: 50%      
     }
 
@@ -54,10 +62,6 @@
 
     @media (max-width: 426px) {
       width: auto;
-      
-      h1{
-        font-size: 24px;
-      }
     }
   }
   
