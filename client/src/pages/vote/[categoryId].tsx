@@ -6,7 +6,6 @@ import Nav from 'shared/Nav'
 import VotingForm from 'features/Vote/VotingForm'
 
 const VotingCategory = ({category}) => {
-  console.log("Category: ", category)
   return (
     <div className={styles.homeWrapper}>
       <Head>
@@ -15,7 +14,7 @@ const VotingCategory = ({category}) => {
       <div className={styles.pageWrapper}>
         <Nav/>
         <Hero />
-        <VotingForm data={category}/>        
+        <VotingForm categoryData={category}/>        
       </div>
     </div>
   )

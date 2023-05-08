@@ -1,0 +1,134 @@
+.accordionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 999px;
+    background-position: left;
+    background-size: 320px;
+    background-repeat: no-repeat;
+    padding-left: 380px;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+
+    @media (max-width: 1025px) {
+      padding-left: 320px;      
+    }
+
+    @media (max-width: 1025px) {
+      padding-left: 200px;      
+    }
+
+    @media (max-width: 769px) {
+      padding-left: 32px;
+      padding-right: 32px;      
+    }
+
+    @media (max-width: 426px) {
+      padding-left: 16px;
+      padding-right: 40px;      
+    }
+  }
+  
+  .accordionActive{
+    .downIconWrapper{
+      transform: rotate(180deg);
+    }
+  }
+  
+  .titleContainer {
+    width: 40%;
+    font-family: 'Graphik LCG - regular';
+    line-height: 130%;
+    text-align: left;
+    letter-spacing: 0.21em;
+    color: #1E1E1E;
+
+    @media (max-width: 1025px) {
+      line-height: 150%;
+      width: 50%      
+    }
+
+    @media (max-width: 769px) {
+      width: 80%;      
+    }
+
+    @media (max-width: 426px) {
+      width: auto;
+      
+      h1{
+        font-size: 24px;
+      }
+    }
+  }
+  
+  .arrowContainer{
+    width: 20%;
+
+    @media (max-width: 1025px) {
+      width: 10%;      
+    }
+  }
+  
+  .downIconWrapper{
+    width: 48px;
+    height: 48px;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .active{
+    display: block;
+    margin-top: 24px;
+  }
+  
+  .content{
+    display: none
+  }
+  
+  .categoryDescription{
+    text-align: left;
+    font-family: 'Cabin';
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px
+  }
+  
+  .voteCTA{
+    background-color: #fff;
+    border: #1E1E1E solid 1px;
+    display: flex;
+    align-items: center;
+    font-family: 'Cabin';
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 24px;
+  
+    &:hover{
+      .iconWrapper{
+        background-color: #3C3C3C;
+        
+        .iconContainer{
+          transform: rotate(45deg);
+          transition: all .5s ease-in-out;
+        }
+      }
+    }
+  }
+  
+  .textContainer{
+    padding: 24px 20px;
+    text-align: center;
+    width: 100%
+  }
+  
+  .iconContainer{
+    transition: all .5s ease-in-out;
+  }
+  
+  .iconWrapper{
+    padding: 16px;
+    border-right: #1E1E1E solid 1px;
+    transition: all .5s ease-in-out;
+  }
+  

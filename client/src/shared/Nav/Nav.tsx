@@ -1,4 +1,3 @@
-import Logo from "features/svgIcons/logoBlack";
 import LogoWhite from "features/svgIcons/LogoWhite";
 import Menu from "features/svgIcons/menu";
 import styles from "./Nav.module.scss";
@@ -7,32 +6,32 @@ import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import Close from "features/svgIcons/close";
 import { AuthContext } from "admin-auth-context";
-import { useSession, getSession } from "next-auth/react"
-import { signOut } from "next-auth/react"
-import type { UserData } from "types/userData";
+import { useSession, getSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 const Nav = () => {
   const [options, showOptions] = useState(false);
-  const [loading, setLoading] = useState(null)
-  const [admin, setAdmin] = useState(true);
-  const { token, logout, isAdminAuthenticated } = useContext(AuthContext);
+  const [loading, setLoading] = useState(null);
+  const { logout, isAdminAuthenticated } = useContext(AuthContext);
 
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
 
   const router = useRouter();
-  
-  async function logoutAdmin() {
-    try{
-      setLoading(true)
-      const response = await fetch("http://localhost:3500/admin/authentication/logout", {
-        method: "GET"
-      });
-      console.log("Logout Admin: ", response)
 
-    } catch (err){
-      console.error(err)
+  async function logoutAdmin() {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        "https://sondeka-voting-api.cyclic.app//admin/authentication/logout",
+        {
+          method: "GET",
+        }
+      );
+      console.log("Logout Admin: ", response);
+    } catch (err) {
+      console.error(err);
     }
-    logout()
+    logout();
     router.push("/");
     showOptions(false);
   }
@@ -46,16 +45,20 @@ const Nav = () => {
               <LogoWhite />
             </div>
           </Link>
-          {/* <div className={styles.title}>
-            50ND3KA <span> | AWARDS 2023</span>
-          </div> */}
           <div className={styles.centerItems}>
-            <div className={styles.centerItem}><Link href={'dd'}>  HOME </Link></div>
-            <div className={styles.centerItem}><Link href={'dd'}>  NOMINEES </Link></div>
-            <div className={styles.centerItem}><Link href={'dd'}>  CATEGORIES </Link></div>
-            <div className={styles.centerItem}><Link href={'dd'}>  SONDEKA.ORG </Link></div>
+            <div className={styles.centerItem}>
+              <Link href={"/"}> HOME </Link>
+            </div>
+            <div className={styles.centerItem}>
+              <Link href={"#"}> NOMINEES </Link>
+            </div>
+            <div className={styles.centerItem}>
+              <Link href={"#"}> CATEGORIES </Link>
+            </div>
+            <div className={styles.centerItem}>
+              <a href="https://www.sondeka.org" target="blank" style={{textDecoration: "none"}}> SONDEKA.ORG </a>
+            </div>
           </div>
-          {/* <>{session.user.name}</> */}
           <div
             className={styles.menuBtn}
             onClick={() => {
@@ -73,6 +76,14 @@ const Nav = () => {
                 <div className={styles.navLink}>
                   <Link href={"/"}>Home</Link>
                 </div>
+                <div className={styles.mobileNavLinks}>
+                  <div className={styles.navLink}>
+                    <Link href={"#"}>Nominees</Link>
+                  </div>
+                  <div className={styles.navLink}>
+                    <Link href={"/#"}>Categories</Link>
+                  </div>
+                </div>
                 <div className={styles.navLink}>
                   <Link href={"/signup"}>Sign Up</Link>
                 </div>
@@ -86,15 +97,29 @@ const Nav = () => {
                 <div className={styles.navLink}>
                   <Link href={"/"}>Home</Link>
                 </div>
-                <div className={styles.navLink} onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}>
+                <div
+                  className={styles.navLink}
+                  onClick={() =>
+                    signOut({ callbackUrl: "http://localhost:3000/" })
+                  }
+                >
                   <div>Log Out</div>
                 </div>
               </>
             )}
             {isAdminAuthenticated && (
               <>
-                <hr/>
-                <p style={{textAlign: "center", fontFamily: "GraphiK LCG", color: "#FFCD00"}}> Admin Actions</p>
+                <hr />
+                <p
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "GraphiK LCG",
+                    color: "#FFCD00",
+                  }}
+                >
+                  {" "}
+                  Admin Actions
+                </p>
                 <div className={styles.navLink}>
                   <Link href={"/admin/dashboard"}>Dashboard</Link>
                 </div>
@@ -107,7 +132,13 @@ const Nav = () => {
                 <div className={styles.navLink}>
                   <Link href={"/admin/voters"}>Nominees</Link>
                 </div>
-                <div className={styles.navLink} onClick={() => {logoutAdmin(); showOptions(false)}}>
+                <div
+                  className={styles.navLink}
+                  onClick={() => {
+                    logoutAdmin();
+                    showOptions(false);
+                  }}
+                >
                   <div>Log Out</div>
                 </div>
               </>

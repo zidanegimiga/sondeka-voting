@@ -6,6 +6,7 @@ import NextNProgress from "nextjs-progressbar";
 import "../styles/app.scss";
 import { Analytics } from "@vercel/analytics/react";
 import { SessionProvider } from "next-auth/react";
+import Cursor from "shared/Cursor";
 
 const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
