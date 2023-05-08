@@ -165,3 +165,7 @@
 20230405	16:59:29	d67f3e9a-5c28-42f8-ba82-9e19645ec08a	GET	/admin/categories/allCategories	undefined
 20230405	16:59:46	085a5a45-d96f-46c7-9271-a7da8f5ecf6e	GET	/admin/authentication/logout	undefined
 20230405	16:59:55	28129303-73fe-4ff4-8b46-d9bcfa01f46b	GET	/admin/categories/allCategories	undefined
+20230504	09:33:10	3fea5f84-32df-40a9-87f6-09f22a4bc5d4	GET	/	undefined
+20230504	09:33:10	c0a9628f-bdf0-4892-86cf-413ed2cbf53d	GET	/css/style.css	undefined
+20230504	09:33:11	a81b94d9-d0d1-4bb0-a89a-6eaeab550b08	GET	/favicon.ico	undefined
+20230504	09:33:11	78ed41b3-db1e-43bd-b411-0120214b4a41	GET	/	undefined

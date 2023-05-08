@@ -2,106 +2,170 @@
     width: 100vw;
     padding-top: 240px;
     overflow-x: hidden;
-    
+
     @media (max-width: 1441px) {
-        padding-top: 200px;        
+        padding-top: 160px;
     }
 
     @media (max-width: 1025px) {
         padding-top: 180px;
     }
+
+    @media (max-width: 450px) {
+        padding-top: 120px;
+    }
 }
 
-.layer1{
+.layer1 {
     position: relative;
     display: flex;
     font-family: 'UKNumberPlate';
     font-size: 200px;
-
-    @media (max-width: 1441px) {
-        font-size: 160px;       
-    }
-
-    @media (max-width: 1025px) {
-        font-size: 120px;       
-    }
-}
-
-.strokedText{
-  -webkit-text-fill-color: white; 
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: '#4e4e4e';
-}
-
-.layer1Left{
     margin-left: -124px;
-    margin-right: 64px;
+
+    @media (max-width: 1701px) {
+        margin-left: -0px;
+        font-size: 100px;
+    }
 
     @media (max-width: 1025px) {
-        margin-left: -56px;  
-        margin-right: 32px;             
+        font-size: 100px;
+        margin-left: -56px;
+        margin-right: 32px;
     }
+
+    @media (max-width: 895px) {
+        font-size: 64px;
+        margin-left: -3px;
+        margin-right: 0px;
+    }
+    @media (max-width: 500px) {
+        font-size: 64px;
+        margin-left: -200px;
+        margin-right: 0px;
+    }
+    @media (max-width: 450px) {
+        display: none;
+    }
+    
 }
 
-.layer1Main{
+.strokedText {
+    -webkit-text-fill-color: #e4e4e4;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #b3b3b3;
+}
+
+.layer1Left {
+    margin-right: 64px;
+}
+
+.layer1Main {
     text-align: right;
     margin-right: 64px;
+
     @media (max-width: 1025px) {
         margin-right: 40px;
     }
 }
 
-.layer1Element{
+.layer1Element {
     margin-right: 64px;
-    @media (max-width: 1025px) {
+
+    @media (max-width: 1701px) {
         transform: scale(70%) translateY(-16%);
-        margin-right: 20px;
+        margin-right: 24px;
+        margin-left: -40px;
+    }
+    @media (max-width: 895px) {
+        transform: scale(50%) translateY(-56%);
     }
 }
 
-.layer1Right{
-}
+.layer1Right {}
 
 
 // ---------------------------------------
 
-.layer2{
+.layer2 {
     display: flex;
     font-family: 'UKNumberPlate';
     font-size: 200px;
     align-items: center;
     margin-left: -440px;
 
-    @media (max-width: 1441px) {
-        font-size: 160px;       
+    @media (max-width: 1701px) {
+        font-size: 100px;
+        margin-left: -200px;
+        margin-top: -40px;
     }
 
     @media (max-width: 1025px) {
-        font-size: 120px;
+        font-size: 100px;
         line-height: 10%;
         margin-left: -280px;
-        margin-top: -40px;       
+    }
+
+    @media (max-width: 895px) {
+        font-size: 64px;
+        margin-left: -200px;
+        margin-top: -80px;
+    }
+
+    @media (max-width: 450px) {
+        display: none;
     }
 }
 
-.layer2Left{
+.layer2Left {
     margin-right: 56px;
+
+    @media (max-width: 500px) {
+        margin-right: -28px;
+    }
+    @media (max-width: 426px) {
+        margin-right: 0px;
+    }
 }
 
 
-.layer2Description{
+.layer2Description {
     font-size: 32px;
     text-align: right;
-    font-family: 'Graphik LCG';
+    font-family: 'Graphik LCG - medium';
     color: #FFCD00;
     line-height: 110%;
 
+    mark {
+        -webkit-animation: 4.5s highlight 1.5s 1 normal forwards;
+        animation: 4.5s highlight 1.5s 1 normal forwards;
+        background-color: none;
+        background: linear-gradient(90deg, #FFCD00 50%, rgba(255, 255, 255, 0) 50%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+    }
+
+    @media (max-width: 1701px) {
+        font-size: 20px;
+    }
+
     @media (max-width: 1025px) {
-        font-size: 20px;        
+        font-size: 20px;
+    }
+    @media (max-width: 800px) {
+        font-size: 16px;
+    }
+    @media (max-width: 500px) {
+        font-size: 14px;
+        line-height: 100%;
+    }
+    @media (max-width: 426px) {
+        font-size: 10px;
+        line-height: 90%;
     }
 }
 
-.layer2Main{
+.layer2Main {
     margin-right: 40px;
     margin-left: 56px;
 
@@ -111,40 +175,123 @@
     }
 }
 
-.layer2Right{
+.layer2Right {
     width: 1%;
 }
 
 
 // ---------------------------------------
 
-.layer3{
+.layer3 {
     display: flex;
     font-family: 'UKNumberPlate';
     font-size: 200px;
     align-items: center;
     margin-left: -320px;
 
-    @media (max-width: 1441px) {
-        font-size: 160px;
-        margin-left: -280px;       
+    @media (max-width: 1701px) {
+        font-size: 100px;
+        margin-left: -120px;
     }
 
     @media (max-width: 1025px) {
-        font-size: 120px;       
+        font-size: 100px;
+    }
+
+    @media (max-width: 895px) {
+        font-size: 64px;
+        margin-left: -40px;
+        margin-top: -24px;
+    }
+    @media (max-width: 665px) {
+        margin-left: -30px;
+        margin-top: -8px;
+    }
+    @media (max-width: 450px) {
+        display: none;
     }
 }
 
-.layer3Left{
+.layer3Left {
     margin-right: 72px;
+
+    @media (max-width: 1701px) {
+        margin-right: 10px;
+    }
+
+    @media (max-width: 1026px) {
+        margin-right: 16px;
+    }
+
+    @media (max-width: 665px) {
+        margin-left: -80px;
+    }
+    @media (max-width: 500px) {
+        margin-right: 8px;
+        margin-left: -360px;
+    }
 }
 
-.layer3Element{
+.layer3Element {
     margin-right: 48px;
 
-    @media (max-width: 1025px) {
-        transform: scale(80%) translateY(0%);
+    @media (max-width: 1701px) {
+        transform: scale(70%) translateY(0%);
+        margin-right: 20px;
+    }
+    @media (max-width: 895px) {
+        transform: scale(50%) translateY(0%);
         margin-right: 20px;
     }
 }
 
+.layer3Right {
+    display: none;
+
+    @media (max-width: 1441px) {
+        display: inline;
+        margin-left: 40px;
+    }
+
+    @media (max-width: 1254px) {
+        display: none;
+    }    
+}
+
+.heroMobile{
+    display: none;
+    font-family: 'UKNumberPlate';
+    font-weight: 400;
+    font-size: 2.5rem;
+    line-height: 100%;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+
+    @media (max-width: 450px) {
+        display: inline-block;
+    }
+
+    @media (max-width: 320px) {
+        font-size: 2rem;
+    }
+}
+
+.layer3MobileElement{
+    transform: scale(80%);
+}
+
+
+// --------------------------------------------------------------Animations---------------------------------------------------------------------------
+
+@-webkit-keyframes highlight {
+    to {
+        background-position: 0 0;
+    }
+}
+
+@keyframes highlight {
+    to {
+        background-position: 0 0;
+    }
+}

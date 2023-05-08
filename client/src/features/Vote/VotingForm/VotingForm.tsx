@@ -2,27 +2,45 @@ import styles from "./VotingForm.module.scss";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/dist/client/link";
+import { useSession, getSession } from "next-auth/react";
 
-const VotingForm = ({ data }) => {
+const VotingForm = ({ categoryData }) => {
   const [nominees, setNominees] = useState<any>();
   const [selectedNomineeId, setSelectedNomineeId] = useState("");
-  const [voteId, setVoterId] = useState("");
+  const [voterId, setVoterId] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState<any>();
   const [jwt, setJWT] = useState("");
   const [formData, setFormData] = useState({
-    categoryId: data._id,
+    categoryId: categoryData._id,
     nomineeId: "",
     voterId: "",
   });
-  const [notloggedIn, setNotLoggedIn] = useState(false);
+
+  const { data: session, status } = useSession();
   const [nullData, setNullData] = useState(false);
 
   useEffect(() => {
+    async function getUserId(name){
+      try{
+        const response = await fetch(`https://sondeka-voting-api.cyclic.app/getUserId/${encodeURIComponent(name)}`);
+        const userId = await response.json();
+        if(response.ok){
+          setVoterId(userId);
+          window.localStorage.setItem('userId', userId)          
+        }else {
+          console.error(userId.message);
+        }       
+      } catch(err){
+        console.error(err)
+      }
+    }
+
+    getUserId(session?.user?.name)
     async function getNominees() {
       try {
         const response = await fetch(
-          `https://sondeka-voting-api.cyclic.app/admin/categories/${data?._id}/nominees`
+          `https://sondeka-voting-api.cyclic.app/admin/categories/${categoryData?._id}/nominees`
         );
         const nomineeData = await response.json();
         setNominees(nomineeData);
@@ -31,14 +49,12 @@ const VotingForm = ({ data }) => {
       }
     }
 
-    if (data.length > 0) {
+    if (categoryData.length > 0) {
       getNominees();
       const token = window.localStorage.getItem("token");
-      if (token === null || undefined) {
-        setNotLoggedIn(true);
-      }
+
       setJWT(token);
-      const vId = window.localStorage.getItem("id");
+      const vId = window.localStorage.getItem("userId");
       setFormData({
         ...formData,
         voterId: vId,
@@ -84,9 +100,10 @@ const VotingForm = ({ data }) => {
     return (
       <>
         <div className={styles.votingFormWrapper}>
-          <h3>{data?.name}</h3>
-          <p>{data?.description}</p>
+          <h3>{categoryData?.name}</h3>
+          <p>{categoryData?.description}</p>
           <h3>Nominees</h3>
+          {voterId && <p>User ID: {voterId}</p>}
           <p style={{textAlign: "center", fontWeight: "bold", backgroundColor: "#FFCD00", marginTop: "32px", padding: "10px"}}>Wait for voting lines to open to be able to cast your vote</p>
 
           {nullData === false && (
@@ -100,7 +117,7 @@ const VotingForm = ({ data }) => {
                     name="nomineeId"
                     value={nominee._id}
                     onChange={(event) => handleInputChange(event)}
-                    disabled={notloggedIn}
+                    disabled={status === "unauthenticated"}
                     className={styles.radio}
                   />
                   <label htmlFor={nominee._id}>{nominee.name}</label>
@@ -108,13 +125,13 @@ const VotingForm = ({ data }) => {
               ))}
 
               <div className={styles.btnContainer}>
-                <button className={styles.button} type="submit">
+                <button className={styles.button} type="submit" disabled={status==="unauthenticated"}>
                   {loading ? "Submitting" : "Submit"}
                 </button>
               </div>
             </form>
           )}
-          {notloggedIn && (
+          {status === "unauthenticated" && (
             <div className={styles.responseMessageE}>
               You need to{" "}
               <Link href={"/login"}>

@@ -1,6 +1,10 @@
 .PageWrapper{
     overflow-x: hidden;
-    padding-top: 72px;
+    padding-top: 120px;
+
+    @media (max-width: 1441px) {
+        padding-top: 80px;        
+    }
 }
 
 .pageContent{

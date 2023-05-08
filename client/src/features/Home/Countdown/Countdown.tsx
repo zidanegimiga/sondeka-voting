@@ -11,7 +11,7 @@ const Countdown = () => {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const target = new Date("4/29/2023 23:59:59");
+    const target = new Date("5/29/2023 23:59:59");
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -40,7 +40,6 @@ const Countdown = () => {
   }, []);
   return (
     <>
-      <div className={styles.title}>VOTING BEGINS IN</div>
       {votingTime ? (
         <>
           <h1>Voting Lines Open!</h1>

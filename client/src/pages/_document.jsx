@@ -10,6 +10,11 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+        <style>{`
+            :root {
+              --d: 0.25s;
+            }
+          `}</style>
           <meta property="og:type" content="website" key="og-type" />
           <meta property="og:url" content="vote.sondeka.org" key="og-url" />
           <meta property="og:title" content="Voting Sondeka" key="og-title" />
@@ -24,6 +29,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap"
             rel="stylesheet"
           ></link>
+          <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet"></link>
         </Head>
         <body>
           <Main />

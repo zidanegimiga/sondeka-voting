@@ -1,5 +1,5 @@
 .pageWrapper {
-  background-color: #FFF;
+  background-color: #e4e4e4;
   width: 100vw;
   min-height: 100vh;
   position: relative;
@@ -16,12 +16,25 @@
   padding-top: 120px;
   padding-left: 196px;
   padding-right: 80px;
+
+  @media (max-width: 1441px) {
+    padding-top: 28px;
+    padding-right: 64px;
+    padding-left: 164px;
+  }
 }
 
 .iconWrapper {
-  background-color: black;
+  background-color: #292929;
   border-radius: 50%;
-  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+
+  @media (max-width: 1441px) {
+    transform: scale(80%);
+  }
 }
 
 .scrollText {
@@ -38,12 +51,18 @@
 }
 
 .countdownContainer {
-  margin-top: 300px;
+  padding-top: 380px;
+  padding-bottom: 380px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 1441px) {
+    padding-top: 300px;
+    padding-bottom: 300px;
+  }
 
 }
 
@@ -56,18 +75,100 @@
   text-align: center;
   letter-spacing: 0.15em;
   color: #3C3C3C;
+
+  @media (max-width: 1441px) {
+    font-size: 40px;
+  }
 }
 
-.subLogo{
+.subLogo {
   width: 100%;
   padding: 32px 0;
   display: flex;
   justify-content: center;
-  border-top: solid 2px black; 
-  border-bottom: solid 2px black; 
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
 }
 
-.sondekaTitle{
+.sondekaTitle {
   color: #FFCD00;
-  font-family: '';  
+  font-family: 'UKNumberPlate';
+  font-size: 48px;
+
+  @media (max-width: 450px) {
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  span {
+    color: #292929;
+    font-family: 'Graphik LCG';
+    font-size: 32px;
+    font-weight: 300;
+
+    @media (max-width: 450px) {
+      font-size: 20px;
+    }
+  }
+}
+
+.footerLayer1 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-family: 'Cabin';
+  font-size: 30px;
+  gap: 72px;
+
+  p {
+    transition: all 1.5s;
+  }
+
+  p:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    font-size: 16px;
+  }
+}
+
+.socials {
+  width: 100vw;
+  border-top: solid 2px black;
+  padding: 48px 16px;
+}
+
+.socialsTitle {
+  text-align: center;
+  color: #292929;
+  font-family: 'Graphik LCG';
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 48px;
+
+  @media (max-width: 450px) {
+    font-size: 28px;
+    font-weight: 500;
+  }
+}
+
+.categories {
+  width: 100vw;
+  padding-top: 80px;
+  padding-bottom: 160px;
+}
+
+.categoriesTitle {
+  text-align: center;
+  color: #292929;
+  font-family: 'Graphik LCG';
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 80px;
 }
