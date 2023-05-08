@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 import { ButtonIcon, DownCircle } from "features/svgIcons/CategoryIcons";
 import styles from "./CategoryItem.module.scss";
-import { Collapse } from "react-collapse"
 import Link from "next/link";
 
-const CategoryItem = ({ title, description, backgroundImage, color, link}) => {
+const CategoryItem = ({ title, description, poster, color, link}) => {
   const [hover, setHover] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
-  const [backgroundPhoto, setBackgroundPhoto] = React.useState("");
+  const [backgroundPhoto, setBackgroundPhoto] = React.useState(`url(/categories/${poster}.png)`);
 
   useEffect(()=>{
     if(window.innerWidth < 769){
       setBackgroundPhoto("none")
     } else{
-      setBackgroundPhoto(backgroundImage)
+      setBackgroundPhoto(poster)
     }
   }, [])
 
@@ -25,7 +24,7 @@ const CategoryItem = ({ title, description, backgroundImage, color, link}) => {
             ? styles.accordionItem + " " + styles.accordionActive
             : styles.accordionItem
         }
-        style={{ backgroundImage: `${backgroundPhoto}`, backgroundColor: `${color}` }}
+        style={{ backgroundColor: `${color}`, backgroundImage: backgroundPhoto }}
         onClick={() => setExpanded(!expanded)}
       >
         <div className={styles.titleContainer}>

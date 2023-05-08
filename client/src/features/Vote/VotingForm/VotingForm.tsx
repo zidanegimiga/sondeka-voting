@@ -20,13 +20,6 @@ const VotingForm = ({ categoryData }) => {
   const { data: session, status } = useSession();
   const [nullData, setNullData] = useState(false);
 
-  console.log("SESSION DATA: ", session?.user?.name)
-
-  // if(status === "authenticated"){
-  //   try{
-  //     const response = await
-  //   }
-  // }
   useEffect(() => {
     async function getUserId(name){
       try{
@@ -39,6 +32,7 @@ const VotingForm = ({ categoryData }) => {
       }
     }
 
+    getUserId(session?.user?.name)
     async function getNominees() {
       try {
         const response = await fetch(

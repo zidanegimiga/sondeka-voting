@@ -40,7 +40,7 @@ export default function Index({data}) {
                 key={index}
                 title={category.name}
                 description={category.description}
-                backgroundImage={category.poster}
+                poster={category.poster}
                 color={category.color}
                 link={category._id}
               />
