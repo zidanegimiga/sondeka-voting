@@ -7,7 +7,7 @@ import { useSession, getSession } from "next-auth/react";
 const VotingForm = ({ categoryData }) => {
   const [nominees, setNominees] = useState<any>();
   const [selectedNomineeId, setSelectedNomineeId] = useState("");
-  const [voteId, setVoterId] = useState("");
+  const [voterId, setVoterId] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState<any>();
   const [jwt, setJWT] = useState("");
@@ -23,10 +23,14 @@ const VotingForm = ({ categoryData }) => {
   useEffect(() => {
     async function getUserId(name){
       try{
-        const response = await fetch(`https://sondeka-voting-api.cyclic.app/getUserId/${name}`);
+        const response = await fetch(`https://sondeka-voting-api.cyclic.app/getUserId/${encodeURIComponent(name)}`);
         const userId = await response.json();
-        window.localStorage.setItem('userId', userId)
-        setVoterId(userId)        
+        if(response.ok){
+          setVoterId(userId);
+          window.localStorage.setItem('userId', userId)          
+        }else {
+          console.error(userId.message);
+        }       
       } catch(err){
         console.error(err)
       }
@@ -50,7 +54,7 @@ const VotingForm = ({ categoryData }) => {
       const token = window.localStorage.getItem("token");
 
       setJWT(token);
-      const vId = window.localStorage.getItem("id");
+      const vId = window.localStorage.getItem("userId");
       setFormData({
         ...formData,
         voterId: vId,
@@ -99,6 +103,7 @@ const VotingForm = ({ categoryData }) => {
           <h3>{categoryData?.name}</h3>
           <p>{categoryData?.description}</p>
           <h3>Nominees</h3>
+          {voterId && <p>User ID: {voterId}</p>}
           <p style={{textAlign: "center", fontWeight: "bold", backgroundColor: "#FFCD00", marginTop: "32px", padding: "10px"}}>Wait for voting lines to open to be able to cast your vote</p>
 
           {nullData === false && (
