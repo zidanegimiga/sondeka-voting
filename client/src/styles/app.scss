@@ -25,12 +25,6 @@
   src: url('../../public/fonts/GraphikLCG-Bold.ttf');
   font-weight: 700;
 }
-
-@font-face {
-  font-family: "Graphik LCG";
-  src: url('../../public/fonts/GraphikLCG-Bold.ttf');
-  font-weight: 700;
-}
   
 @font-face {
   font-family: "UKNumberPlate";
@@ -47,6 +41,11 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar{
+    width: 2px;
+  }
 }
 
 // html {
