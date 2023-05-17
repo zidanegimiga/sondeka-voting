@@ -27,10 +27,9 @@ const VotingForm = ({ categoryData }) => {
     async function getUserId(name) {
       try {
         const response = await fetch(
-          `https://sondeka-voting-api.cyclic.app/users/${encodeURIComponent(
-            name
-          )}`
+          `https://sondeka-voting-api.cyclic.app/users/${encodeURIComponent(name)}`
         );
+
         const userId = await response.json();
 
         if (response.ok) {
