@@ -7,6 +7,7 @@ import Countdown from "../Countdown";
 import { useRouter } from "next/router";
 import LogoElement from "features/svgIcons/sondekaElement";
 import Layer3Element from "features/svgIcons/layer3Element";
+import { motion } from 'framer-motion'
 
 const Hero = () => {
   const [height, setHeight] = useState<number>();
@@ -22,7 +23,7 @@ const Hero = () => {
       {/* {
         router.pathname === '/' && <Countdown/>
       }*/}
-      <div className={styles.layer1}>
+      <motion.div className={styles.layer1} initial={{x: 250}} animate={{x: 0}} transition={{duration: 2.5}}>
         
         <div className={styles["strokedText"] + " " + styles["layer1Left"]}>
           {" "}
@@ -39,9 +40,9 @@ const Hero = () => {
         <div className={styles.strokedText + " " + styles["layer3Right"]}>
           SOND3KA
         </div>        
-      </div>
+      </motion.div>
 
-      <div className={styles.layer2}>
+      <motion.div className={styles.layer2}>
         <div className={styles["strokedText"] + " " + styles.layer2Left}>
           AWARDS
         </div>
@@ -57,9 +58,9 @@ const Hero = () => {
         <div className={styles["strokedText"] + " " + styles.layer2Right}>
           SONDEKA
         </div>
-      </div>
+      </motion.div>
 
-      <div className={styles.layer3}>
+      <motion.div className={styles.layer3} initial={{x: -250}} animate={{x: 0}} transition={{duration: 2.5}}>
         <div className={styles.strokedText + " " + styles.layer3Left}>
           SOND3KA 2023
         </div>
@@ -71,7 +72,7 @@ const Hero = () => {
         <div className={styles.strokedText + " " + styles["layer3Right"]}>
           SOND3KA
         </div>
-      </div>
+      </motion.div>
       <div className={styles.heroMobile}>
         <h1>Sond3ka</h1>
         <h1>Awards</h1>
