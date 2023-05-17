@@ -24,10 +24,19 @@
     li{
         line-height: 28px;
     }
+
+    @media (max-width: 426px) {
+        padding: 32px 16px;
+        flex-direction: column;        
+    }
 }
 
 .right{
     width: 70%;
+
+    @media (max-width: 426px) {
+        width: 100%;
+    }
 }
 
 .left{
@@ -35,6 +44,12 @@
     right: 5%;
     top: 20%;
     width: 20%;
+    
+    @media (max-width: 426px) {
+        width: 100%;
+        position: relative;
+        padding-left: 24px
+    }
 }
 
 .hr{
@@ -42,6 +57,9 @@
     right: 30%;
     top: 20%;
     height: 400px;
+    @media (max-width: 426px) {
+        display: none;
+    }
 }
 
 .NavWrapper{
