@@ -20,6 +20,9 @@ export default function LogInPage({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
+  const handleBack = () =>{
+    router.back()
+  }
 
   if (typeof window !== undefined) {
     return (
@@ -30,16 +33,22 @@ export default function LogInPage({
               <Logo />
             </div>
             <>
-              <div className={styles.heading}> LOG IN TO CONTINUE </div>
+              <div className={styles.heading}> Welcome</div>
+              <div className={styles.subTitle}>Log in with your Sondeka Account to continue</div>
               {Object.values(providers).map((provider) => (
-                <div key={provider.name}>
+                <div key={provider.name} className={styles.buttonsContainer}>
                   <button onClick={() => signIn(provider.id)} className={styles.googleButton}>
                     <div  className={styles.googleIconWrapper}><Google/></div>
-                    <div className={styles.googleButtonText}>Sign in with {provider.name}</div>
+                    <div className={styles.googleButtonText}>Continue with {provider.name}</div>
                   </button>
                 </div>
               ))}
             </>
+            <div className={styles.footer}>
+              <Link href={'/privacy'}><p>Privacy Policy</p> </Link>
+              <p>|</p>
+              <p onClick={handleBack}>Back</p>
+            </div>
           </div>
         </div>
       </div>
