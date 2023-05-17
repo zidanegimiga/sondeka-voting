@@ -44,8 +44,11 @@ body {
   scroll-behavior: smooth;
 
   &::-webkit-scrollbar{
-    width: 2px;
+    width: 0.2px;
   }
+}
+::-webkit-scrollbar{
+  width: 0.2px;
 }
 
 // html {

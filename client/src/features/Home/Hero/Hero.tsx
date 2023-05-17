@@ -73,13 +73,14 @@ const Hero = () => {
           SOND3KA
         </div>
       </motion.div>
-      <div className={styles.heroMobile}>
-        <h1>Sond3ka</h1>
-        <h1>Awards</h1>
-        <div className={styles.layer3Mobile}>
-        <h1>2023</h1><div className={styles.layer3MobileElement}><Layer3Element/></div>
-        </div>
-      </div>
+      <motion.div className={styles.heroMobile}>
+        <motion.h1 >Sond3ka</motion.h1>
+        <motion.h1 >Awards</motion.h1>
+        <motion.div className={styles.layer3Mobile} >
+        <motion.h1 >2023</motion.h1>
+        <motion.div className={styles.layer3MobileElement} initial={{ scale: 0.1, rotate: 180}} animate={{rotate: 0, scale: 1}} transition={{duration: 2.5}}><Layer3Element/></motion.div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
