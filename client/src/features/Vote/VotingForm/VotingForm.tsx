@@ -153,7 +153,7 @@ const VotingForm = ({ categoryData }) => {
           {status === "unauthenticated" && (
             <div className={styles.responseMessageE}>
               You need to{" "}
-              <Link href={"/login"}>
+              <Link href={"/oAuthLogin"}>
                 <span>log in</span>
               </Link>{" "}
               to vote
