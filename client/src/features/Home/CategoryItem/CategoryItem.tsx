@@ -3,7 +3,7 @@ import { ButtonIcon, DownCircle } from "features/svgIcons/CategoryIcons";
 import styles from "./CategoryItem.module.scss";
 import Link from "next/link";
 
-const CategoryItem = ({ title, description, poster, color, link}) => {
+const CategoryItem = ({ title, description, poster, link}) => {
   const [hover, setHover] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [backgroundPhoto, setBackgroundPhoto] = React.useState(`url(/categories/${poster}.png)`);
@@ -24,7 +24,7 @@ const CategoryItem = ({ title, description, poster, color, link}) => {
             ? styles.accordionItem + " " + styles.accordionActive
             : styles.accordionItem
         }
-        style={{ backgroundColor: `${color}`, backgroundImage: backgroundPhoto }}
+        style={{ backgroundColor: `#e4e4e4`, backgroundImage: backgroundPhoto }}
         onClick={() => setExpanded(!expanded)}
       >
         <div className={styles.titleContainer}>

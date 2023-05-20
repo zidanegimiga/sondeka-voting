@@ -41,7 +41,6 @@ export default function Index({data}) {
                 title={category.name}
                 description={category.description}
                 poster={category.poster}
-                color={category.color}
                 link={category._id}
               />
             );
