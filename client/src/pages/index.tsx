@@ -33,7 +33,7 @@ export default function Index({data}) {
           <Countdown />
         </div>
         <div className={styles.categories}>
-          <div className={styles.categoriesTitle}>CATEGORIES</div>
+          <div className={styles.categoriesTitle} id="categories">CATEGORIES</div>
           {data.map((category, index) => {
             return (
               <CategoryItem

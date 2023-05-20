@@ -7,6 +7,7 @@ import { useSession, getSession } from "next-auth/react";
 const VotingForm = ({ categoryData }) => {
   const [nominees, setNominees] = useState<any>();
   const [selectedNomineeId, setSelectedNomineeId] = useState("");
+  const [voterName, setVoterName] = useState("");
   const [voterId, setVoterId] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState<any>();
@@ -21,22 +22,28 @@ const VotingForm = ({ categoryData }) => {
   const [nullData, setNullData] = useState(false);
 
   useEffect(() => {
-    async function getUserId(name){
-      try{
-        const response = await fetch(`https://sondeka-voting-api.cyclic.app/getUserId/${encodeURIComponent(name)}`);
+    setVoterName(session?.user?.name);
+
+    async function getUserId(name) {
+      try {
+        const response = await fetch(
+          `https://sondeka-voting-api.cyclic.app/users/${encodeURIComponent(name)}`
+        );
+
         const userId = await response.json();
-        if(response.ok){
-          setVoterId(userId);
-          window.localStorage.setItem('userId', userId)          
-        }else {
+
+        if (response.ok) {
+          setVoterId(userId?.id);
+          window.localStorage.setItem("userId", userId);
+        } else {
           console.error(userId.message);
-        }       
-      } catch(err){
-        console.error(err)
+        }
+      } catch (err) {
+        console.error(err);
       }
     }
 
-    getUserId(session?.user?.name)
+    getUserId(voterName);
     async function getNominees() {
       try {
         const response = await fetch(
@@ -62,7 +69,7 @@ const VotingForm = ({ categoryData }) => {
     } else {
       setNullData(true);
     }
-  }, []);
+  }, [session]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -70,7 +77,6 @@ const VotingForm = ({ categoryData }) => {
       ...formData,
       [name]: value,
     });
-    console.log("Form: ", formData);
   };
 
   const handleSubmit = async (event) => {
@@ -103,8 +109,17 @@ const VotingForm = ({ categoryData }) => {
           <h3>{categoryData?.name}</h3>
           <p>{categoryData?.description}</p>
           <h3>Nominees</h3>
-          {voterId && <p>User ID: {voterId}</p>}
-          <p style={{textAlign: "center", fontWeight: "bold", backgroundColor: "#FFCD00", marginTop: "32px", padding: "10px"}}>Wait for voting lines to open to be able to cast your vote</p>
+          <p
+            style={{
+              textAlign: "center",
+              fontWeight: "bold",
+              backgroundColor: "#FFCD00",
+              marginTop: "32px",
+              padding: "10px",
+            }}
+          >
+            Wait for voting lines to open to be able to cast your vote
+          </p>
 
           {nullData === false && (
             <form onSubmit={handleSubmit}>
@@ -125,7 +140,11 @@ const VotingForm = ({ categoryData }) => {
               ))}
 
               <div className={styles.btnContainer}>
-                <button className={styles.button} type="submit" disabled={status==="unauthenticated"}>
+                <button
+                  className={styles.button}
+                  type="submit"
+                  disabled={status === "unauthenticated"}
+                >
                   {loading ? "Submitting" : "Submit"}
                 </button>
               </div>

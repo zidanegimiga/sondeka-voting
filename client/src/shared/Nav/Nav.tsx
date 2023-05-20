@@ -49,11 +49,11 @@ const Nav = () => {
             <div className={styles.centerItem}>
               <Link href={"/"}> HOME </Link>
             </div>
-            <div className={styles.centerItem}>
+            {/* <div className={styles.centerItem}>
               <Link href={"#"}> NOMINEES </Link>
-            </div>
+            </div> */}
             <div className={styles.centerItem}>
-              <Link href={"#"}> CATEGORIES </Link>
+              <Link href={"#categories"}> CATEGORIES </Link>
             </div>
             <div className={styles.centerItem}>
               <a href="https://www.sondeka.org" target="blank" style={{textDecoration: "none"}}> SONDEKA.ORG </a>

@@ -39,6 +39,13 @@
     }
     @media (max-width: 426px) {
         width: 90%;
+        right: 1%;
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+    @media (max-width: 321px) {
+        width: 80%;
+        right: 6%;
         padding-right: 16px;
         padding-left: 16px;
     }

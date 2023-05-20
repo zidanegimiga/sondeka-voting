@@ -160,15 +160,17 @@
 
 .categories {
   width: 100vw;
-  padding-top: 80px;
   padding-bottom: 160px;
 }
 
 .categoriesTitle {
-  text-align: center;
-  color: #292929;
   font-family: 'Graphik LCG';
-  font-size: 2.5rem;
-  font-weight: 300;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 130%;
+  text-align: center;
+  letter-spacing: 0.15em;
+  color: #3C3C3C; 
   margin-bottom: 80px;
 }

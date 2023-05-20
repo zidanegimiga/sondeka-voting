@@ -13,7 +13,7 @@ const VotingCategory = ({category}) => {
       </Head>
       <div className={styles.pageWrapper}>
         <Nav/>
-        <Hero />
+        {/* <Hero /> */}
         <VotingForm categoryData={category}/>        
       </div>
     </div>

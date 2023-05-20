@@ -1,9 +1,14 @@
 .pageWrapper {
-    background-color: #FFF;
+    background-color: #ebebeb;
     width: 100vw;
     min-height: 100vh;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 420px;
+
+    @media (max-width: 426px) {
+        padding-top: 400px;        
+    }
 }
