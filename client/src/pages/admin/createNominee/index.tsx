@@ -34,7 +34,7 @@ const CreateNominee = ({ data }) => {
   //submit the form
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const socialMedia = {instagram, twitter, facebook, other}
+    const socialMedia = {instagram, twitter, facebook, other: [other]}
     try {
       setLoading(true);
       const response = await fetch(
