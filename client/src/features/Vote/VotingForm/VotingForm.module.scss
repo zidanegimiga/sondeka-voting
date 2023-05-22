@@ -69,10 +69,13 @@
     font-family: 'Inter';
     cursor: pointer;
     border-radius: 8px;
+    width: 95%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
     
     &:hover{
         background-color: #f3f3f3;
         border-bottom: #f3f3f3;
+        border: none;
     }
 
     margin-bottom: 8px;
@@ -139,5 +142,53 @@
         color: #250F36;
         cursor: pointer;
         font-weight: 600;
+    }
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.centerPiece{
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 426px){
+        justify-content: center;
+    }
+}
+
+.viewProfile{
+    padding: 8px 16px;
+    border: 1.2px solid #0a0a0a;
+    width: 100%;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+
+    &:hover{
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+}
+
+.nomineeName{
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.labelBtnContainer{
+    margin-left: 16px;
+}
+
+.nomineeImage{
+    height: 100%;
+    width: 100px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 426px){
+        display: none;
     }
 }

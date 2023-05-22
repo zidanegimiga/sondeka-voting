@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/dist/client/link";
 import { useSession, getSession } from "next-auth/react";
 
-const VotingForm = ({ categoryData }) => {
+const VotingForm = ({ categoryData, openModal }) => {
   const [nominees, setNominees] = useState<any>();
   const [selectedNomineeId, setSelectedNomineeId] = useState("");
   const [voterName, setVoterName] = useState("");
@@ -15,7 +15,7 @@ const VotingForm = ({ categoryData }) => {
   const [formData, setFormData] = useState({
     categoryId: categoryData._id,
     nomineeId: "",
-    voterId: "",
+    voterId,
   });
 
   const { data: session, status } = useSession();
@@ -23,6 +23,7 @@ const VotingForm = ({ categoryData }) => {
 
   useEffect(() => {
     setVoterName(session?.user?.name);
+    console.log("Category: ", categoryData)
 
     async function getUserId(name) {
       try {
@@ -33,6 +34,7 @@ const VotingForm = ({ categoryData }) => {
         const userId = await response.json();
 
         if (response.ok) {
+          const id = userId?.id
           setVoterId(userId?.id);
           window.localStorage.setItem("userId", userId);
         } else {
@@ -43,24 +45,23 @@ const VotingForm = ({ categoryData }) => {
       }
     }
 
-    getUserId(voterName);
+    getUserId(voterName)
+
     async function getNominees() {
       try {
         const response = await fetch(
           `https://sondeka-voting-api.cyclic.app/admin/categories/${categoryData?._id}/nominees`
         );
         const nomineeData = await response.json();
+        console.log("Nominee Data: ", nomineeData)
         setNominees(nomineeData);
       } catch (error) {
         console.error(error);
       }
     }
 
-    if (categoryData.length > 0) {
+    if (categoryData.nominees.length > 0) {
       getNominees();
-      const token = window.localStorage.getItem("token");
-
-      setJWT(token);
       const vId = window.localStorage.getItem("userId");
       setFormData({
         ...formData,
@@ -109,7 +110,7 @@ const VotingForm = ({ categoryData }) => {
           <h3>{categoryData?.name}</h3>
           <p>{categoryData?.description}</p>
           <h3>Nominees</h3>
-          <p
+          {/* <p
             style={{
               textAlign: "center",
               fontWeight: "bold",
@@ -119,23 +120,37 @@ const VotingForm = ({ categoryData }) => {
             }}
           >
             Wait for voting lines to open to be able to cast your vote
-          </p>
+          </p> */}
 
           {nullData === false && (
             <form onSubmit={handleSubmit}>
-              <p>Please select a nominee:</p>
+              <p>Click on a nominee&apos;s name and submit your vote:</p>
               {nominees?.map((nominee) => (
-                <div key={nominee._id} className={styles.nomineeOption}>
-                  <input
-                    type="radio"
-                    id={nominee._id}
-                    name="nomineeId"
-                    value={nominee._id}
-                    onChange={(event) => handleInputChange(event)}
-                    disabled={status === "unauthenticated"}
-                    className={styles.radio}
-                  />
-                  <label htmlFor={nominee._id}>{nominee.name}</label>
+                <div key={nominee._id}>
+                  <div className={styles.nomineeOption}>
+                    <div className={styles.center}>
+                      <div className={styles.centerPiece}>
+                        <input
+                          type="radio"
+                          id={nominee._id}
+                          name="nomineeId"
+                          value={nominee._id}
+                          onChange={(event) => handleInputChange(event)}
+                          disabled={status === "unauthenticated"}
+                          className={styles.radio}
+                        />
+                        <div className={styles.labelBtnContainer}>
+                          <label htmlFor={nominee._id} className={styles.nomineeName} onClick={(event)=>handleInputChange(event)}>{nominee.fullName}</label>
+                          <div className={styles.viewProfile} onClick={()=>openModal(nominee)}>
+                            View Profile                          
+                          </div>
+                        </div>
+                      </div>
+                      <div className={styles.imageContainer}>
+                        <img src={nominee.profilePicture.url} className={styles.nomineeImage} alt={nominee.fullName}/>
+                      </div>
+                    </div>
+                </div>
                 </div>
               ))}
 
@@ -145,7 +160,7 @@ const VotingForm = ({ categoryData }) => {
                   type="submit"
                   disabled={status === "unauthenticated"}
                 >
-                  {loading ? "Submitting" : "Submit"}
+                  {loading ? "Submitting Vote" : "Submit Vote"}
                 </button>
               </div>
             </form>

@@ -7,10 +7,11 @@ import "../styles/app.scss";
 import { Analytics } from "@vercel/analytics/react";
 import { SessionProvider } from "next-auth/react";
 import Cursor from "shared/Cursor";
+import { VoterContext, VoterProvider } from "global/VoterContext";
 
 const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
-    <>
+    <VoterProvider>
       <NextNProgress
         color="#29D"
         startPosition={0.3}
@@ -24,7 +25,7 @@ const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) 
           <Analytics />
         </AuthProvider>
       </SessionProvider>
-    </>
+    </VoterProvider>
   );
 };
 
