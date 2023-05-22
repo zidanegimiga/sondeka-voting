@@ -90,7 +90,7 @@ const VotingForm = ({ categoryData, openModal }) => {
           method: "POST",
           body: JSON.stringify(formData),
           headers: {
-            Authorization: `${jwt}`,
+            // Authorization: `${jwt}`,
             "Content-Type": "application/json",
           },
         }
