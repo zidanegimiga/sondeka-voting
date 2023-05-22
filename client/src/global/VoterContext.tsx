@@ -1,15 +1,14 @@
-import { useContext, createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 // @ts-ignore - Default value is not needed here
 const VoterContext = createContext();
 
 const VoterProvider = ({children}) =>{
-  const [userId, setUserId] = useState("")
-  const [userName, setUserName] = useState("")
   const [nomineeModalData, setNomineeModalData] = useState({})
 
   return(
-    <VoterContext.Provider value={{userId, setUserId, nomineeModalData, setNomineeModalData}}>
+    <VoterContext.Provider value={{ nomineeModalData, setNomineeModalData}}>
       {children}
     </VoterContext.Provider>
   )

@@ -12,7 +12,7 @@ const Nominee = require('../../models/Nominee')
 // @access Private
 const vote = asyncHandler(async (req, res) => {
     try {
-        const { categoryId, nomineeId, voterId } = req.body;
+        const { categoryId, nomineeId, voterId, categoryName} = req.body;
         console.log("Category Id: ", categoryId)
         console.log("Nominee Id: ", nomineeId)
         console.log("Voter Id: ", voterId)
@@ -25,12 +25,12 @@ const vote = asyncHandler(async (req, res) => {
         }
 
         const nominee = await Nominee.findById(mongoose.Types.ObjectId(nomineeId));
-        if (!nominee || nominee.category.toString() !== categoryId) {
+        if (!nominee || nominee.categoryName !== categoryName) {
             return res.status(400).json({ message: 'Invalid nominee ID' });
         }
 
         // Has the user voted?
-        const existingVoteLogEntry = await VotingLog.findOne({ voterId: mongoose.Types.ObjectId(voterId), category_id: mongoose.Types.ObjectId(categoryId) });
+        const existingVoteLogEntry = await VotingLog.findOne({ voterId: mongoose.Types.ObjectId(voterId), categoryName: categoryName});
         if (existingVoteLogEntry) {
             return res.status(400).json({ message: 'You have already voted in this category' });
         }

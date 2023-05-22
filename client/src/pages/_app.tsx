@@ -5,7 +5,7 @@ import { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import "../styles/app.scss";
 import { Analytics } from "@vercel/analytics/react";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import Cursor from "shared/Cursor";
 import { VoterContext, VoterProvider } from "global/VoterContext";
 

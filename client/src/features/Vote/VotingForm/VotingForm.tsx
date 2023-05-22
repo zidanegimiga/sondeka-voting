@@ -1,51 +1,31 @@
 import styles from "./VotingForm.module.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/dist/client/link";
 import { useSession, getSession } from "next-auth/react";
+import { AuthContext } from "admin-auth-context";
 
 const VotingForm = ({ categoryData, openModal }) => {
+  const {userId} = useContext(AuthContext)
   const [nominees, setNominees] = useState<any>();
-  const [selectedNomineeId, setSelectedNomineeId] = useState("");
   const [voterName, setVoterName] = useState("");
   const [voterId, setVoterId] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState<any>();
-  const [jwt, setJWT] = useState("");
+  const [nullData, setNullData] = useState(false);
+  
   const [formData, setFormData] = useState({
     categoryId: categoryData._id,
-    nomineeId: "",
-    voterId,
+    categoryName: categoryData.name,
+    voterId: userId,
   });
 
   const { data: session, status } = useSession();
-  const [nullData, setNullData] = useState(false);
 
   useEffect(() => {
     setVoterName(session?.user?.name);
-    console.log("Category: ", categoryData)
-
-    async function getUserId(name) {
-      try {
-        const response = await fetch(
-          `https://sondeka-voting-api.cyclic.app/users/${encodeURIComponent(name)}`
-        );
-
-        const userId = await response.json();
-
-        if (response.ok) {
-          const id = userId?.id
-          setVoterId(userId?.id);
-          window.localStorage.setItem("userId", userId);
-        } else {
-          console.error(userId.message);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    getUserId(voterName)
+    // console.log("Category: ", categoryData)
+    console.log("User ID: ", userId)
 
     async function getNominees() {
       try {
@@ -53,7 +33,7 @@ const VotingForm = ({ categoryData, openModal }) => {
           `https://sondeka-voting-api.cyclic.app/admin/categories/${categoryData?._id}/nominees`
         );
         const nomineeData = await response.json();
-        console.log("Nominee Data: ", nomineeData)
+        // console.log("Nominee Data: ", nomineeData)
         setNominees(nomineeData);
       } catch (error) {
         console.error(error);
@@ -62,11 +42,6 @@ const VotingForm = ({ categoryData, openModal }) => {
 
     if (categoryData.nominees.length > 0) {
       getNominees();
-      const vId = window.localStorage.getItem("userId");
-      setFormData({
-        ...formData,
-        voterId: vId,
-      });
     } else {
       setNullData(true);
     }
@@ -85,7 +60,8 @@ const VotingForm = ({ categoryData, openModal }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://sondeka-voting-api.cyclic.app/vote`,
+        `http://localhost:3500/vote`,
+        // `https://sondeka-voting-api.cyclic.app/vote`,
         {
           method: "POST",
           body: JSON.stringify(formData),
@@ -101,6 +77,7 @@ const VotingForm = ({ categoryData, openModal }) => {
     } catch (err) {
       console.error(err);
     }
+    console.log("Form submission: ", formData)
   };
 
   if (typeof window !== undefined) {

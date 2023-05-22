@@ -69,9 +69,9 @@ const VotingCategory = ({ category }) => {
               <h2>{nomineeModalData.fullName}</h2>
               <p>{nomineeModalData.bio}</p>
               <div className={styles.socialMedia}>
-                { nomineeModalData.socialMedia.twitter !== "" && <a  href={nomineeModalData.socialMedia.twitter}><Twitter/></a>}
-                { nomineeModalData.socialMedia.instagram!== "" && <a  href={nomineeModalData.socialMedia.instagram}> <Instagram/> </a>}
-                { nomineeModalData.socialMedia.facebook !== "" && <a  href={nomineeModalData.socialMedia.facebook}><Facebook/> </a>}
+                { nomineeModalData?.socialMedia?.twitter !== "" && <a  href={nomineeModalData?.socialMedia?.twitter}><Twitter/></a>}
+                { nomineeModalData?.socialMedia?.instagram!== "" && <a  href={nomineeModalData?.socialMedia?.instagram}> <Instagram/> </a>}
+                { nomineeModalData?.socialMedia?.facebook !== "" && <a  href={nomineeModalData?.socialMedia?.facebook}><Facebook/> </a>}
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.checkOutMyWork}>

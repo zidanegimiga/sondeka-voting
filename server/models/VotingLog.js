@@ -16,6 +16,11 @@ const logSchema = new mongoose.Schema({
     ref: 'Category',
     required: true
   },
+  categoryName:{
+    type: String,
+    ref: 'Category',
+    required: true
+  },
   timestamp: {
     type: Date,
     default: Date.now,

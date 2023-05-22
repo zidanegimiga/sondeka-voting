@@ -141,7 +141,7 @@ const getAllNomineesPerCategory = asyncHandler(async (req, res) => {
         if (!category) {
             return res.status(404).json({ message: 'Category not found' });
         }
-        const nominees = await Nominee.find({ category: req.params.categoryId });
+        const nominees = await Nominee.find({ categoryName: category.name });
         if(nominees){
             res.json(nominees);
         } else{
