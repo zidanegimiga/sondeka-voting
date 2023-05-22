@@ -1,6 +1,7 @@
 require('dotenv').config({ path: __dirname + '/.env' })
 
 const express = require('express')
+const bodyParser = require('body-parser');
 const app = express()
 const path = require('path')
 const { logger, logEvents } = require('./middlewares/logger')
@@ -21,6 +22,8 @@ connectDB();
 // app setup
 app.use(logger)
 app.use(cors(corsOptions))
+app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(express.json())
 app.use(cookieParser(process.env.ADMIN_SECRET_KEY))
 app.use(express.static('./server/public'))

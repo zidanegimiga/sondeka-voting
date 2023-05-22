@@ -1,6 +1,7 @@
 const Nominee = require('../../models/Nominee');
 const Category = require('../../models/Category');
 const asyncHandler = require('express-async-handler');
+const cloudinary = require('../../utils/cloudinary');
 
 // @desc Get all nominees
 // @route GET /admin/nominees/allNominees
@@ -37,13 +38,14 @@ const getOneNominee = asyncHandler(async (req, res) => {
 // @route POST /admin/nominees/newNominee
 // @access Private
 const createNewNominee = asyncHandler(async (req, res) => {
-    const { fullName, stageName, bio, categoryName, socialMedia, submission} = req.body
+    const { fullName, stageName, bio, categoryName, socialMedia, submission, profilePicture } = req.body;
+    console.log("Body: ", submission)
 
     // Confirm data
-    if (!fullName || !stageName || !bio || !categoryName || submission) {
+    if (!fullName || !stageName || !bio || !categoryName || !submission) {
         return res.status(400).json({
             message: 'All fields are required',
-            success: true,
+            success: false,
         })
     }
 
@@ -51,9 +53,9 @@ const createNewNominee = asyncHandler(async (req, res) => {
     const nominee = await Nominee.findOne({ stageName }).lean().exec()
 
     if (nominee) {
-        return res.status(409).json({ 
-            type: 'existingNominee', 
-            title: 'One Little Problem', 
+        return res.status(409).json({
+            type: 'existingNominee',
+            title: 'One Little Problem',
             description: 'This nominee seems to exist.',
             success: false,
         })
@@ -65,15 +67,20 @@ const createNewNominee = asyncHandler(async (req, res) => {
         return res.status(404).json({ message: `Category "${categoryName}" not found.` });
     }
 
-    const nomineeObject = { fullName, stageName, bio, categoryName, socialMedia, submission, category: category._id }
+    const result = await cloudinary.uploader.upload(profilePicture, {
+        folder: "nominees",
+    })
+
+    const nomineeObject = { fullName, stageName, bio, categoryName, socialMedia, submission, category: category._id, profilePicture: { public_id: result.public_id, url: result.secure_url }, }
+    // const nomineeObject = { fullName, stageName, bio, categoryName, socialMedia, submission, category: category._id }
 
     // Create and store new nominee
     const newNominee = await Nominee.create(nomineeObject)
 
     if (newNominee) { //nominee created
         category.nominees.push(newNominee._id);
-        await category.save(); 
-        res.status(201).json({ message: `Nominee: ${stageName} successfully created.` })
+        await category.save();
+        res.status(201).json({ message: `Nominee: ${stageName} successfully created. Imag link: ${result.secure_url}` })
     } else {
         res.status(400).json({ message: 'Invalid nominee data received' })
     }
@@ -86,7 +93,7 @@ const updateNominee = asyncHandler(async (req, res) => {
     const { id, name, description, poster, category } = req.body
 
     // Confirm data 
-    if (!id || !name ) {
+    if (!id || !name) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -102,7 +109,7 @@ const updateNominee = asyncHandler(async (req, res) => {
 
     // Allow updates to the original user 
     if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate nominee name'})
+        return res.status(409).json({ message: 'Duplicate nominee name' })
     }
 
     nominee.name = name

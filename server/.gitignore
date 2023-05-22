@@ -6,7 +6,11 @@
 .pnp.js
 
 package.json
+
 yarn.lock
+
+# Dev Log files
+/logs
 
 # testing
 /coverage
@@ -30,8 +34,5 @@ yarn-error.log*
 
 # vercel
 .vercel
-
-# Dev Log files
-*.log
 
 example.js

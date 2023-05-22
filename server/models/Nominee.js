@@ -36,19 +36,20 @@ const nomineeSchema = new mongoose.Schema({
     }]
   },
   submission: {
-    title: {
       type: String,
       required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    link: {
-      type: String,
-      required: true,
-    },
   },
+  profilePicture: {
+    public_id: {
+        type: String,
+        required: true
+    },
+    url: {
+        type: String,
+        required: true
+    }
+
+},
   votes: { type: Number, default: 0 }
 });
 
