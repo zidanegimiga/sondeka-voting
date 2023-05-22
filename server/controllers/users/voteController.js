@@ -16,6 +16,7 @@ const vote = asyncHandler(async (req, res) => {
         console.log("Category Id: ", categoryId)
         console.log("Nominee Id: ", nomineeId)
         console.log("Voter Id: ", voterId)
+        console.log("Category Name: ", categoryName)
 
         // Is category and nominee valid?
         const category = await VotingCategory.findById(mongoose.Types.ObjectId(categoryId));
@@ -38,6 +39,7 @@ const vote = asyncHandler(async (req, res) => {
          // Create a new vote log entry
         const voteLogEntry = new VotingLog({
             voterId: mongoose.Types.ObjectId(voterId),
+            categoryName: categoryName,
             category: mongoose.Types.ObjectId(categoryId),
             nominee: mongoose.Types.ObjectId(nomineeId),
             timestamp: Date.now()

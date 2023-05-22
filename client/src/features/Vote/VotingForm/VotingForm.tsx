@@ -60,8 +60,8 @@ const VotingForm = ({ categoryData, openModal }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3500/vote`,
-        // `https://sondeka-voting-api.cyclic.app/vote`,
+        // `http://localhost:3500/vote`,
+        `https://sondeka-voting-api.cyclic.app/vote`,
         {
           method: "POST",
           body: JSON.stringify(formData),
