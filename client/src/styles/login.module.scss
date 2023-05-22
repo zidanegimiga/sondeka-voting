@@ -18,6 +18,9 @@
     border-radius: 8px;
     padding-top: 32px;
 
+    @media (max-width: 1560px){
+        height: 75vh;        
+    }
     @media (max-width: 1026px) {
         width: 70vw        
     }
