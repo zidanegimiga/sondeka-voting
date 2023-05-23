@@ -11,11 +11,6 @@ import { VoterContext, VoterProvider } from "global/VoterContext";
 import Maintenance from "features/Home/Maintenance";
 
 const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
-  if(process.env.MAINTENANCE === "yes"){
-    return(
-      <Maintenance></Maintenance>
-    )
-  } else if(process.env.MAINTENANCE === "no"){
     return (
       <VoterProvider>
         <NextNProgress
@@ -34,6 +29,4 @@ const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) 
       </VoterProvider>
     );
   }
-};
-
 export default App;
