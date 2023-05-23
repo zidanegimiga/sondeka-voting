@@ -40,16 +40,10 @@ const nomineeSchema = new mongoose.Schema({
       required: true,
   },
   profilePicture: {
-    public_id: {
-        type: String,
-        required: true
-    },
-    url: {
-        type: String,
-        required: true
-    }
-
-},
+    type: Object,
+    required: true
+  },
+  
   votes: { type: Number, default: 0 }
 });
 
