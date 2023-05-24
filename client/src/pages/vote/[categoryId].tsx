@@ -78,7 +78,7 @@ const VotingCategory = ({ category }) => {
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.checkOutMyWork}>
-                CHECK OUT MY WORK
+                <a href={nomineeModalData?.submission}>CHECK OUT MY WORK</a>
               </div>
               <div className={styles.voteForMe} onClick={closeModal}>
                 VOTE FOR ME
