@@ -50,7 +50,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(50%);
+  transform: scale(60%);
   position: absolute;
   right: -30px;
   top: -30px;
@@ -75,7 +75,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   @media (max-width: 769px) {
     justify-content: flex-start;   
   }

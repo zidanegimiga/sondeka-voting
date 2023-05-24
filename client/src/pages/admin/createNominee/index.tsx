@@ -31,7 +31,6 @@ const CreateNominee = ({ data }) => {
     };
   };
 
-  //submit the form
   const handleSubmit = async (event) => {
     event.preventDefault();
     const socialMedia = {instagram, twitter, facebook, other: [other]}
@@ -54,6 +53,14 @@ const CreateNominee = ({ data }) => {
       setResponseMessage(datares);
       console.log(responseMessage)
       setLoading(false);
+      setBio("");
+      setFacebook("")
+      setTwitter("")
+      setOther("")
+      setFullName("")
+      setStageName("")
+      setInstagram("")
+      setSubmission("")
     } catch (err) {
       console.error(err);
     }
