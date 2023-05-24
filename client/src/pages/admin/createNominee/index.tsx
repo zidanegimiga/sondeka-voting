@@ -37,7 +37,7 @@ const CreateNominee = ({ data }) => {
     try {
       setLoading(true);
       const response = await fetch(
-      `http://localhost:3500/admin/nominees/newNominee`,
+      "http//localhost:3500/admin/nominees/newNominee",
         {
           method: "POST",
           body: JSON.stringify({fullName, stageName, categoryName, bio, socialMedia, submission, profilePicture}),

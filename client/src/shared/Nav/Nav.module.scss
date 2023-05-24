@@ -120,6 +120,7 @@
 }
 
 .navOptions {
+    padding-top: 16px;
     position: fixed;
     width: 320px;
     height: fit-content;
@@ -136,7 +137,15 @@
 
     @media (max-width: 426px) {
         right: 16px;
-        width: 160px;
+        width: 260px;
+    }
+
+    .user{
+        text-align: center;
+        font-family: 'Inter';
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+        font-weight: 600;
     }
 }
 
