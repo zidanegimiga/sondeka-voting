@@ -29,5 +29,4 @@ const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) 
       </VoterProvider>
     );
   }
-
 export default App;
