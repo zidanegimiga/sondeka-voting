@@ -1,7 +1,8 @@
 const Nominee = require('../../models/Nominee');
 const Category = require('../../models/Category');
 const asyncHandler = require('express-async-handler');
-const cloudinary = require('../../utils/cloudinary');
+const { resolve } = require('path');
+const cloudinary = require('../../utils/uploadImage')
 
 // @desc Get all nominees
 // @route GET /admin/nominees/allNominees
@@ -38,18 +39,17 @@ const getOneNominee = asyncHandler(async (req, res) => {
 // @route POST /admin/nominees/newNominee
 // @access Private
 const createNewNominee = asyncHandler(async (req, res) => {
-    const { fullName, stageName, bio, categoryName, socialMedia, submission, profilePicture } = req.body;
-    console.log("Body: ", submission)
+    const { stageName, fullName, categoryName, socialMedia, submission, profilePicture, bio } = req.body
 
-    // Confirm data
-    if (!fullName || !stageName || !bio || !categoryName || !submission) {
+    // // Confirm data
+    if (!profilePicture || !fullName || !stageName || !bio || !categoryName || !submission) {
         return res.status(400).json({
             message: 'All fields are required',
             success: false,
         })
     }
 
-    // Check for duplicate record
+    // // Check for duplicate record
     const nominee = await Nominee.findOne({ stageName }).lean().exec()
 
     if (nominee) {
@@ -67,22 +67,29 @@ const createNewNominee = asyncHandler(async (req, res) => {
         return res.status(404).json({ message: `Category "${categoryName}" not found.` });
     }
 
-    const result = await cloudinary.uploader.upload(profilePicture, {
-        folder: "nominees",
-    })
-
-    const nomineeObject = { fullName, stageName, bio, categoryName, socialMedia, submission, category: category._id, profilePicture: { public_id: result.public_id, url: result.secure_url }, }
-    // const nomineeObject = { fullName, stageName, bio, categoryName, socialMedia, submission, category: category._id }
-
-    // Create and store new nominee
-    const newNominee = await Nominee.create(nomineeObject)
-
-    if (newNominee) { //nominee created
-        category.nominees.push(newNominee._id);
-        await category.save();
-        res.status(201).json({ message: `Nominee: ${stageName} successfully created. Imag link: ${result.secure_url}` })
-    } else {
-        res.status(400).json({ message: 'Invalid nominee data received' })
+    try{
+        if(profilePicture){
+            console.log("Profile Pic: ", profilePicture)
+            const uploadedImage = await cloudinary.uploader.upload(profilePicture, {folder: "nominees"});
+            if(uploadedImage){
+                console.log("Uploaded IMG: ", uploadedImage)
+                const nomineeObject = { fullName, stageName, bio, categoryName, socialMedia, submission, categoryId: category._id, profilePicture: uploadedImage }
+                
+                // Create and store new nominee
+                const newNominee = await Nominee.create(nomineeObject)
+                if (newNominee) { //nominee created
+                    category.nominees.push(newNominee._id);
+                    await category.save();
+                    res.status(201).json({ message: `Nominee: ${stageName} successfully created.` })
+                } else {
+                    res.status(400).json({ message: 'Invalid nominee data received' })
+                }
+            }
+            
+        }
+    } catch(err){
+        console.log(err)
+        res.status(500).json({message: "Internal Server Error"})
     }
 })
 

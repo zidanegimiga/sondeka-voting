@@ -78,7 +78,6 @@ export default function Index({data}) {
 }
 
 export const getServerSideProps = async () => {
-  try{
     const res = await fetch(
       "https://sondeka-voting-api.cyclic.app/categories/allCategories"
     );
@@ -89,7 +88,4 @@ export const getServerSideProps = async () => {
         data,
       },
     };
-  }catch(err){
-    console.log(err)
-  }
 };

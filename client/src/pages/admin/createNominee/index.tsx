@@ -31,14 +31,13 @@ const CreateNominee = ({ data }) => {
     };
   };
 
-  //submit the form
   const handleSubmit = async (event) => {
     event.preventDefault();
     const socialMedia = {instagram, twitter, facebook, other: [other]}
     try {
       setLoading(true);
       const response = await fetch(
-      "http//localhost:3500/admin/nominees/newNominee",
+      `http://localhost:3500/admin/nominees/newNominee`,
         {
           method: "POST",
           body: JSON.stringify({fullName, stageName, categoryName, bio, socialMedia, submission, profilePicture}),
@@ -54,6 +53,14 @@ const CreateNominee = ({ data }) => {
       setResponseMessage(datares);
       console.log(responseMessage)
       setLoading(false);
+      setBio("");
+      setFacebook("")
+      setTwitter("")
+      setOther("")
+      setFullName("")
+      setStageName("")
+      setInstagram("")
+      setSubmission("")
     } catch (err) {
       console.error(err);
     }
