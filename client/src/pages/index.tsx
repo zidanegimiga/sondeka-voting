@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import CategoryItem from "features/Home/CategoryItem/CategoryItem";
 
 export default function Index({data}) {
+  const [loading, setLoading] = useState(false)
   console.log(data)
   return (
     <div className={styles.homeWrapper}>
@@ -34,7 +35,7 @@ export default function Index({data}) {
         </div>
         <div className={styles.categories}>
           <div className={styles.categoriesTitle} id="categories">CATEGORIES</div>
-          {data.map((category, index) => {
+          {data?.map((category, index) => {
             return (
               <CategoryItem
                 key={index}
@@ -77,14 +78,18 @@ export default function Index({data}) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch(
-    "https://sondeka-voting-api.cyclic.app/categories/allCategories"
-  );
-  const data = await res.json();
+  try{
+    const res = await fetch(
+      "https://sondeka-voting-api.cyclic.app/categories/allCategories"
+    );
+    const data = await res.json();
 
-  return {
-    props: {
-      data,
-    },
-  };
+    return {
+      props: {
+        data,
+      },
+    };
+  }catch(err){
+    console.log(err)
+  }
 };

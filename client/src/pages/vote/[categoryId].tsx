@@ -8,6 +8,7 @@ import { VoterContext } from "../../global/VoterContext";
 import { useSession } from "next-auth/react";
 import Close from "features/svgIcons/close";
 import { Twitter, Instagram, Facebook, Other } from "shared/ModalIcons";
+import { motion } from "framer-motion";
 
 const Modal = ({ isOpen, onClose, categoryColor, children }) => {
   if (!isOpen) return null;
@@ -55,11 +56,12 @@ const VotingCategory = ({ category }) => {
         onClose={closeModal}
         categoryColor={categoryColor}
       >
-        <div
+        <motion.div
           className={styles.modalContent}
           style={{
             backgroundColor: categoryColor,
           }}
+          initial={{y: 50}} animate={{y: 0}} transition={{duration: 1}}
         >
           <div className={styles.contentContainer}>
             <div className={styles.imageContainer}>
@@ -72,6 +74,7 @@ const VotingCategory = ({ category }) => {
                 { nomineeModalData?.socialMedia?.twitter !== "" && <a  href={nomineeModalData?.socialMedia?.twitter}><Twitter/></a>}
                 { nomineeModalData?.socialMedia?.instagram!== "" && <a  href={nomineeModalData?.socialMedia?.instagram}> <Instagram/> </a>}
                 { nomineeModalData?.socialMedia?.facebook !== "" && <a  href={nomineeModalData?.socialMedia?.facebook}><Facebook/> </a>}
+                { nomineeModalData?.socialMedia?.other[0] !== "" && <a  href={nomineeModalData?.socialMedia?.other[0]}><Other/> </a>}
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.checkOutMyWork}>
@@ -85,7 +88,7 @@ const VotingCategory = ({ category }) => {
           <div className={styles.closeModal} onClick={closeModal}>
             <Close />
           </div>
-        </div>
+        </motion.div>
       </Modal>
     </div>
   );

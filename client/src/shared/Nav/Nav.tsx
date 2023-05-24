@@ -81,7 +81,7 @@ const Nav = () => {
                     <Link href={"#"}>Nominees</Link>
                   </div>
                   <div className={styles.navLink}>
-                    <Link href={"/#"}>Categories</Link>
+                    <Link href={"/#categories"}>Categories</Link>
                   </div>
                 </div>
                 <div className={styles.navLink}>
@@ -94,8 +94,12 @@ const Nav = () => {
             )}
             {status === "authenticated" && (
               <>
+                <div className={styles.user}>Hi {session.user.name}!</div>
                 <div className={styles.navLink}>
                   <Link href={"/"}>Home</Link>
+                </div>
+                <div className={styles.navLink}>
+                    <Link href={"/#categories"}>Categories</Link>
                 </div>
                 <div
                   className={styles.navLink}
