@@ -56,7 +56,14 @@ const Nav = () => {
               <Link href={"/#categories"}> CATEGORIES </Link>
             </div>
             <div className={styles.centerItem}>
-              <a href="https://www.sondeka.org" target="blank" style={{textDecoration: "none"}}> SONDEKA.ORG </a>
+              <a
+                href="https://www.sondeka.org"
+                target="blank"
+                style={{ textDecoration: "none" }}
+              >
+                {" "}
+                SONDEKA.ORG{" "}
+              </a>
             </div>
           </div>
           <div
@@ -70,83 +77,87 @@ const Nav = () => {
         </div>
 
         {options && (
-          <div className={styles.navOptions}>
-            {status === "unauthenticated" && (
-              <>
-                <div className={styles.navLink}>
-                  <Link href={"/"}>Home</Link>
-                </div>
-                <div className={styles.mobileNavLinks}>
+          <div className={styles.navOptionsCover} onClick={() => {
+            showOptions(!options);
+          }}>
+            <div className={styles.navOptions}>
+              {status === "unauthenticated" && (
+                <div>
                   <div className={styles.navLink}>
-                    <Link href={"#"}>Nominees</Link>
+                    <Link href={"/"}>Home</Link>
+                  </div>
+                  <div className={styles.mobileNavLinks}>
+                    <div className={styles.navLink}>
+                      <Link href={"#"}>Nominees</Link>
+                    </div>
+                    <div className={styles.navLink}>
+                      <Link href={"/#categories"}>Categories</Link>
+                    </div>
+                  </div>
+                  <div className={styles.navLink}>
+                    <Link href={"/signup"}>Sign Up</Link>
+                  </div>
+                  <div className={styles.navLink}>
+                    <Link href={"/oAuthLogin"}>Log In</Link>
+                  </div>
+                </div>
+              )}
+              {status === "authenticated" && (
+                <>
+                  <div className={styles.user}>Hi {session.user.name}!</div>
+                  <div className={styles.navLink}>
+                    <Link href={"/"}>Home</Link>
                   </div>
                   <div className={styles.navLink}>
                     <Link href={"/#categories"}>Categories</Link>
                   </div>
-                </div>
-                <div className={styles.navLink}>
-                  <Link href={"/signup"}>Sign Up</Link>
-                </div>
-                <div className={styles.navLink}>
-                  <Link href={"/oAuthLogin"}>Log In</Link>
-                </div>
-              </>
-            )}
-            {status === "authenticated" && (
-              <>
-                <div className={styles.user}>Hi {session.user.name}!</div>
-                <div className={styles.navLink}>
-                  <Link href={"/"}>Home</Link>
-                </div>
-                <div className={styles.navLink}>
-                    <Link href={"/#categories"}>Categories</Link>
-                </div>
-                <div
-                  className={styles.navLink}
-                  onClick={() =>
-                    signOut({ callbackUrl: "http://localhost:3000/" })
-                  }
-                >
-                  <div>Log Out</div>
-                </div>
-              </>
-            )}
-            {isAdminAuthenticated && (
-              <>
-                <hr />
-                <p
-                  style={{
-                    textAlign: "center",
-                    fontFamily: "GraphiK LCG",
-                    color: "#FFCD00",
-                  }}
-                >
-                  {" "}
-                  Admin Actions
-                </p>
-                <div className={styles.navLink}>
-                  <Link href={"/admin/dashboard"}>Dashboard</Link>
-                </div>
-                <div className={styles.navLink}>
-                  <Link href={"/admin/categories"}>Categories</Link>
-                </div>
-                <div className={styles.navLink}>
-                  <Link href={"/admin/voters"}>Voters</Link>
-                </div>
-                <div className={styles.navLink}>
-                  <Link href={"/admin/voters"}>Nominees</Link>
-                </div>
-                <div
-                  className={styles.navLink}
-                  onClick={() => {
-                    logoutAdmin();
-                    showOptions(false);
-                  }}
-                >
-                  <div>Log Out</div>
-                </div>
-              </>
-            )}
+                  <div
+                    className={styles.navLink}
+                    onClick={() =>
+                      signOut({ callbackUrl: "http://localhost:3000/" })
+                    }
+                  >
+                    <div>Log Out</div>
+                  </div>
+                </>
+              )}
+              {isAdminAuthenticated && (
+                <>
+                  <hr />
+                  <p
+                    style={{
+                      textAlign: "center",
+                      fontFamily: "GraphiK LCG",
+                      color: "#FFCD00",
+                    }}
+                  >
+                    {" "}
+                    Admin Actions
+                  </p>
+                  <div className={styles.navLink}>
+                    <Link href={"/admin/dashboard"}>Dashboard</Link>
+                  </div>
+                  <div className={styles.navLink}>
+                    <Link href={"/admin/categories"}>Categories</Link>
+                  </div>
+                  <div className={styles.navLink}>
+                    <Link href={"/admin/voters"}>Voters</Link>
+                  </div>
+                  <div className={styles.navLink}>
+                    <Link href={"/admin/voters"}>Nominees</Link>
+                  </div>
+                  <div
+                    className={styles.navLink}
+                    onClick={() => {
+                      logoutAdmin();
+                      showOptions(false);
+                    }}
+                  >
+                    <div>Log Out</div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         )}
       </div>
