@@ -108,9 +108,9 @@
   .category{
     width: 320px;
     height: 320px;
-    background-color: #bbbbbb;
     position: relative;
     overflow: hidden;
+    animation: skeleton-loading 1s linear infinite alternate;
 
     &:hover{
       .nomineeButton{
@@ -120,6 +120,15 @@
       .buttonContainer{
         opacity: 1;
       }
+    }
+  }
+
+  @keyframes skeleton-loading{
+    0%{
+      background-color: hsl(200, 20%, 70%);
+    }
+    100%{
+      background-color: hsl(200, 20%, 95%);
     }
   }
 
