@@ -106,6 +106,8 @@ export default function Index({ data }) {
           </div>
           <div className={styles.categories} id="categories">
             <div className={styles.categoriesTitle}>CATEGORIES</div>
+            <div>
+
             {data?.map((category, index) => {
               return (
                 <CategoryItem
@@ -119,6 +121,7 @@ export default function Index({ data }) {
                 />
               );
             })}
+            </div>
           </div>
           <div className={styles.subLogo}>
             <div className={styles.sondekaTitle}>

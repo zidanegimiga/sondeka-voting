@@ -45,6 +45,11 @@
     flex-wrap: wrap;
     gap: 48px;
     padding: 48px;
+
+    @media (max-width: 426px){
+      flex-direction: column;
+      align-items: center;
+    }
   }
   
   .categoryTitleContainer{

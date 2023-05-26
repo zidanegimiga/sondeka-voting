@@ -27,7 +27,7 @@ const Categories = () => {
           onMouseLeave={()=>{setInstagramElementHover(false)}}
           className={activeElement ? styles.instagramActive : styles.instagram}
         >
-          <Instagram hover={instagramElementHover}/>
+          <a href="https://www.instagram.com/creativesgarage/?hl=en" target="_blank" rel="noreferrer"><Instagram hover={instagramElementHover}/></a>
         </div>
         <div
           className={styles.shareButton}
@@ -42,14 +42,14 @@ const Categories = () => {
         onMouseEnter={()=>{setTwitterElementHover(true)}}
         onMouseLeave={()=>{setTwitterElementHover(false)}}
         className={activeElement ? styles.twitterActive : styles.twitter}>
-          <Twitter hover={twitterElementHover}/>
+         <a href="https://twitter.com/cr8vesgarage?lang=en" rel="noreferrer" target="_blank"> <Twitter hover={twitterElementHover}/></a>
         </div>
       </div>
       <div 
       onMouseEnter={()=>{setFacebookElementHover(true)}}
       onMouseLeave={()=>{setFacebookElementHover(false)}}
       className={activeElement ? styles.facebookActive : styles.facebook}>
-        <Facebook hover={facebookElementHover}/>
+        <a href="https://www.facebook.com/Creatives.Garage/" target="_blank" rel="noreferrer"><Facebook hover={facebookElementHover}/></a>
       </div>
     </div>
   );
