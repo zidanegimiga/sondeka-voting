@@ -93,8 +93,8 @@ const CategoryItem = ({
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <div className={styles.categoryTitleContainer}>
-          <h1 onClick={() => setExpanded(!expanded)}>{title?.toUpperCase()}</h1>
+        <div className={styles.categoryTitleContainer} onClick={() => setExpanded(!expanded)}>
+          <h1 >{title?.toUpperCase()}</h1>
           <div className={styles.arrowContainer}>
             <div className={styles.downIconWrapper}>
               <DownCircle hover={hover} />

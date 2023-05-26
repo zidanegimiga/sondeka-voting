@@ -10,18 +10,13 @@
       }
     }
 
-    @media (max-width: 1025px) {
-      padding-left: 400px;      
+    @media (max-width: 1025px) {      
     }
 
-    @media (max-width: 769px) {
-      padding-left: 32px;
-      padding-right: 32px;      
+    @media (max-width: 769px) {      
     }
 
-    @media (max-width: 426px) {
-      padding-left: 16px;
-      padding-right: 40px;      
+    @media (max-width: 426px) {     
     }
   }
 
@@ -72,6 +67,7 @@
     padding: 48px;
 
     @media (max-width: 426px){
+      padding: 4px;
       flex-direction: column;
       align-items: center;
     }
@@ -87,6 +83,20 @@
     h1{
       font-family: 'Inter';
       color: #a1a1a1;
+
+      @media (max-width: 769px) {      
+        font-size: 28px;
+      }
+
+      @media (max-width: 426px) {      
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 426px){
+      gap: 8px;
+      flex-direction: column-reverse;
+      margin-bottom: 32px;
     }
   }
 
