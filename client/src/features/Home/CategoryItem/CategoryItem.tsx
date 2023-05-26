@@ -2,19 +2,32 @@ import React, { useEffect } from "react";
 import { ButtonIcon, DownCircle } from "features/svgIcons/CategoryIcons";
 import styles from "./CategoryItem.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 
-const CategoryItem = ({ title, description, poster, link}) => {
+const CategoryItem = ({ title, description, poster, link, color, openModal }) => {
   const [hover, setHover] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
-  const [backgroundPhoto, setBackgroundPhoto] = React.useState(`url(/categories/${poster}.png)`);
+  const [loadNominees, setLoadNominees] = React.useState(false);
+  const [nominee, setNominee] = React.useState<any>();
 
-  useEffect(()=>{
-    if(window.innerWidth < 769){
-      setBackgroundPhoto("none")
-    } else{
-      setBackgroundPhoto(poster)
+  useEffect(() => {
+    async function getNominees() {
+      try {
+        setLoadNominees(true);
+        const response = await fetch(
+          `https://sondeka-voting-api.cyclic.app/admin/categories/${link}/nominees`
+        );
+        const nomineeData = await response.json();
+        console.log(`${title}: `, nomineeData);
+        setNominee(nomineeData);
+        setLoadNominees(false);
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }, [])
+
+    getNominees();
+  }, []);
 
   return (
     <div>
@@ -24,10 +37,11 @@ const CategoryItem = ({ title, description, poster, link}) => {
             ? styles.accordionItem + " " + styles.accordionActive
             : styles.accordionItem
         }
-        style={{ backgroundColor: `#e4e4e4`, backgroundImage: backgroundPhoto }}
         onClick={() => setExpanded(!expanded)}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
       >
-        <div className={styles.titleContainer}>
+        {/* <div className={styles.titleContainer}>
           <h2>{title}</h2>
           <div className={expanded ? styles.active : styles.content}>
             <div className={styles.categoryDescription}>
@@ -50,13 +64,28 @@ const CategoryItem = ({ title, description, poster, link}) => {
               </div>
             </Link>
           </div>
-        </div>
-        <div className={styles.arrowContainer}>
-          <div className={styles.downIconWrapper}>
-            <DownCircle />
-            <div />
+              </div>*/}
+        <div className={styles.categoryTitleContainer}>
+          <h1>{title?.toUpperCase()}</h1>
+          <div className={styles.arrowContainer}>
+            <div className={styles.downIconWrapper}>
+              <DownCircle hover={hover} />
+            </div>
           </div>
         </div>
+        {expanded ? (
+          <div className={styles.categoriesContainer}>
+            {loadNominees && <div> Loading....</div>}
+            {nominee?.map((nom: any, index: number) => (
+              <div key={index} className={styles.category}>
+                <Image alt={nom?.fullName} width={320} height={320} src={nom?.profilePicture?.secure_url}/>
+                <div className={styles.buttonContainer} style={{background: `linear-gradient(180deg, ${color}00, ${color}99)`}}>
+                  <div className={styles.nomineeButton} onClick={()=> openModal(nom, color)}> VIEW PROFILE </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );

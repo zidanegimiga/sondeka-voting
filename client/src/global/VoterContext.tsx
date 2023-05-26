@@ -6,9 +6,10 @@ const VoterContext = createContext();
 
 const VoterProvider = ({children}) =>{
   const [nomineeModalData, setNomineeModalData] = useState({})
+  const [userID, setUserID] = useState("")
 
   return(
-    <VoterContext.Provider value={{ nomineeModalData, setNomineeModalData}}>
+    <VoterContext.Provider value={{ nomineeModalData, setNomineeModalData }}>
       {children}
     </VoterContext.Provider>
   )

@@ -14,7 +14,6 @@ const VotingForm = ({ categoryData, openModal }) => {
   const [loadingNominees, setLoadingNominees] = useState(false);
   const [responseMessage, setResponseMessage] = useState<any>();
   const [nullData, setNullData] = useState(false);
-  console.log("User ID: ", userId);
 
   const [formData, setFormData] = useState({
     categoryId: categoryData._id,

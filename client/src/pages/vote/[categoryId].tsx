@@ -13,11 +13,7 @@ import { motion } from "framer-motion";
 const Modal = ({ isOpen, onClose, categoryColor, children }) => {
   if (!isOpen) return null;
 
-  return (
-    <div className={styles.modal}>
-      {children}
-    </div>
-  );
+  return <div className={styles.modal}>{children}</div>;
 };
 
 const VotingCategory = ({ category }) => {
@@ -61,25 +57,48 @@ const VotingCategory = ({ category }) => {
           style={{
             backgroundColor: categoryColor,
           }}
-          initial={{y: 50}} animate={{y: 0}} transition={{duration: 1}}
+          initial={{ y: 50 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1 }}
         >
           <div className={styles.contentContainer}>
             <div className={styles.imageContainer}>
-              <img src={nomineeModalData?.profilePicture?.url} alt={nomineeModalData.fullName} className={styles.modalImage}/>
+              <img
+                src={nomineeModalData?.profilePicture?.url}
+                alt={nomineeModalData.fullName}
+                className={styles.modalImage}
+              />
             </div>
             <div className={styles.nomineeContent}>
               <h2>{nomineeModalData.fullName}</h2>
               <p>{nomineeModalData.bio}</p>
               <div className={styles.socialMedia}>
-                { nomineeModalData?.socialMedia?.twitter !== "" && <a  href={nomineeModalData?.socialMedia?.twitter}><Twitter/></a>}
-                { nomineeModalData?.socialMedia?.instagram!== "" && <a  href={nomineeModalData?.socialMedia?.instagram}> <Instagram/> </a>}
-                { nomineeModalData?.socialMedia?.facebook !== "" && <a  href={nomineeModalData?.socialMedia?.facebook}><Facebook/> </a>}
-                { nomineeModalData?.socialMedia?.other[0] !== "" && <a  href={nomineeModalData?.socialMedia?.other[0]}><Other/> </a>}
+                {nomineeModalData?.socialMedia?.twitter !== "" && (
+                  <a href={nomineeModalData?.socialMedia?.twitter}>
+                    <Twitter />
+                  </a>
+                )}
+                {nomineeModalData?.socialMedia?.instagram !== "" && (
+                  <a href={nomineeModalData?.socialMedia?.instagram}>
+                    {" "}
+                    <Instagram />{" "}
+                  </a>
+                )}
+                {nomineeModalData?.socialMedia?.facebook !== "" && (
+                  <a href={nomineeModalData?.socialMedia?.facebook}>
+                    <Facebook />{" "}
+                  </a>
+                )}
+                {nomineeModalData?.socialMedia?.other[0] !== "" && (
+                  <a href={nomineeModalData?.socialMedia?.other[0]}>
+                    <Other />{" "}
+                  </a>
+                )}
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
-              <div className={styles.checkOutMyWork}>
-                <a href={nomineeModalData?.submission}>CHECK OUT MY WORK</a>
-              </div>
+              <a href={nomineeModalData?.submission}>
+                <div className={styles.checkOutMyWork}>CHECK OUT MY WORK</div>
+              </a>
               <div className={styles.voteForMe} onClick={closeModal}>
                 VOTE FOR ME
               </div>

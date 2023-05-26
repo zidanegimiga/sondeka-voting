@@ -34,7 +34,7 @@ const AuthProvider: FC = ({ children }) => {
       if (response.ok) {
         const id = userId?.id
         setUserId(id);
-        console.log("User ID: ", id)
+        // console.log("User ID: ", id)
       } else {
         console.error(userId.message);
       }
@@ -46,7 +46,7 @@ const AuthProvider: FC = ({ children }) => {
   useEffect(()=>{
     const accessToken = window.localStorage.getItem('admin-token')
     setToken(accessToken)
-    console.log("Session: ", session)
+    // console.log("Session: ", session)
 
     if(status === "authenticated"){
       getUserId(session?.user?.name)

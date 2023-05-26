@@ -1,16 +1,14 @@
 .accordionItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-height: 999px;
-    background-position: left;
-    background-size: 320px;
-    background-repeat: no-repeat;
-    padding-left: 380px;
     transition: all 0.5s ease-in-out;
     cursor: pointer;
-    border-top: solid 1px black;
-    border-bottom: solid 1px black;
+    width: 100%;
+    padding: 48px 0px;
+
+    &:hover{
+      h1{
+        color: #f1f1f1
+      }
+    }
 
     @media (max-width: 1025px) {
       padding-left: 400px;      
@@ -26,57 +24,98 @@
       padding-right: 40px;      
     }
   }
-  
-  .accordionActive{
-    .downIconWrapper{
-      transform: rotate(180deg);
-    }
-  }
-  
-  .titleContainer {
-    width: 40%;
-    h2{
-      font-family: 'Graphik lcg';
-      line-height: 130%;
-      text-align: left;
-      letter-spacing: 0.21em;
-      color: #1E1E1E;
-      font-weight: 600;
 
-      @media (max-width: 1025px) {
-        line-height: 150%;
-      }
-      @media (max-width: 426px) {
-        font-size: 24px;
-      }
-    }
-
-    @media (max-width: 1025px) {
-      width: 50%      
-    }
-
-    @media (max-width: 769px) {
-      width: 80%;      
-    }
-
-    @media (max-width: 426px) {
-      width: auto;
-    }
-  }
-  
-  .arrowContainer{
-    width: 20%;
-
-    @media (max-width: 1025px) {
-      width: 10%;      
-    }
-  }
-  
   .downIconWrapper{
     width: 48px;
     height: 48px;
     transition: all 0.5s ease-in-out;
   }
+  
+  .accordionActive{
+    background-color: #292929;
+    .downIconWrapper{
+      transform: rotate(180deg);
+    }
+  }
+
+  .categoriesContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 48px;
+    padding: 48px;
+  }
+  
+  .categoryTitleContainer{
+    display: flex;
+    gap: 48px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    h1{
+      font-family: 'Inter';
+      color: #a1a1a1;
+    }
+  }
+
+  .category{
+    width: 320px;
+    height: 320px;
+    background-color: #bbbbbb;
+    position: relative;
+    overflow: hidden;
+
+    &:hover{
+      .nomineeButton{
+        bottom: 10%
+      }
+
+      .buttonContainer{
+        opacity: 1;
+      }
+    }
+  }
+
+  .buttonContainer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: all ease-in-out 0.5s;
+  }
+
+  .nomineeButton{
+    position: absolute;
+    width: 60%;
+    height: 48px;
+    color: #f1f1f1;
+    z-index: 20;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    bottom: -15%;
+    background-color: #313131;
+    transition: all ease-in-out 0.5s;
+    font-family: 'Inter';
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+  }
+  
+  // .arrowContainer{
+  //   width: 20%;
+
+  //   @media (max-width: 1025px) {
+  //     width: 10%;      
+  //   }
+  // }
   
   .active{
     display: block;
@@ -86,53 +125,4 @@
   .content{
     display: none
   }
-  
-  .categoryDescription{
-    text-align: left;
-    font-family: 'Cabin';
-    font-size: 1.1rem;
-    letter-spacing: 0.1em;
-    margin-bottom: 24px
-  }
-  
-  .voteCTA{
-    background-color: #fff;
-    border: #1E1E1E solid 1px;
-    display: flex;
-    align-items: center;
-    font-family: 'Cabin';
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 24px;
-    border-radius: 8px;
-  
-    &:hover{
-      .iconWrapper{
-        background-color: #3C3C3C;
-        
-        .iconContainer{
-          transform: rotate(45deg);
-          transition: all .5s ease-in-out;
-        }
-      }
-    }
-  }
-  
-  .textContainer{
-    padding: 24px 20px;
-    text-align: center;
-    width: 100%
-  }
-  
-  .iconContainer{
-    transition: all .5s ease-in-out;
-  }
-  
-  .iconWrapper{
-    padding: 16px;
-    border-right: #1E1E1E solid 1px;
-    transition: all .5s ease-in-out;
-  }
-  
+   
