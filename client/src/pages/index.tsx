@@ -139,8 +139,8 @@ export default function Index({ data }) {
               <p> Creatives Garage </p>{" "}
             </Link>
             <p>
-              <a href="mailto: awesome@creativesgarage.org">
-                awesome@creativesgarage.org
+              <a href="mailto: community@creativesgarage.org">
+                community@creativesgarage.org
               </a>
             </p>
           </div>
