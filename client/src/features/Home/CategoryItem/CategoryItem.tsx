@@ -16,6 +16,7 @@ const CategoryItem = ({
   openModal,
 }) => {
   const { userId } = React.useContext(AuthContext);
+  const [loading, setLoading] = React.useState(false);
   const [hover, setHover] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [loadNominees, setLoadNominees] = React.useState(false);
@@ -34,7 +35,32 @@ const CategoryItem = ({
       ...formData,
       [name]: value,
     });
-    console.log("Form Data: ", userId);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      setLoading(true);
+      const votingData = {nomineeId: formData?.nomineeId, voterId: userId, categoryName: title}
+      const response = await fetch(
+        `https://sondeka-voting-api.cyclic.app/vote`,
+        {
+          method: "POST",
+          body: JSON.stringify(votingData),
+          headers: {
+            // Authorization: `${jwt}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const datares = await response.json();
+      setLoading(false);
+      setResponseMessage(datares);
+    } catch (err) {
+      console.error(err);
+    }
+    // console.log("Form Data: ", {nomineeId: formData?.nomineeId, voterId: userId, categoryName: title})
   };
 
   useEffect(() => {
@@ -125,14 +151,22 @@ const CategoryItem = ({
               {status === "unauthenticated" && (
                 <div className={styles.responseMessageE}>
                   You need to{" "}
-                  <Link href={"/login"}>
+                  <Link href={"/oAuthLogin"}>
                     <span>log in</span>
                   </Link>{" "}
                   to vote
                 </div>
               )}
 
-              <button className={styles.voteButton}> SUBMIT VOTE</button>
+              <button
+                className={styles.voteButton}
+                type="submit"
+                disabled={status === "unauthenticated"}
+                onClick={(e)=>handleSubmit(e)}
+              >
+                {" "}
+                {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
+              </button>
               {responseMessage && (
                 <div className={styles.responseMessage}>
                   {responseMessage?.message}
