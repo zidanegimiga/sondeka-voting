@@ -208,11 +208,11 @@ export default function Index({ data }) {
                 <div className={styles.voteForMe} onClick={handleVote}>
                   {loading ? "Submitting Vote..." : "VOTE FOR ME"}
                 </div>
-                {responseMessage && (
+                {/* {responseMessage && (
                   <div className={styles.responseMessage}>
                     {responseMessage?.message}
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>
