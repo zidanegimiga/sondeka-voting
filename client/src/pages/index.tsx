@@ -208,9 +208,6 @@ export default function Index({ data }) {
                 >
                   <div>CHECK OUT MY WORK</div>
                 </a>
-                <div className={styles.voteForMe} onClick={handleVote}>
-                  {loading ? "Submitting Vote..." : "VOTE FOR ME"}
-                </div>
                 {/* {responseMessage && (
                   <div className={styles.responseMessage}>
                     {responseMessage?.message}
