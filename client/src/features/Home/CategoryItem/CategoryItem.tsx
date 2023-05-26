@@ -3,12 +3,39 @@ import { ButtonIcon, DownCircle } from "features/svgIcons/CategoryIcons";
 import styles from "./CategoryItem.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { VoterContext } from "global/VoterContext";
+import { AuthContext } from "admin-auth-context";
+import { useSession } from "next-auth/react";
 
-const CategoryItem = ({ title, description, poster, link, color, openModal }) => {
+const CategoryItem = ({
+  title,
+  description,
+  poster,
+  link,
+  color,
+  openModal,
+}) => {
+  const { userId } = React.useContext(AuthContext);
   const [hover, setHover] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [loadNominees, setLoadNominees] = React.useState(false);
+  const [responseMessage, setResponseMessage] = React.useState<any>();
   const [nominee, setNominee] = React.useState<any>();
+  const [formData, setFormData] = React.useState({
+    categoryName: title,
+    nomineeId: "",
+    voterId: userId,
+  });
+  const { data: session, status } = useSession();
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    console.log("Form Data: ", userId);
+  };
 
   useEffect(() => {
     async function getNominees() {
@@ -26,7 +53,7 @@ const CategoryItem = ({ title, description, poster, link, color, openModal }) =>
       }
     }
 
-    setTimeout(getNominees, 3000)
+    setTimeout(getNominees, 3000);
   }, []);
 
   return (
@@ -37,36 +64,11 @@ const CategoryItem = ({ title, description, poster, link, color, openModal }) =>
             ? styles.accordionItem + " " + styles.accordionActive
             : styles.accordionItem
         }
-        onClick={() => setExpanded(!expanded)}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        {/* <div className={styles.titleContainer}>
-          <h2>{title}</h2>
-          <div className={expanded ? styles.active : styles.content}>
-            <div className={styles.categoryDescription}>
-              {description}
-            </div>
-            <Link href={`/vote/${link}`}>
-              <div
-                className={styles.voteCTA}
-                onMouseEnter={() => {
-                  setHover(true);
-                }}
-                onMouseLeave={() => setHover(false)}
-              >
-                <div className={styles.iconWrapper}>
-                  <div className={styles.iconContainer}>
-                    <ButtonIcon hover={hover} />
-                  </div>
-                </div>
-                <div className={styles.textContainer}>VOTE NOW</div>
-              </div>
-            </Link>
-          </div>
-              </div>*/}
         <div className={styles.categoryTitleContainer}>
-          <h1>{title?.toUpperCase()}</h1>
+          <h1 onClick={() => setExpanded(!expanded)}>{title?.toUpperCase()}</h1>
           <div className={styles.arrowContainer}>
             <div className={styles.downIconWrapper}>
               <DownCircle hover={hover} />
@@ -74,17 +76,70 @@ const CategoryItem = ({ title, description, poster, link, color, openModal }) =>
           </div>
         </div>
         {expanded ? (
-          <div className={styles.categoriesContainer}>
-            {loadNominees && <div> Loading....</div>}
-            {nominee?.map((nom: any, index: number) => (
-              <div key={index} className={styles.category}>
-                <Image alt={nom?.fullName} width={320} height={320} src={nom?.profilePicture?.secure_url}/>
-                <div className={styles.buttonContainer} style={{background: `linear-gradient(180deg, ${color}00, ${color}99)`}}>
-                  <div className={styles.nomineeButton} onClick={()=> openModal(nom, color)}> VIEW PROFILE </div>
+          <form>
+            {/* {loadNominees && <div> Loading....</div>} */}
+            <div className={styles.categoriesContainer}>
+              {nominee?.map((nom: any, index: number) => (
+                <div key={index} className={styles.categoryWrapper}>
+                  <div className={styles.category}>
+                    <Image
+                      alt={nom?.fullName}
+                      width={320}
+                      height={320}
+                      src={nom?.profilePicture?.secure_url}
+                    />
+                    <div
+                      className={styles.buttonContainer}
+                      style={{
+                        background: `linear-gradient(180deg, ${color}00, ${color}99)`,
+                      }}
+                    >
+                      <div
+                        className={styles.nomineeButton}
+                        onClick={() => openModal(nom, color)}
+                      >
+                        {" "}
+                        VIEW PROFILE{" "}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input
+                      disabled={status === "unauthenticated"}
+                      type="radio"
+                      name="nomineeId"
+                      value={nom._id}
+                      onChange={(event) => handleInputChange(event)}
+                      className={styles.radio}
+                    />
+                    <label htmlFor={nom._id} className={styles.voteformLabel}>
+                      {" "}
+                      Vote for me{" "}
+                    </label>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+
+            <div className={styles.votebuttonContainer}>
+              {status === "unauthenticated" && (
+                <div className={styles.responseMessageE}>
+                  You need to{" "}
+                  <Link href={"/login"}>
+                    <span>log in</span>
+                  </Link>{" "}
+                  to vote
+                </div>
+              )}
+
+              <button className={styles.voteButton}> SUBMIT VOTE</button>
+              {responseMessage && (
+                <div className={styles.responseMessage}>
+                  {responseMessage?.message}
+                </div>
+              )}
+            </div>
+          </form>
         ) : null}
       </div>
     </div>
