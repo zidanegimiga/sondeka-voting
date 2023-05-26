@@ -13,6 +13,7 @@
 
     @media (max-width: 450px) {
         padding-top: 120px;
+        margin-bottom: 48px
     }
 }
 
@@ -315,5 +316,25 @@
 @keyframes highlight {
     to {
         background-position: 0 0;
+    }
+}
+
+.heroCTAcontainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.heroCTA{
+    background-color: #FFCD00;
+    padding: 4px 10px;
+    width: 100%;
+    border-radius: 8px;
+    p{
+        font-size: 16px;
+        color: #292727;
+        font-family: 'Graphik lcg';
+        font-weight: 500;
     }
 }

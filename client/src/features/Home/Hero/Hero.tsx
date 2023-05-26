@@ -7,7 +7,8 @@ import Countdown from "../Countdown";
 import { useRouter } from "next/router";
 import LogoElement from "features/svgIcons/sondekaElement";
 import Layer3Element from "features/svgIcons/layer3Element";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Hero = () => {
   const [height, setHeight] = useState<number>();
@@ -23,8 +24,12 @@ const Hero = () => {
       {/* {
         router.pathname === '/' && <Countdown/>
       }*/}
-      <motion.div className={styles.layer1} initial={{x: 250}} animate={{x: 0}} transition={{duration: 2.5}}>
-        
+      <motion.div
+        className={styles.layer1}
+        initial={{ x: 250 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 2.5 }}
+      >
         <div className={styles["strokedText"] + " " + styles["layer1Left"]}>
           {" "}
           2023
@@ -39,7 +44,7 @@ const Hero = () => {
         </div>
         <div className={styles.strokedText + " " + styles["layer3Right"]}>
           SOND3KA
-        </div>        
+        </div>
       </motion.div>
 
       <motion.div className={styles.layer2}>
@@ -60,7 +65,12 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      <motion.div className={styles.layer3} initial={{x: -250}} animate={{x: 0}} transition={{duration: 2.5}}>
+      <motion.div
+        className={styles.layer3}
+        initial={{ x: -250 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 2.5 }}
+      >
         <div className={styles.strokedText + " " + styles.layer3Left}>
           SOND3KA 2023
         </div>
@@ -74,12 +84,26 @@ const Hero = () => {
         </div>
       </motion.div>
       <motion.div className={styles.heroMobile}>
-        <motion.h1 >Sond3ka</motion.h1>
-        <motion.h1 >Awards</motion.h1>
-        <motion.div className={styles.layer3Mobile} >
-        <motion.h1 >2023</motion.h1>
-        <motion.div className={styles.layer3MobileElement} initial={{ scale: 0.1, rotate: 180}} animate={{rotate: 0, scale: 1}} transition={{duration: 2.5}}><Layer3Element/></motion.div>
+        <motion.h1>Sond3ka</motion.h1>
+        <motion.h1>Awards</motion.h1>
+        <motion.div className={styles.layer3Mobile}>
+          <motion.h1>2023</motion.h1>
+          <motion.div
+            className={styles.layer3MobileElement}
+            initial={{ scale: 0.1, rotate: 180 }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{ duration: 2.5 }}
+          >
+            <Layer3Element />
+          </motion.div>
         </motion.div>
+        <div className={styles.heroCTAcontainer}>
+          <Link href={"/#categories"}>
+            <div className={styles.heroCTA}>
+              <p>VIEW CATEGORIES</p>
+            </div>
+          </Link>
+        </div>
       </motion.div>
     </div>
   );
