@@ -66,13 +66,13 @@ export default function Index({ data }) {
         console.error(err);
       }
     };
-    userVote()
+    userVote();
     console.log("Form Data: ", formData);
   };
 
   const openModal = (nominee: any, categoryColor: string) => {
     setNomineeModalData(nominee);
-    // console.log("Nominee: ", nomineeModalData);
+    console.log("Nominee: ", nomineeModalData);
     setCategoryColor(categoryColor);
     setIsModalOpen(true);
   };
@@ -107,20 +107,19 @@ export default function Index({ data }) {
           <div className={styles.categories} id="categories">
             <div className={styles.categoriesTitle}>CATEGORIES</div>
             <div>
-
-            {data?.map((category, index) => {
-              return (
-                <CategoryItem
-                  key={index}
-                  title={category.name}
-                  description={category.description}
-                  poster={category.poster}
-                  link={category._id}
-                  color={category.color}
-                  openModal={openModal}
-                />
-              );
-            })}
+              {data?.map((category, index) => {
+                return (
+                  <CategoryItem
+                    key={index}
+                    title={category.name}
+                    description={category.description}
+                    poster={category.poster}
+                    link={category._id}
+                    color={category.color}
+                    openModal={openModal}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className={styles.subLogo}>
@@ -165,13 +164,29 @@ export default function Index({ data }) {
           transition={{ duration: 1 }}
         >
           <div className={styles.contentContainer}>
-            <div className={styles.imageContainer}>
-              <img
-                src={nomineeModalData?.profilePicture?.url}
-                alt={nomineeModalData.fullName}
-                className={styles.modalImage}
-              />
-            </div>
+            {nomineeModalData?.categoryName ===
+            "Traditional/Contemporary Art" && (
+              <div className={styles.imageContainer}>
+                <img
+                  src={`/nomineeAssets/${nomineeModalData?.fullName}.jpg`}
+                  alt={nomineeModalData.fullName}
+                  className={styles.modalImage}
+                />
+              </div>
+            )}
+
+            {
+              nomineeModalData?.categoryName == "Digital Art" && (
+                <div className={styles.imageContainer}>
+                <img
+                  src={`/nomineeAssets/${nomineeModalData?.fullName}.jpg`}
+                  alt={nomineeModalData.fullName}
+                  className={styles.modalImage}
+                />
+              </div>
+              )
+            }
+
             <div className={styles.nomineeContent}>
               <h2>{nomineeModalData?.fullName}</h2>
               <p>{nomineeModalData?.bio}</p>
