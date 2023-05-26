@@ -12,14 +12,13 @@ const Nominee = require('../../models/Nominee')
 // @access Private
 const vote = asyncHandler(async (req, res) => {
     try {
-        const { categoryId, nomineeId, voterId, categoryName} = req.body;
-        console.log("Category Id: ", categoryId)
+        const {nomineeId, voterId, categoryName} = req.body;
         console.log("Nominee Id: ", nomineeId)
         console.log("Voter Id: ", voterId)
         console.log("Category Name: ", categoryName)
 
         // Is category and nominee valid?
-        const category = await VotingCategory.findById(mongoose.Types.ObjectId(categoryId));
+        const category = await VotingCategory.find({name: categoryName});
         
         if (!category) {
             return res.status(400).json({ message: 'Invalid category ID' });
@@ -40,7 +39,6 @@ const vote = asyncHandler(async (req, res) => {
         const voteLogEntry = new VotingLog({
             voterId: mongoose.Types.ObjectId(voterId),
             categoryName: categoryName,
-            category: mongoose.Types.ObjectId(categoryId),
             nominee: mongoose.Types.ObjectId(nomineeId),
             timestamp: Date.now()
         });

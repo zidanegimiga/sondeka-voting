@@ -6,14 +6,9 @@ const logSchema = new mongoose.Schema({
     ref: 'Voter',
     required: true
   },
-  nominee: {
+  nomineeId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Nominee',
-    required: true
-  },
-  category:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
     required: true
   },
   categoryName:{
