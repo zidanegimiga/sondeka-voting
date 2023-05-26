@@ -30,7 +30,7 @@ const vote = asyncHandler(async (req, res) => {
         }
 
         // Has the user voted?
-        const existingVoteLogEntry = await VotingLog.findOne({ voterId: mongoose.Types.ObjectId(voterId), categoryName: categoryName});
+        const existingVoteLogEntry = await VotingLog.findOne({ voterId: voterId, categoryName: categoryName});
         if (existingVoteLogEntry) {
             return res.status(400).json({ message: 'You have already voted in this category' });
         }
@@ -39,7 +39,7 @@ const vote = asyncHandler(async (req, res) => {
         const voteLogEntry = new VotingLog({
             voterId: mongoose.Types.ObjectId(voterId),
             categoryName: categoryName,
-            nominee: mongoose.Types.ObjectId(nomineeId),
+            nomineeId: mongoose.Types.ObjectId(nomineeId),
             timestamp: Date.now()
         });
 
