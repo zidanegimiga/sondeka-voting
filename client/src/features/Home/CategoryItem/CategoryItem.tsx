@@ -26,7 +26,7 @@ const CategoryItem = ({ title, description, poster, link, color, openModal }) =>
       }
     }
 
-    getNominees();
+    setTimeout(getNominees, 3000)
   }, []);
 
   return (
