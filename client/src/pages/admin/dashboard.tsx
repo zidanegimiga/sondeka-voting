@@ -23,7 +23,7 @@ const Dashboard = () => {
     const accessToken = window.localStorage.getItem('admin-auth')
     const getDashboardDigits = async () =>{
       try{
-        const res = await fetch(`${process.env.API_URL}/admin/dashboard`, {
+        const res = await fetch(`https://sondeka-render-api.onrender.com/admin/dashboard`, {
           headers: {
             authorization: accessToken,
           },

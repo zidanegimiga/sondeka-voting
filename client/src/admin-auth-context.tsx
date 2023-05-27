@@ -26,7 +26,7 @@ const AuthProvider: FC = ({ children }) => {
   async function getUserId(name) {
     try {
       const response = await fetch(
-        `https://sondeka-voting-api.cyclic.app/users/${encodeURIComponent(name)}`
+        `https://sondeka-render-api.onrender.com/users/${encodeURIComponent(name)}`
       );
 
       const userId = await response.json();

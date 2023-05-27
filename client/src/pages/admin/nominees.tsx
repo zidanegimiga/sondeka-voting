@@ -16,7 +16,7 @@ const Dashboard = () => {
 
     const fetchNomineesData = async () => {
       const res = await fetch(
-        `https://sondeka-voting-api.cyclic.app/admin/nominees/allNominees`,
+        `https://sondeka-render-api.onrender.com/admin/nominees/allNominees`,
         {
           headers: {
             authorization: accessToken,

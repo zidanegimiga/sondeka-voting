@@ -14,7 +14,7 @@ const Voters = () => {
     const categoryId = router.query.categoryId;
 
     const fetchVotersData = async () => {
-      const res = await fetch(`${process.env.API_URL}/admin/voters/allVoters`, {
+      const res = await fetch(`https://sondeka-render-api.onrender.com/admin/voters/allVoters`, {
         headers: {
           authorization: accessToken,
         },

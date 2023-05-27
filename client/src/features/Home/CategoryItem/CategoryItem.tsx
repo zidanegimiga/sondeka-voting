@@ -43,7 +43,7 @@ const CategoryItem = ({
       setLoading(true);
       const votingData = {nomineeId: formData?.nomineeId, voterId: userId, categoryName: title}
       const response = await fetch(
-        `https://sondeka-voting-api.cyclic.app/vote`,
+        `https://sondeka-render-api.onrender.com/vote`,
         {
           method: "POST",
           body: JSON.stringify(votingData),
@@ -68,7 +68,7 @@ const CategoryItem = ({
       try {
         setLoadNominees(true);
         const response = await fetch(
-          `https://sondeka-voting-api.cyclic.app/admin/categories/${link}/nominees`
+          `https://sondeka-render-api.onrender.com/admin/categories/${link}/nominees`
         );
         const nomineeData = await response.json();
         console.log(`${title}: `, nomineeData);

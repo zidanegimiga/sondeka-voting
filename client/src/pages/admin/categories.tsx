@@ -21,7 +21,7 @@ const AdminCategories = () => {
       console.log("Is Authenticated: ", isAdminAuthenticated);
       try {
         const res = await fetch(
-          `https://sondeka-voting-api.cyclic.app//admin/categories/allCategories`,
+          `https://sondeka-render-api.onrender.com/admin/categories/allCategories`,
           {
             headers: {
               authorization: accessToken,

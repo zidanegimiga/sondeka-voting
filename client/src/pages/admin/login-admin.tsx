@@ -42,7 +42,7 @@ const AdminLoginPage = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://sondeka-voting-api.cyclic.app/admin/authentication/login`,
+        `https://sondeka-render-api.onrender.com/admin/authentication/login`,
         {
           method: "POST",
           body: JSON.stringify(formData),

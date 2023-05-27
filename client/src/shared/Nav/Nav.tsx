@@ -22,7 +22,7 @@ const Nav = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://sondeka-voting-api.cyclic.app//admin/authentication/logout",
+        "https://sondeka-render-api.onrender.com/admin/authentication/logout",
         {
           method: "GET",
         }
@@ -49,9 +49,6 @@ const Nav = () => {
             <div className={styles.centerItem}>
               <Link href={"/"}> HOME </Link>
             </div>
-            {/* <div className={styles.centerItem}>
-              <Link href={"#"}> NOMINEES </Link>
-            </div> */}
             <div className={styles.centerItem}>
               <Link href={"/#categories"}> CATEGORIES </Link>
             </div>
@@ -114,7 +111,7 @@ const Nav = () => {
                   <div
                     className={styles.navLink}
                     onClick={() =>
-                      signOut({ callbackUrl: "http://localhost:3000/" })
+                      signOut({ callbackUrl: "vote.sondeka.org" })
                     }
                   >
                     <div>Log Out</div>

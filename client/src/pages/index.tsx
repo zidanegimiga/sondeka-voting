@@ -48,7 +48,7 @@ export default function Index({ data }) {
         setLoading(true);
         const response = await fetch(
           // `http://localhost:3500/vote`,
-          `https://sondeka-voting-api.cyclic.app/vote`,
+          `https://sondeka-render-api.onrender.com/vote`,
           // `http://localhost:3500/vote`,
           {
             method: "POST",
@@ -242,7 +242,7 @@ export default function Index({ data }) {
 
 export const getServerSideProps = async () => {
   const res = await fetch(
-    "https://sondeka-voting-api.cyclic.app/categories/allCategories"
+    "https://sondeka-render-api.onrender.com/categories/allCategories"
   );
   const data = await res.json();
 

@@ -40,7 +40,7 @@ const CategoryId = () => {
       console.log("Category ID Type: ", typeof categoryId);
 
       const res = await fetch(
-        `${process.env.API_URL}/admin/categories/${categoryId}`,
+        `https://sondeka-render-api.onrender.com/admin/categories/${categoryId}`,
         {
           headers: {
             authorization: accessToken,
@@ -59,7 +59,7 @@ const CategoryId = () => {
 
     const fetchNomineeData = async () => {
       const res = await fetch(
-        `${process.env.API_URL}/admin/categories/${categoryId}/nominees`,
+        `https://sondeka-render-api.onrender.com/admin/categories/${categoryId}/nominees`,
         {
           headers: {
             authorization: accessToken,

@@ -37,7 +37,7 @@ const CreateNominee = ({ data }) => {
     try {
       setLoading(true);
       const response = await fetch(
-      `http://localhost:3500/admin/nominees/newNominee`,
+      `https://sondeka-render-api.onrender.com/admin/nominees/newNominee`,
         {
           method: "POST",
           body: JSON.stringify({fullName, stageName, categoryName, bio, socialMedia, submission, profilePicture}),
@@ -178,7 +178,7 @@ export default CreateNominee;
 
 export const getServerSideProps = async () => {
   const res = await fetch(
-    "https://sondeka-voting-api.cyclic.app/categories/allCategories"
+    "https://sondeka-render-api.onrender.com/categories/allCategories"
   );
   const data = await res.json();
 
