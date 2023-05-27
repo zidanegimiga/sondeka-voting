@@ -27,7 +27,7 @@ const Nav = () => {
           method: "GET",
         }
       );
-      console.log("Logout Admin: ", response);
+      console.log("Admin Log out: ", response);
     } catch (err) {
       console.error(err);
     }
