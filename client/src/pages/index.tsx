@@ -245,6 +245,7 @@ export const getServerSideProps = async () => {
     "https://sondeka-render-api.onrender.com/categories/allCategories"
   );
   const data = await res.json();
+  console.log("Categories generated, ", data)
 
   return {
     props: {

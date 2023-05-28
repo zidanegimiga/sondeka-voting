@@ -104,6 +104,15 @@ const CategoryItem = ({
         {expanded ? (
           <form>
             {/* {loadNominees && <div> Loading....</div>} */}
+            {status === "unauthenticated" && (
+                <div className={styles.responseMessageE}>
+                  You need to{" "}
+                  <Link href={"/oAuthLogin"}>
+                    <span>log in</span>
+                  </Link>{" "}
+                  to vote
+                </div>
+              )}
             <div className={styles.categoriesContainer}>
               {nominee?.map((nom: any, index: number) => (
                 <div key={index} className={styles.categoryWrapper}>
@@ -148,16 +157,6 @@ const CategoryItem = ({
             </div>
 
             <div className={styles.votebuttonContainer}>
-              {status === "unauthenticated" && (
-                <div className={styles.responseMessageE}>
-                  You need to{" "}
-                  <Link href={"/oAuthLogin"}>
-                    <span>log in</span>
-                  </Link>{" "}
-                  to vote
-                </div>
-              )}
-
               <button
                 className={styles.voteButton}
                 type="submit"
