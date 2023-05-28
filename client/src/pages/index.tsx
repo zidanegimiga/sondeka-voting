@@ -165,7 +165,7 @@ export default function Index({ data }) {
         >
           <div className={styles.contentContainer}>
             {nomineeModalData?.categoryName ===
-            "Traditional/Contemporary Art" && (
+              "Traditional/Contemporary Art" && (
               <div className={styles.imageContainer}>
                 <img
                   src={`/nomineeAssets/${nomineeModalData?.fullName}.jpg`}
@@ -175,17 +175,15 @@ export default function Index({ data }) {
               </div>
             )}
 
-            {
-              nomineeModalData?.categoryName == "Digital Art" && (
-                <div className={styles.imageContainer}>
+            {nomineeModalData?.categoryName == "Digital Art" && (
+              <div className={styles.imageContainer}>
                 <img
                   src={`/nomineeAssets/${nomineeModalData?.fullName}.jpg`}
                   alt={nomineeModalData.fullName}
                   className={styles.modalImage}
                 />
               </div>
-              )
-            }
+            )}
 
             <div className={styles.nomineeContent}>
               <h2>{nomineeModalData?.fullName}</h2>
@@ -215,14 +213,18 @@ export default function Index({ data }) {
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.modalButtonsContainer}>
-                <a
-                  href={nomineeModalData?.submission}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.checkOutMyWork}
-                >
-                  <div>CHECK OUT MY WORK</div>
-                </a>
+                {
+                  nomineeModalData?.categoryName !== "Digital Art" || "Traditional/Contemporary Art" ? (
+                    <a
+                    href={nomineeModalData?.submission}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.checkOutMyWork}
+                  >
+                    <div>CHECK OUT MY WORK</div>
+                  </a>
+                  ) : null
+                }
                 {/* {responseMessage && (
                   <div className={styles.responseMessage}>
                     {responseMessage?.message}
@@ -245,7 +247,7 @@ export const getServerSideProps = async () => {
     "https://sondeka-render-api.onrender.com/categories/allCategories"
   );
   const data = await res.json();
-  console.log("Categories generated, ", data)
+  console.log("Categories generated, ", data);
 
   return {
     props: {
