@@ -213,17 +213,15 @@ export default function Index({ data }) {
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.modalButtonsContainer}>
-                {
-                  nomineeModalData?.categoryName !== "Digital Art" || "Traditional/Contemporary Art" ? (
+                { nomineeModalData.categoryName !== "Digital Art" || "Traditional/Contemporary Art" &&
                     <a
                     href={nomineeModalData?.submission}
                     target="_blank"
                     rel="noreferrer"
                     className={styles.checkOutMyWork}
                   >
-                    <div>CHECK OUT MY WORK</div>
+                    <div> CHECK OUT MY WORK</div>
                   </a>
-                  ) : null
                 }
                 {/* {responseMessage && (
                   <div className={styles.responseMessage}>
