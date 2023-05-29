@@ -166,11 +166,8 @@ export default function Index() {
                       key={category.name}
                       categoryData={category}
                       title={category.name}
-                      description={category.description}
-                      poster={category.poster}
                       link={category._id}
                       color={category.color}
-                      choices={choices}
                       openModal={openModal}
                       handleChoiceChange={handleChoiceChange}
                     />
@@ -263,45 +260,41 @@ export default function Index() {
               <p>{nomineeModalData?.bio}</p>
               <div className={styles.socialMedia}>
                 {nomineeModalData?.socialMedia?.twitter !== "" && (
-                  <a href={nomineeModalData?.socialMedia?.twitter}>
+                  <a href={nomineeModalData?.socialMedia?.twitter} rel="noreferrer" target="_blank">
                     <Twitter />
                   </a>
                 )}
                 {nomineeModalData?.socialMedia?.instagram !== "" && (
-                  <a href={nomineeModalData?.socialMedia?.instagram}>
+                  <a href={nomineeModalData?.socialMedia?.instagram} rel="noreferrer" target="_blank">
                     {" "}
                     <Instagram />{" "}
                   </a>
                 )}
                 {nomineeModalData?.socialMedia?.facebook !== "" && (
-                  <a href={nomineeModalData?.socialMedia?.facebook}>
+                  <a href={nomineeModalData?.socialMedia?.facebook} rel="noreferrer" target="_blank">
                     <Facebook />{" "}
                   </a>
                 )}
                 {nomineeModalData?.socialMedia?.other[0] !== "" && (
-                  <a href={nomineeModalData?.socialMedia?.other[0]}>
+                  <a href={nomineeModalData?.socialMedia?.other[0]} rel="noreferrer" target="_blank">
                     <Other />{" "}
                   </a>
                 )}
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.modalButtonsContainer}>
-                {nomineeModalData.categoryName !== "Digital Art" ||
-                  ("Traditional/Contemporary Art" && (
+                {
+                  nomineeModalData?.categoryName !== "Digital Art" && nomineeModalData?.categoryName !== "Traditional/Contemporary Art" ? (
                     <a
-                      href={nomineeModalData?.submission}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={styles.checkOutMyWork}
-                    >
-                      <div> CHECK OUT MY WORK</div>
-                    </a>
-                  ))}
-                {/* {responseMessage && (
-                  <div className={styles.responseMessage}>
-                    {responseMessage?.message}
-                  </div>
-                )} */}
+                    href={nomineeModalData?.submission}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.checkOutMyWork}
+                  >
+                    <div> CHECK OUT MY WORK</div>
+                  </a>
+                  ) : null
+                }
               </div>
             </div>
           </div>

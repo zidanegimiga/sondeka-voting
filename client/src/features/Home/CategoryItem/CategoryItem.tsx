@@ -16,36 +16,17 @@ const override: CSSProperties = {
 
 const CategoryItem = ({
   title,
-  description,
-  poster,
   link,
   color,
   openModal,
   categoryData,
-  choices,
   handleChoiceChange
 }) => {
-  const { userId } = React.useContext(AuthContext);
-  const [loading, setLoading] = React.useState(false);
   const [hover, setHover] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [loadNominees, setLoadNominees] = React.useState(false);
-  const [responseMessage, setResponseMessage] = React.useState<any>();
   const [nominee, setNominee] = React.useState<any>();
-  const [formData, setFormData] = React.useState({
-    categoryName: title,
-    nomineeId: "",
-    voterId: userId,
-  });
   const { data: session, status } = useSession();
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
   useEffect(() => {
     async function getNominees() {
@@ -150,9 +131,6 @@ const CategoryItem = ({
                         name={nom.categoryName}
                         value={nom._id}
                         required
-                        // checked={
-                        //   choices.find((choice) => choice.categoryName === categoryData.name)?.selectedNominee === nominee
-                        // }
                         onChange={() => handleChoiceChange(categoryData, nom)}
                         className={styles.radio}
                       />
