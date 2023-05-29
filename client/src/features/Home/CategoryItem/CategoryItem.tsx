@@ -79,7 +79,7 @@ const CategoryItem = ({
       }
     }
 
-    setTimeout(getNominees, 3000);
+    setTimeout(getNominees, 6000);
   }, []);
 
   return (

@@ -2,12 +2,10 @@ import styles from "../styles/Home.module.scss";
 import Head from "next/head";
 import Nav from "shared/Nav";
 import Hero from "features/Home/Hero";
-import Categories from "features/Home/Categories";
 import DownArrow from "features/svgIcons/downArrow";
 import Countdown from "features/Home/Countdown/Countdown";
 import Link from "next/link";
 import SocialsButton from "../features/Home/SocialsButton";
-import Cursor from "shared/Cursor";
 import { useState, useEffect, useContext } from "react";
 import { VoterContext } from "global/VoterContext";
 import CategoryItem from "features/Home/CategoryItem/CategoryItem";
@@ -22,7 +20,8 @@ const Modal = ({ isOpen, onClose, categoryColor, children }) => {
   return <div className={styles.modal}>{children}</div>;
 };
 
-export default function Index({ data }) {
+export default function Index() {
+  const [categoryData, setCategoryData] = useState([])
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { userId } = useContext(AuthContext);
@@ -81,7 +80,22 @@ export default function Index({ data }) {
     setIsModalOpen(false);
   };
 
-  console.log(data);
+  useEffect(()=>{
+    async function getCategories(){
+      try{
+        const res = await fetch(
+          "https://sondeka-render-api.onrender.com/categories/allCategories"
+        );
+        const data = await res.json();
+        console.log("Category Data: ", data)
+        setCategoryData(data)
+      }catch(err){
+        console.error("Category Data Error: ",err)
+      }
+    }
+    setTimeout(getCategories, 3000)
+  }, [])
+
   return (
     <div>
       <div className={styles.homeWrapper}>
@@ -107,7 +121,7 @@ export default function Index({ data }) {
           <div className={styles.categories} id="categories">
             <div className={styles.categoriesTitle}>CATEGORIES</div>
             <div>
-              {data?.map((category, index) => {
+              {categoryData?.map((category, index) => {
                 return (
                   <CategoryItem
                     key={index}
@@ -240,16 +254,17 @@ export default function Index({ data }) {
   );
 }
 
-export const getServerSideProps = async () => {
-  const res = await fetch(
-    "https://sondeka-render-api.onrender.com/categories/allCategories"
-  );
-  const data = await res.json();
-  console.log("Categories generated, ", data);
+// export const getServerSideProps = async () => {
+//   const res = await fetch(
+//     "https://sondeka-render-api.onrender.com/categories/allCategories"
+//   );
+//   const data = await res.json();
+//   console.log("Categories generated, ", data);
 
-  return {
-    props: {
-      data,
-    },
-  };
-};
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// };
+
