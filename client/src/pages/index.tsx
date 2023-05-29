@@ -17,6 +17,9 @@ import { AuthContext } from "admin-auth-context";
 import BeatLoader from "react-spinners/BeatLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FrankNjugi from "shared/Nominee/FrankNjugi";
+import MartinMururu from "shared/Nominee/MartinMururu";
+import LutiviniMajanja from "shared/Nominee/LutiviniMajanja";
 
 const override: CSSProperties = {
   display: "block",
@@ -245,6 +248,21 @@ export default function Index() {
           transition={{ duration: 1 }}
         >
           <div className={styles.contentContainer}>
+            {
+              nomineeModalData?.stageName === "Frank Njugi" && (
+                <FrankNjugi/>
+              )                        
+            }
+            {
+              nomineeModalData?.stageName === "Martin Mururu" && (
+                <MartinMururu/>
+              )                        
+            }
+            {
+              nomineeModalData?.stageName === "Lutivini Majanja" && (
+                <LutiviniMajanja/>
+              )                        
+            }
             {nomineeModalData?.categoryName ===
               "Traditional/Contemporary Art" && (
               <div className={styles.imageContainer}>
@@ -307,10 +325,11 @@ export default function Index() {
                     <Other />{" "}
                   </a>
                 )}
-                {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.modalButtonsContainer}>
                 {nomineeModalData?.categoryName !== "Digital Art" &&
+                // nomineeModalData?.categoryName !==
+                // "Short Stories" &&
                 nomineeModalData?.categoryName !==
                   "Traditional/Contemporary Art" ? (
                   <a
