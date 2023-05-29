@@ -6,7 +6,7 @@ import DownArrow from "features/svgIcons/downArrow";
 import Countdown from "features/Home/Countdown/Countdown";
 import Link from "next/link";
 import SocialsButton from "../features/Home/SocialsButton";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, CSSProperties } from "react";
 import { VoterContext } from "global/VoterContext";
 import CategoryItem from "features/Home/CategoryItem/CategoryItem";
 import { useSession } from "next-auth/react";
@@ -14,6 +14,13 @@ import Close from "../features/svgIcons/close";
 import { Twitter, Instagram, Facebook, Other } from "../shared/ModalIcons";
 import { motion } from "framer-motion";
 import { AuthContext } from "admin-auth-context";
+import BeatLoader from "react-spinners/BeatLoader";
+
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 const Modal = ({ isOpen, onClose, categoryColor, children }) => {
   if (!isOpen) return null;
@@ -83,17 +90,19 @@ export default function Index() {
   useEffect(()=>{
     async function getCategories(){
       try{
+        setLoading(true)
         const res = await fetch(
           "https://sondeka-render-api.onrender.com/categories/allCategories"
         );
         const data = await res.json();
         console.log("Category Data: ", data)
         setCategoryData(data)
+        setLoading(false)
       }catch(err){
         console.error("Category Data Error: ", err)
       }
     }
-    setTimeout(getCategories, 3000)
+    setTimeout(getCategories, 1000)
   }, [])
 
   return (
@@ -120,21 +129,43 @@ export default function Index() {
           </div>
           <div className={styles.categories} id="categories">
             <div className={styles.categoriesTitle}>CATEGORIES</div>
-            <div>
-              {categoryData?.map((category, index) => {
-                return (
-                  <CategoryItem
-                    key={index}
-                    title={category.name}
-                    description={category.description}
-                    poster={category.poster}
-                    link={category._id}
-                    color={category.color}
-                    openModal={openModal}
-                  />
-                );
-              })}
-            </div>
+            {
+              loading ? (
+                <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingTop: "24px",
+                  paddingBottom: "24px",
+                }}
+              >
+                <BeatLoader
+                  loading={loading}
+                  color="#ffcd00"
+                  size={25}
+                  aria-label="Loading Nominees"
+                  cssOverride={override}
+                />
+              </div>
+              ) : (
+                <div>
+                {categoryData?.map((category, index) => {
+                  return (
+                    <CategoryItem
+                      key={index}
+                      title={category.name}
+                      description={category.description}
+                      poster={category.poster}
+                      link={category._id}
+                      color={category.color}
+                      openModal={openModal}
+                    />
+                  );
+                })}
+              </div>
+              )
+            }
           </div>
           <div className={styles.subLogo}>
             <div className={styles.sondekaTitle}>

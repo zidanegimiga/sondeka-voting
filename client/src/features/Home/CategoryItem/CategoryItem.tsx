@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, CSSProperties } from "react";
 import { ButtonIcon, DownCircle } from "features/svgIcons/CategoryIcons";
 import styles from "./CategoryItem.module.scss";
 import Link from "next/link";
@@ -6,6 +6,13 @@ import Image from "next/image";
 import { VoterContext } from "global/VoterContext";
 import { AuthContext } from "admin-auth-context";
 import { useSession } from "next-auth/react";
+import BeatLoader from "react-spinners/BeatLoader";
+
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 const CategoryItem = ({
   title,
@@ -41,7 +48,11 @@ const CategoryItem = ({
     event.preventDefault();
     try {
       setLoading(true);
-      const votingData = {nomineeId: formData?.nomineeId, voterId: userId, categoryName: title}
+      const votingData = {
+        nomineeId: formData?.nomineeId,
+        voterId: userId,
+        categoryName: title,
+      };
       const response = await fetch(
         `https://sondeka-render-api.onrender.com/vote`,
         {
@@ -79,7 +90,7 @@ const CategoryItem = ({
       }
     }
 
-    setTimeout(getNominees, 3000);
+    setTimeout(getNominees, 1000);
   }, []);
 
   return (
@@ -93,8 +104,11 @@ const CategoryItem = ({
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <div className={styles.categoryTitleContainer} onClick={() => setExpanded(!expanded)}>
-          <h1 >{title?.toUpperCase()}</h1>
+        <div
+          className={styles.categoryTitleContainer}
+          onClick={() => setExpanded(!expanded)}
+        >
+          <h1>{title?.toUpperCase()}</h1>
           <div className={styles.arrowContainer}>
             <div className={styles.downIconWrapper}>
               <DownCircle hover={hover} />
@@ -102,9 +116,28 @@ const CategoryItem = ({
           </div>
         </div>
         {expanded ? (
-          <form>
-            {/* {loadNominees && <div> Loading....</div>} */}
-            {status === "unauthenticated" && (
+          loadNominees ? (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                paddingTop: "24px",
+                paddingBottom: "24px",
+              }}
+            >
+              <BeatLoader
+                loading={loadNominees}
+                color="#ffcd00"
+                size={25}
+                aria-label="Loading Nominees"
+                cssOverride={override}
+              />
+            </div>
+          ) : (
+            <form>
+              {/* {loadNominees && <div> Loading....</div>} */}
+              {status === "unauthenticated" && (
                 <div className={styles.responseMessageE}>
                   You need to{" "}
                   <Link href={"/oAuthLogin"}>
@@ -113,66 +146,67 @@ const CategoryItem = ({
                   to vote
                 </div>
               )}
-            <div className={styles.categoriesContainer}>
-              {nominee?.map((nom: any, index: number) => (
-                <div key={index} className={styles.categoryWrapper}>
-                  <div className={styles.category}>
-                    <Image
-                      alt={nom?.fullName}
-                      width={320}
-                      height={320}
-                      src={nom?.profilePicture?.secure_url}
-                    />
-                    <div
-                      className={styles.buttonContainer}
-                      style={{
-                        background: `linear-gradient(180deg, ${color}00, ${color}99)`,
-                      }}
-                    >
+              <div className={styles.categoriesContainer}>
+                {nominee?.map((nom: any, index: number) => (
+                  <div key={index} className={styles.categoryWrapper}>
+                    <div className={styles.category}>
+                      <Image
+                        alt={nom?.fullName}
+                        width={320}
+                        height={320}
+                        src={nom?.profilePicture?.secure_url}
+                      />
                       <div
-                        className={styles.nomineeButton}
-                        onClick={() => openModal(nom, color)}
+                        className={styles.buttonContainer}
+                        style={{
+                          background: `linear-gradient(180deg, ${color}00, ${color}99)`,
+                        }}
                       >
-                        {" "}
-                        VIEW PROFILE{" "}
+                        <div
+                          className={styles.nomineeButton}
+                          onClick={() => openModal(nom, color)}
+                        >
+                          {" "}
+                          VIEW PROFILE{" "}
+                        </div>
                       </div>
                     </div>
+                    <div className={styles.inputGroup}>
+                      <input
+                        disabled={status === "unauthenticated"}
+                        type="radio"
+                        name="nomineeId"
+                        value={nom._id}
+                        onChange={(event) => handleInputChange(event)}
+                        className={styles.radio}
+                      />
+                      <label htmlFor={nom._id} className={styles.voteformLabel}>
+                        {" "}
+                        Vote for me{" "}
+                      </label>
+                    </div>
                   </div>
-                  <div className={styles.inputGroup}>
-                    <input
-                      disabled={status === "unauthenticated"}
-                      type="radio"
-                      name="nomineeId"
-                      value={nom._id}
-                      onChange={(event) => handleInputChange(event)}
-                      className={styles.radio}
-                    />
-                    <label htmlFor={nom._id} className={styles.voteformLabel}>
-                      {" "}
-                      Vote for me{" "}
-                    </label>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            <div className={styles.votebuttonContainer}>
-              <button
-                className={styles.voteButton}
-                type="submit"
-                disabled={status === "unauthenticated"}
-                onClick={(e)=>handleSubmit(e)}
-              >
-                {" "}
-                {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
-              </button>
-              {responseMessage && (
-                <div className={styles.responseMessage}>
-                  {responseMessage?.message}
-                </div>
-              )}
-            </div>
-          </form>
+              <div className={styles.votebuttonContainer}>
+                <button
+                  className={styles.voteButton}
+                  type="submit"
+                  disabled={status === "unauthenticated"}
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  {" "}
+                  {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
+                </button>
+                {responseMessage && (
+                  <div className={styles.responseMessage}>
+                    {responseMessage?.message}
+                  </div>
+                )}
+              </div>
+            </form>
+          )
         ) : null}
       </div>
     </div>
