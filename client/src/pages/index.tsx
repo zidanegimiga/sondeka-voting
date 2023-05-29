@@ -73,7 +73,9 @@ export default function Index() {
 
   const handleChoiceChange = (category: any, nominee: any) => {
     const updatedChoices = [...choices];
-    const existingChoiceIndex = updatedChoices.findIndex((choice) => choice.categoryName === category?.name);
+    const existingChoiceIndex = updatedChoices.findIndex(
+      (choice) => choice.categoryName === category?.name
+    );
 
     if (existingChoiceIndex !== -1) {
       updatedChoices[existingChoiceIndex] = {
@@ -84,7 +86,7 @@ export default function Index() {
       updatedChoices.push({
         categoryName: category.name,
         nomineeId: nominee._id,
-        voterId: userId
+        voterId: userId,
       });
     }
 
@@ -110,7 +112,7 @@ export default function Index() {
       const datares = await response.json();
       setLoading(false);
       setResponseMessage(datares);
-      setChoices([])
+      setChoices([]);
     } catch (err) {
       console.error(err);
     }
@@ -160,6 +162,15 @@ export default function Index() {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
+                {status === "unauthenticated" && (
+                  <div className={styles.responseMessageE}>
+                    You need to{" "}
+                    <Link href={"/oAuthLogin"}>
+                      <span>log in</span>
+                    </Link>{" "}
+                    to vote
+                  </div>
+                )}
                 {categoryData?.map((category, index) => {
                   return (
                     <CategoryItem
@@ -176,13 +187,13 @@ export default function Index() {
 
                 <div className={styles.votebuttonContainer}>
                   <button
-                  className={styles.voteButton}
-                  type="submit"
-                  disabled={status === "unauthenticated"}
-                >
-                  {" "}
-                  {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
-                </button>
+                    className={styles.voteButton}
+                    type="submit"
+                    disabled={status === "unauthenticated"}
+                  >
+                    {" "}
+                    {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
+                  </button>
                   {responseMessage && (
                     <div className={styles.responseMessage}>
                       {responseMessage?.message}
@@ -260,32 +271,49 @@ export default function Index() {
               <p>{nomineeModalData?.bio}</p>
               <div className={styles.socialMedia}>
                 {nomineeModalData?.socialMedia?.twitter !== "" && (
-                  <a href={nomineeModalData?.socialMedia?.twitter} rel="noreferrer" target="_blank">
+                  <a
+                    href={nomineeModalData?.socialMedia?.twitter}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     <Twitter />
                   </a>
                 )}
                 {nomineeModalData?.socialMedia?.instagram !== "" && (
-                  <a href={nomineeModalData?.socialMedia?.instagram} rel="noreferrer" target="_blank">
+                  <a
+                    href={nomineeModalData?.socialMedia?.instagram}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     {" "}
                     <Instagram />{" "}
                   </a>
                 )}
                 {nomineeModalData?.socialMedia?.facebook !== "" && (
-                  <a href={nomineeModalData?.socialMedia?.facebook} rel="noreferrer" target="_blank">
+                  <a
+                    href={nomineeModalData?.socialMedia?.facebook}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     <Facebook />{" "}
                   </a>
                 )}
                 {nomineeModalData?.socialMedia?.other[0] !== "" && (
-                  <a href={nomineeModalData?.socialMedia?.other[0]} rel="noreferrer" target="_blank">
+                  <a
+                    href={nomineeModalData?.socialMedia?.other[0]}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     <Other />{" "}
                   </a>
                 )}
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.modalButtonsContainer}>
-                {
-                  nomineeModalData?.categoryName !== "Digital Art" && nomineeModalData?.categoryName !== "Traditional/Contemporary Art" ? (
-                    <a
+                {nomineeModalData?.categoryName !== "Digital Art" &&
+                nomineeModalData?.categoryName !==
+                  "Traditional/Contemporary Art" ? (
+                  <a
                     href={nomineeModalData?.submission}
                     target="_blank"
                     rel="noreferrer"
@@ -293,8 +321,7 @@ export default function Index() {
                   >
                     <div> CHECK OUT MY WORK</div>
                   </a>
-                  ) : null
-                }
+                ) : null}
               </div>
             </div>
           </div>
