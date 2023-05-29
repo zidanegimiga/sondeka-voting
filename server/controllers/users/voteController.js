@@ -12,48 +12,43 @@ const Nominee = require('../../models/Nominee')
 // @access Private
 const vote = asyncHandler(async (req, res) => {
     try {
-        const {nomineeId, voterId, categoryName} = req.body;
-        console.log("Nominee Id: ", nomineeId)
-        console.log("Voter Id: ", voterId)
-        console.log("Category Name: ", categoryName)
+        const choices = req.body;
+        if (choices.length !== 10) {
+            res.status(400).json({ message: "Please cast your vote in all categories before you submit" })
+        }
 
-        // Is category and nominee valid?
-        const category = await VotingCategory.find({name: categoryName});
+        choices.forEach(async (choice) => {
+            const category = await VotingCategory.find({ name: choice.categoryName });
+            if (!category) {
+                return res.status(400).json({ message: 'Invalid category ID' });
+            }
+
+            const nominee = await Nominee.findById(mongoose.Types.ObjectId(choice.nomineeId));
+            if (!nominee || nominee.categoryName !== choice.categoryName) {
+                return res.status(400).json({ message: 'Invalid nominee ID' });
+            }
+
+            const existingVoteLogEntry = await VotingLog.findOne({ voterId: choice.voterId, categoryName: choice.categoryName});
+            if (existingVoteLogEntry) {
+                return res.status(400).json({ message: 'You have already voted in this category' });
+            }
+
+            const voteLogEntry = new VotingLog({
+                voterId: mongoose.Types.ObjectId(choice.voterId),
+                categoryName: choice.categoryName,
+                nomineeId: mongoose.Types.ObjectId(choice.nomineeId),
+                timestamp: Date.now()
+            });
+
+            await voteLogEntry.save();
+
+            nominee.votes += 1;
+            await nominee.save();
+        })
         
-        if (!category) {
-            return res.status(400).json({ message: 'Invalid category ID' });
-        }
-
-        const nominee = await Nominee.findById(mongoose.Types.ObjectId(nomineeId));
-        if (!nominee || nominee.categoryName !== categoryName) {
-            return res.status(400).json({ message: 'Invalid nominee ID' });
-        }
-
-        // Has the user voted?
-        const existingVoteLogEntry = await VotingLog.findOne({ voterId: voterId, categoryName: categoryName});
-        if (existingVoteLogEntry) {
-            return res.status(400).json({ message: 'You have already voted in this category' });
-        }
-
-         // Create a new vote log entry
-        const voteLogEntry = new VotingLog({
-            voterId: mongoose.Types.ObjectId(voterId),
-            categoryName: categoryName,
-            nomineeId: mongoose.Types.ObjectId(nomineeId),
-            timestamp: Date.now()
-        });
-
-        // Save the new vote log entry to the database
-        await voteLogEntry.save();
-
-        // Update the nominee's vote count
-        nominee.votes += 1;
-        await nominee.save();
-
-        // Send a response indicating success
         return res.status(200).json({ message: 'Vote successfully recorded!' });
-    } 
-    
+    }
+
     catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Internal server error' });

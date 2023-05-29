@@ -15,6 +15,8 @@ import { Twitter, Instagram, Facebook, Other } from "../shared/ModalIcons";
 import { motion } from "framer-motion";
 import { AuthContext } from "admin-auth-context";
 import BeatLoader from "react-spinners/BeatLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const override: CSSProperties = {
   display: "block",
@@ -28,53 +30,18 @@ const Modal = ({ isOpen, onClose, categoryColor, children }) => {
 };
 
 export default function Index() {
-  const [categoryData, setCategoryData] = useState([])
+  const [choices, setChoices] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { userId } = useContext(AuthContext);
-  // @ts-ignore
-  const { nomineeModalData, setNomineeModalData } = useContext(VoterContext);
   const [categoryColor, setCategoryColor] = useState("");
   const [responseMessage, setResponseMessage] = useState<any>();
-  // const [formData, setFormData] = useState({});
+
+  // @ts-ignore
+  const { nomineeModalData, setNomineeModalData } = useContext(VoterContext);
+  const { userId } = useContext(AuthContext);
+
   const { data: session, status } = useSession();
-
-  const handleVote = () => {
-    console.log("UserId: ", userId);
-    console.log("categoryName: ", nomineeModalData?.categoryName);
-    console.log("nomineeId: ", nomineeModalData?._id);
-
-    const formData = {
-      categoryName: nomineeModalData?.categoryName,
-      voterId: userId,
-      nomineeId: nomineeModalData?._id,
-    };
-    const userVote = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          // `http://localhost:3500/vote`,
-          `https://sondeka-render-api.onrender.com/vote`,
-          // `http://localhost:3500/vote`,
-          {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-              // Authorization: `${jwt}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const datares = await response.json();
-        setLoading(false);
-        setResponseMessage(datares);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    userVote();
-    console.log("Form Data: ", formData);
-  };
 
   const openModal = (nominee: any, categoryColor: string) => {
     setNomineeModalData(nominee);
@@ -87,23 +54,67 @@ export default function Index() {
     setIsModalOpen(false);
   };
 
-  useEffect(()=>{
-    async function getCategories(){
-      try{
-        setLoading(true)
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        setLoading(true);
         const res = await fetch(
           "https://sondeka-render-api.onrender.com/categories/allCategories"
         );
         const data = await res.json();
-        console.log("Category Data: ", data)
-        setCategoryData(data)
-        setLoading(false)
-      }catch(err){
-        console.error("Category Data Error: ", err)
+        setCategoryData(data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Category Data Error: ", err);
       }
     }
-    setTimeout(getCategories, 1000)
-  }, [])
+    setTimeout(getCategories, 1000);
+  }, []);
+
+  const handleChoiceChange = (category: any, nominee: any) => {
+    const updatedChoices = [...choices];
+    const existingChoiceIndex = updatedChoices.findIndex((choice) => choice.categoryName === category?.name);
+
+    if (existingChoiceIndex !== -1) {
+      updatedChoices[existingChoiceIndex] = {
+        ...updatedChoices[existingChoiceIndex],
+        nomineeId: nominee._id,
+      };
+    } else {
+      updatedChoices.push({
+        categoryName: category.name,
+        nomineeId: nominee._id,
+        voterId: userId
+      });
+    }
+
+    setChoices(updatedChoices);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `https://sondeka-render-api.onrender.com/vote`,
+        {
+          method: "POST",
+          body: JSON.stringify(choices),
+          headers: {
+            // Authorization: `${jwt}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const datares = await response.json();
+      setLoading(false);
+      setResponseMessage(datares);
+      setChoices([])
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div>
@@ -129,9 +140,8 @@ export default function Index() {
           </div>
           <div className={styles.categories} id="categories">
             <div className={styles.categoriesTitle}>CATEGORIES</div>
-            {
-              loading ? (
-                <div
+            {loading ? (
+              <div
                 style={{
                   width: "100%",
                   display: "flex",
@@ -148,24 +158,42 @@ export default function Index() {
                   cssOverride={override}
                 />
               </div>
-              ) : (
-                <div>
+            ) : (
+              <form onSubmit={handleSubmit}>
                 {categoryData?.map((category, index) => {
                   return (
                     <CategoryItem
-                      key={index}
+                      key={category.name}
+                      categoryData={category}
                       title={category.name}
                       description={category.description}
                       poster={category.poster}
                       link={category._id}
                       color={category.color}
+                      choices={choices}
                       openModal={openModal}
+                      handleChoiceChange={handleChoiceChange}
                     />
                   );
                 })}
-              </div>
-              )
-            }
+
+                <div className={styles.votebuttonContainer}>
+                  <button
+                  className={styles.voteButton}
+                  type="submit"
+                  disabled={status === "unauthenticated"}
+                >
+                  {" "}
+                  {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
+                </button>
+                  {responseMessage && (
+                    <div className={styles.responseMessage}>
+                      {responseMessage?.message}
+                    </div>
+                  )}
+                </div>
+              </form>
+            )}
           </div>
           <div className={styles.subLogo}>
             <div className={styles.sondekaTitle}>
@@ -258,16 +286,17 @@ export default function Index() {
                 {/* { nomineeModalData.socialMedia.twitter !== "" && <Other/> } */}
               </div>
               <div className={styles.modalButtonsContainer}>
-                { nomineeModalData.categoryName !== "Digital Art" || "Traditional/Contemporary Art" &&
+                {nomineeModalData.categoryName !== "Digital Art" ||
+                  ("Traditional/Contemporary Art" && (
                     <a
-                    href={nomineeModalData?.submission}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.checkOutMyWork}
-                  >
-                    <div> CHECK OUT MY WORK</div>
-                  </a>
-                }
+                      href={nomineeModalData?.submission}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={styles.checkOutMyWork}
+                    >
+                      <div> CHECK OUT MY WORK</div>
+                    </a>
+                  ))}
                 {/* {responseMessage && (
                   <div className={styles.responseMessage}>
                     {responseMessage?.message}
@@ -281,21 +310,7 @@ export default function Index() {
           </div>
         </motion.div>
       </Modal>
+      <ToastContainer />
     </div>
   );
 }
-
-// export const getServerSideProps = async () => {
-//   const res = await fetch(
-//     "https://sondeka-render-api.onrender.com/categories/allCategories"
-//   );
-//   const data = await res.json();
-//   console.log("Categories generated, ", data);
-
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
-

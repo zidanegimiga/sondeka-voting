@@ -21,6 +21,9 @@ const CategoryItem = ({
   link,
   color,
   openModal,
+  categoryData,
+  choices,
+  handleChoiceChange
 }) => {
   const { userId } = React.useContext(AuthContext);
   const [loading, setLoading] = React.useState(false);
@@ -42,36 +45,6 @@ const CategoryItem = ({
       ...formData,
       [name]: value,
     });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      setLoading(true);
-      const votingData = {
-        nomineeId: formData?.nomineeId,
-        voterId: userId,
-        categoryName: title,
-      };
-      const response = await fetch(
-        `https://sondeka-render-api.onrender.com/vote`,
-        {
-          method: "POST",
-          body: JSON.stringify(votingData),
-          headers: {
-            // Authorization: `${jwt}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const datares = await response.json();
-      setLoading(false);
-      setResponseMessage(datares);
-    } catch (err) {
-      console.error(err);
-    }
-    // console.log("Form Data: ", {nomineeId: formData?.nomineeId, voterId: userId, categoryName: title})
   };
 
   useEffect(() => {
@@ -135,8 +108,7 @@ const CategoryItem = ({
               />
             </div>
           ) : (
-            <form>
-              {/* {loadNominees && <div> Loading....</div>} */}
+            <div>
               {status === "unauthenticated" && (
                 <div className={styles.responseMessageE}>
                   You need to{" "}
@@ -175,9 +147,13 @@ const CategoryItem = ({
                       <input
                         disabled={status === "unauthenticated"}
                         type="radio"
-                        name="nomineeId"
+                        name={nom.categoryName}
                         value={nom._id}
-                        onChange={(event) => handleInputChange(event)}
+                        required
+                        // checked={
+                        //   choices.find((choice) => choice.categoryName === categoryData.name)?.selectedNominee === nominee
+                        // }
+                        onChange={() => handleChoiceChange(categoryData, nom)}
                         className={styles.radio}
                       />
                       <label htmlFor={nom._id} className={styles.voteformLabel}>
@@ -188,24 +164,7 @@ const CategoryItem = ({
                   </div>
                 ))}
               </div>
-
-              <div className={styles.votebuttonContainer}>
-                <button
-                  className={styles.voteButton}
-                  type="submit"
-                  disabled={status === "unauthenticated"}
-                  onClick={(e) => handleSubmit(e)}
-                >
-                  {" "}
-                  {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
-                </button>
-                {responseMessage && (
-                  <div className={styles.responseMessage}>
-                    {responseMessage?.message}
-                  </div>
-                )}
-              </div>
-            </form>
+            </div>
           )
         ) : null}
       </div>

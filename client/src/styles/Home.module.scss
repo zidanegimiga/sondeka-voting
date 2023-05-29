@@ -343,3 +343,30 @@
   font-family: 'Inter';
   padding: 24px;
 }
+
+.votebuttonContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.voteButton{
+  width: 40%;
+  height: 48px;
+  cursor: pointer;
+  color: #292929;
+  font-family: 'inter';
+  font-weight: 600;
+  border-radius: 8px;
+  margin: 32px 0px;
+
+  &:hover{
+    background-color: #440A80;
+    color: #ffffff;
+    border: none
+  }
+}
