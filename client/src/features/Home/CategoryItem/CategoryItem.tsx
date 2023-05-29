@@ -1,10 +1,8 @@
 import React, { useEffect, CSSProperties } from "react";
-import { ButtonIcon, DownCircle } from "features/svgIcons/CategoryIcons";
+import { DownCircle } from "features/svgIcons/CategoryIcons";
 import styles from "./CategoryItem.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import { VoterContext } from "global/VoterContext";
-import { AuthContext } from "admin-auth-context";
 import { useSession } from "next-auth/react";
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -36,7 +34,6 @@ const CategoryItem = ({
           `https://sondeka-render-api.onrender.com/admin/categories/${link}/nominees`
         );
         const nomineeData = await response.json();
-        console.log(`${title}: `, nomineeData);
         setNominee(nomineeData);
         setLoadNominees(false);
       } catch (err) {
