@@ -90,7 +90,7 @@ export default function Index() {
         console.log("Category Data: ", data)
         setCategoryData(data)
       }catch(err){
-        console.error("Category Data Error: ",err)
+        console.error("Category Data Error: ", err)
       }
     }
     setTimeout(getCategories, 3000)
