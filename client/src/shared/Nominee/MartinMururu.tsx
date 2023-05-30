@@ -4,7 +4,7 @@ const MartinMururu = () => {
   return (
     <div
       style={{
-        margin: "8px",
+        padding: "8px",
         borderRadius: "8px",
         width: "50%",
         height: "480px",

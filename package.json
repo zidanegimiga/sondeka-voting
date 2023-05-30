@@ -15,6 +15,7 @@
   "homepage": "https://github.com/zidanegimiga/sondeka-voting/README.md",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "classnames": "^2.3.2",
     "cloudinary": "^1.37.0",
     "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^5.0.0",

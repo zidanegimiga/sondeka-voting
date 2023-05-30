@@ -21,6 +21,9 @@ import "react-toastify/dist/ReactToastify.css";
 import FrankNjugi from "shared/Nominee/FrankNjugi";
 import MartinMururu from "shared/Nominee/MartinMururu";
 import LutiviniMajanja from "shared/Nominee/LutiviniMajanja";
+import MishiKhalid from "shared/Nominee/MishiKhalid";
+import FidelisNjoki from "shared/Nominee/FideliSNjoki";
+import NatashaMuhanji from "shared/Nominee/FideliSNjoki";
 
 const override: CSSProperties = {
   display: "block",
@@ -166,7 +169,7 @@ export default function Index() {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
-                {status === "unauthenticated" && (
+                {/* {status === "unauthenticated" && (
                   <div className={styles.responseMessageE}>
                     You need to{" "}
                     <Link href={"/oAuthLogin"}>
@@ -174,7 +177,7 @@ export default function Index() {
                     </Link>{" "}
                     to vote
                   </div>
-                )}
+                )} */}
                 {categoryData?.map((category, index) => {
                   return (
                     <CategoryItem
@@ -262,6 +265,16 @@ export default function Index() {
             {
               nomineeModalData?.stageName === "Lutivini Majanja" && (
                 <LutiviniMajanja/>
+              )                        
+            }
+            {
+              nomineeModalData?.stageName === "Mishi khalid" && (
+                <MishiKhalid image={nomineeModalData?.submission}/>
+              )                        
+            }
+            {
+              nomineeModalData?.stageName === "Natasha Muhanji" && (
+                <NatashaMuhanji/>
               )                        
             }
             {nomineeModalData?.categoryName ===

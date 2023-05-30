@@ -2,7 +2,7 @@ import React from "react";
 
 const LutiviniMajanja = () => {
   return (
-    <div style={{ margin: "8px", borderRadius: "8px", width: "50%", height: "480px", overflow: "scroll", fontFamily: "Inter", backgroundColor: "rgb(158 158 158 / 16%)"}}>
+    <div style={{ padding: "8px", borderRadius: "8px", width: "50%", height: "480px", overflow: "scroll", fontFamily: "Inter", backgroundColor: "rgb(158 158 158 / 16%)"}}>
       <h3>Visitors Day</h3>
       <p>By Lutivini Majanja</p>
       <p>Published : https://adimagazine.com/articles/visitors-day/</p>
