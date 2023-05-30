@@ -74,9 +74,11 @@ const Nav = () => {
         </div>
 
         {options && (
-          <div className={styles.navOptionsCover} onClick={() => {
-            showOptions(!options);
-          }}>
+          <div className={styles.navOptionsCover} 
+          // onClick={() => {
+          //   showOptions(!options);
+          // }}
+          >
             <div className={styles.navOptions}>
               {status === "unauthenticated" && (
                 <div>

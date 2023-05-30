@@ -2,7 +2,7 @@ import React from "react";
 
 const FrankNjugi = () => {
   return (
-    <div style={{ margin: "8px", borderRadius: "8px", width: "50%", height: "480px", overflow: "scroll", fontFamily: "Inter", backgroundColor: "rgb(158 158 158 / 16%)"}}>
+    <div style={{ padding: "8px", borderRadius: "8px", width: "50%", height: "480px", overflow: "scroll", fontFamily: "Inter", backgroundColor: "rgb(158 158 158 / 16%)"}}>
       <h4>The Manifestations of an Exiled Clairvoyant</h4>
       <p>
         And it is with esteemed gratification that I shall reply to the
