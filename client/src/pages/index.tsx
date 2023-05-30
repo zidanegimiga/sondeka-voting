@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from "../styles/Home.module.scss";
 import Head from "next/head";
 import Nav from "shared/Nav";
@@ -139,7 +140,7 @@ export default function Index() {
           </div>
           <div className={styles.countdownContainer}>
             <div className={styles.countdownContainerTitle}>
-              VOTING BEGINS IN
+              VOTING STOPS IN
             </div>
             <Countdown />
           </div>
