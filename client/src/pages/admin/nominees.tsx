@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Nav from "shared/Nav/Nav";
 import styles from "../../styles/adminVotersPanel.module.scss";
 import Image from "next/image";
-import AdminContentWrapper from "shared/AdminContentWrapper/AdminContentWrapper";
+import AdminContentWrapper from "shared/AdminContentWrapper";
 import { useRouter } from "next/router";
 
 const Dashboard = () => {
@@ -25,8 +25,8 @@ const Dashboard = () => {
       );
 
       const data = await res.json();
-      console.log("Nominee Data: ", data);
-
+      setNomineesData(data)
+      console.log(data)
       if (data && data.message === "Forbiden!") {
         setNomineesData([]);
       } else if (data && data.message === "No nominees found"){
@@ -48,7 +48,7 @@ const Dashboard = () => {
               <h1>Nominees</h1>
               <div className={styles.count}>
                 <p>Voters Count:</p>
-                <span>{nomineesData?.length + 1}</span>
+                <span>{nomineesData?.length}</span>
               </div>
             </div>
             <div className={styles.warning}>
@@ -79,8 +79,8 @@ const Dashboard = () => {
                               style={{ display: "flex" }}
                             >
                               <Image
-                                src={"/nominee.png"}
-                                width={60}
+                                src={nominee?.profilePicture?.secure_url}
+                                width={72}
                                 height={72}
                                 alt="nominee"
                               />
@@ -95,7 +95,7 @@ const Dashboard = () => {
                                   {nominee.name}
                                 </p>
                                 <p className={styles.nomineeEmail}>
-                                  {nominee.description.slice(0, 20)}...
+                                  {nominee?.fullName}
                                 </p>
                               </div>
                             </div>
