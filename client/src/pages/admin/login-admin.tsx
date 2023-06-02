@@ -107,13 +107,15 @@ const AdminLoginPage = () => {
                   <div className={styles.heading}> ADMIN - LOG IN TO CONTINUE </div>
                   <div className={styles.form}>
                     <form onSubmit={handleSubmit} className={styles.form}>
-                      <TextField
-                        onChange={handleInputChange}
-                        value={formData.name}
-                        name={"name"}
-                        type={"text"}
-                        placeholder={"Name"}
-                      />
+                      <div className={styles.userNameAdminField}>
+                        <TextField
+                          onChange={handleInputChange}
+                          value={formData.name}
+                          name={"name"}
+                          type={"text"}
+                          placeholder={"Name"}
+                        />
+                      </div>
                       <div className={styles.passwordField}>
                         <TextField
                           onChange={handleInputChange}
@@ -144,21 +146,12 @@ const AdminLoginPage = () => {
                           </button>
                         )}
                       </div>
-                      {/* <div className={styles.forgotPasswordText}>
-                      Forgot Password?
-                    </div> */}
-                      <div className={styles.buttonContainer}>
+                      <div className={styles.adminButtonContainer}>
                         <Button
                           text={loading ? "Logging In..." : "LOG IN"}
                           type="submit"
                           color={loading ? "#808080" : "#440A80"}
                         />
-                      </div>
-                      <div className={styles.signUpLink}>
-                        Have an account?{" "}
-                        <Link href={"/signup"}>
-                          <span>Sign Up</span>
-                        </Link>
                       </div>
                     </form>
                   </div>
