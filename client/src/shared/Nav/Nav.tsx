@@ -94,7 +94,7 @@ const Nav = () => {
                     </div>
                   </div>
                   <div className={styles.navLink}>
-                    <Link href={"/oAuthLogin"}>Log In</Link>
+                    <Link href={"/oAuthLogin"}>Log In/Sign Up</Link>
                   </div>
                 </div>
               )}

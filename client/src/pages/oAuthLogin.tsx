@@ -34,7 +34,7 @@ export default function LogInPage({
             </div>
             <>
               <div className={styles.heading}> Welcome</div>
-              <div className={styles.subTitle}>Log in with your Sondeka Account to continue</div>
+              {/* <div className={styles.subTitle}>Continue with your Google Account</div> */}
               {Object.values(providers).map((provider) => (
                 <div key={provider.name} className={styles.buttonsContainer}>
                   <button onClick={() => signIn(provider.id)} className={styles.googleButton}>
