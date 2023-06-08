@@ -9,9 +9,27 @@ import { SessionProvider, useSession } from "next-auth/react";
 import Cursor from "shared/Cursor";
 import { VoterContext, VoterProvider } from "global/VoterContext";
 import Maintenance from "features/Home/Maintenance";
+import Script from "next/script";
 
-const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
-    return (
+const App: FC = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) => {
+  const measurementID = "G-6FRNWVQCNN";
+  return (
+    <>
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-6FRNWVQCNN"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6FRNWVQCNN');
+        `}
+      </Script>
       <VoterProvider>
         <NextNProgress
           color="#29D"
@@ -27,6 +45,7 @@ const App: FC = ({ Component, pageProps: { session, ...pageProps } }: AppProps) 
           </AuthProvider>
         </SessionProvider>
       </VoterProvider>
-    );
-  }
+    </>
+  );
+};
 export default App;

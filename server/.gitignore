@@ -5,10 +5,6 @@
 /.pnp
 .pnp.js
 
-package.json
-
-yarn.lock
-
 # Dev Log files
 /logs
 

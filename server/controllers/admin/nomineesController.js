@@ -97,6 +97,7 @@ const createNewNominee = asyncHandler(async (req, res) => {
 // @route PATCH /admin/categories/updateCategory
 // @access Private
 const updateNominee = asyncHandler(async (req, res) => {
+    const { stageName, fullName, categoryName, socialMedia, submission, profilePicture, bio } = req.body
     const { id, name, description, poster, category } = req.body
 
     // Confirm data 

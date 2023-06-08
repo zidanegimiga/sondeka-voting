@@ -2,20 +2,24 @@ const Nominee = require('../../models/Nominee');
 const Voter = require('../../models/User');
 const Category = require('../../models/Category');
 const asyncHandler = require('express-async-handler');
+const mongoose = require('mongoose');
 
 // @desc Get all nominees
 // @route GET /admin/voters/allVoters
 // @access Private
 const getAllVoters = asyncHandler(async (req, res) => {
     // Get all voters from MongoDB
-    const voters = await Voter.find({}).lean()
-
-    // If no voters 
-    if (!voters?.length) {
-        return res.status(400).json({ message: 'No voters found' })
-    }
-
-    res.json(voters)
+    const UserModel = mongoose.model("User");
+    
+    UserModel.find({}, function(err, users) {
+        if (err) {
+          console.error('Failed to count documents:', err);
+          return;
+        }
+  
+        console.log("Voters: ", users)
+        res.json(users)
+      });
 })
 
 // @desc Get one nominee
@@ -38,7 +42,7 @@ const getOneNominee = asyncHandler(async (req, res) => {
 // @route POST /admin/nominees/newNominee
 // @access Private
 const createNewNominee = asyncHandler(async (req, res) => {
-    const { name, description, categoryName, poster} = req.body
+    const { name, description, categoryName, poster } = req.body
 
     // Confirm data
     if (!name || !description || !poster || !categoryName) {
@@ -52,9 +56,9 @@ const createNewNominee = asyncHandler(async (req, res) => {
     const nominee = await Nominee.findOne({ name }).lean().exec()
 
     if (nominee) {
-        return res.status(409).json({ 
-            type: 'existingNominee', 
-            title: 'One Little Problem', 
+        return res.status(409).json({
+            type: 'existingNominee',
+            title: 'One Little Problem',
             description: 'This nominee seems to exist.',
             success: false,
         })
@@ -73,7 +77,7 @@ const createNewNominee = asyncHandler(async (req, res) => {
 
     if (newNominee) { //nominee created
         category.nominees.push(newNominee._id);
-        await category.save(); 
+        await category.save();
         res.status(201).json({ message: `Nominee: ${name} successfully created.` })
     } else {
         res.status(400).json({ message: 'Invalid nominee data received' })
@@ -87,7 +91,7 @@ const updateNominee = asyncHandler(async (req, res) => {
     const { id, name, description, poster, category } = req.body
 
     // Confirm data 
-    if (!id || !name ) {
+    if (!id || !name) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -103,7 +107,7 @@ const updateNominee = asyncHandler(async (req, res) => {
 
     // Allow updates to the original user 
     if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate nominee name'})
+        return res.status(409).json({ message: 'Duplicate nominee name' })
     }
 
     nominee.name = name

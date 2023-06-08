@@ -41,7 +41,7 @@ router.route('/nominees/updateNominee').patch(verifyJWT, nomineesController.upda
 router.route('/nominees/deleteNominee').delete(verifyJWT, nomineesController.deleteNominee);
 
 // Voters
-router.route('/voters/allVoters').get(verifyJWT, votersController.getAllVoters);
+router.route('/voters/allVoters').get(votersController.getAllVoters);
 
 
 module.exports = router;

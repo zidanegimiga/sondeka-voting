@@ -203,7 +203,7 @@
   padding: 20px;
   border-radius: 8px;
   width: 75vw;
-  height: fit-content;
+  height: 70vh;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   position: relative;
 
@@ -248,9 +248,11 @@
 }
 
 .modalImage {
-  width: 60%;
+  width: 50%;
+  height: 100%;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 8px;
+  background-color: #3C3C3C;
 }
 
 .nomineeContent {
@@ -342,4 +344,31 @@
   background-color: #ffe566;
   font-family: 'Inter';
   padding: 24px;
+}
+
+.votebuttonContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.voteButton{
+  width: 40%;
+  height: 48px;
+  cursor: pointer;
+  color: #292929;
+  font-family: 'inter';
+  font-weight: 600;
+  border-radius: 8px;
+  margin: 32px 0px;
+
+  &:hover{
+    background-color: #440A80;
+    color: #ffffff;
+    border: none
+  }
 }

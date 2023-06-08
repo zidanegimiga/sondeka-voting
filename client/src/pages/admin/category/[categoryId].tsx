@@ -28,6 +28,7 @@ interface CategoryData {
 const CategoryId = () => {
   const [categoryData, setCategoryData] = useState<CategoryData | any>([]);
   const [nomineeData, setNomineeData] = useState<NomineeData | any>([]);
+  const [categoryId, setCategoryId] = useState()
   const { token, login, isAdminAuthenticated } = useContext(AuthContext);
   const router = useRouter();
 
@@ -40,7 +41,7 @@ const CategoryId = () => {
       console.log("Category ID Type: ", typeof categoryId);
 
       const res = await fetch(
-        `${process.env.API_URL}/admin/categories/${categoryId}`,
+        `https://sondeka-render-api.onrender.com/admin/categories/${categoryId}`,
         {
           headers: {
             authorization: accessToken,
@@ -57,9 +58,10 @@ const CategoryId = () => {
       }
     };
 
-    const fetchNomineeData = async () => {
+    const fetchNomineesData = async () => {
       const res = await fetch(
-        `${process.env.API_URL}/admin/categories/${categoryId}/nominees`,
+        // `https://sondeka-render-api.onrender.com/admin/categories/${categoryId}/nominees`,
+        `https://sondeka-render-api.onrender.com/admin/categories/${categoryId}/nominees`,
         {
           headers: {
             authorization: accessToken,
@@ -78,7 +80,7 @@ const CategoryId = () => {
 
     async function fetchAllData() {
       fetchCategoryData();
-      fetchNomineeData();
+      fetchNomineesData();
     }
 
     accessToken ? fetchAllData() : router.push("/admin/login-admin");
@@ -105,23 +107,23 @@ const CategoryId = () => {
                   <tr className={styles.headRow}>
                     <th>#</th>
                     <th>Details</th>
-                    <th>Category</th>
+                    <th>Description</th>
                     <th>Votes</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {nomineeData.map((nominee, index) => (
+                  {nomineeData?.map((nominee, index) => (
                     <tr key={index}>
-                      <td>{nomineeData.length + 1}</td>
+                      <td>{index + 1}</td>
                       <td>
                         <div
                           className={styles.nomineePictureWrapper}
                           style={{ display: "flex" }}
                         >
                           <Image
-                            src={"/nominee.png"}
-                            width={60}
-                            height={72}
+                            src={nominee?.profilePicture?.secure_url}
+                            width={80}
+                            height={80}
                             alt="nominee"
                           />
                           <div
@@ -132,15 +134,15 @@ const CategoryId = () => {
                               className={styles.nomineeName}
                               style={{ fontWeight: "700", color: "white" }}
                             >
-                              {nominee.name}
+                              {nominee.fullName}
                             </p>
                             <p className={styles.nomineeEmail}>
-                              {nominee.description.slice(0, 10)}...
+                              {nominee?.stageName}
                             </p>
                           </div>
                         </div>
                       </td>
-                      <td>{nominee.categoryName}</td>
+                      <td>{nominee?.bio.slice(0, 100)}...</td>
                       <td>{nominee.votes}</td>
                     </tr>
                   ))}

@@ -178,7 +178,7 @@ export default CreateNominee;
 
 export const getServerSideProps = async () => {
   const res = await fetch(
-    "https://sondeka-voting-api.cyclic.app/categories/allCategories"
+    "https://sondeka-render-api.onrender.com/categories/allCategories"
   );
   const data = await res.json();
 

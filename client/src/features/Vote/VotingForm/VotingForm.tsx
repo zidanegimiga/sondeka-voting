@@ -32,7 +32,7 @@ const VotingForm = ({ categoryData, openModal }) => {
       try {
         setLoadingNominees(true);
         const response = await fetch(
-          `https://sondeka-voting-api.cyclic.app/admin/categories/${categoryData?._id}/nominees`
+          `https://sondeka-render-api.onrender.com/admin/categories/${categoryData?._id}/nominees`
         );
         const nomineeData = await response.json();
         console.log("Nominee Data: ", nomineeData)
@@ -64,7 +64,7 @@ const VotingForm = ({ categoryData, openModal }) => {
       setLoading(true);
       const response = await fetch(
         // `http://localhost:3500/vote`,
-        `https://sondeka-voting-api.cyclic.app/vote`,
+        `https://sondeka-render-api.onrender.com/vote`,
         {
           method: "POST",
           body: JSON.stringify(formData),

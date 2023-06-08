@@ -22,12 +22,12 @@ const Nav = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://sondeka-voting-api.cyclic.app//admin/authentication/logout",
+        "https://sondeka-render-api.onrender.com/admin/authentication/logout",
         {
           method: "GET",
         }
       );
-      console.log("Logout Admin: ", response);
+      console.log("Admin Log out: ", response);
     } catch (err) {
       console.error(err);
     }
@@ -49,9 +49,6 @@ const Nav = () => {
             <div className={styles.centerItem}>
               <Link href={"/"}> HOME </Link>
             </div>
-            {/* <div className={styles.centerItem}>
-              <Link href={"#"}> NOMINEES </Link>
-            </div> */}
             <div className={styles.centerItem}>
               <Link href={"/#categories"}> CATEGORIES </Link>
             </div>
@@ -77,9 +74,11 @@ const Nav = () => {
         </div>
 
         {options && (
-          <div className={styles.navOptionsCover} onClick={() => {
-            showOptions(!options);
-          }}>
+          <div className={styles.navOptionsCover} 
+          // onClick={() => {
+          //   showOptions(!options);
+          // }}
+          >
             <div className={styles.navOptions}>
               {status === "unauthenticated" && (
                 <div>
@@ -95,10 +94,7 @@ const Nav = () => {
                     </div>
                   </div>
                   <div className={styles.navLink}>
-                    <Link href={"/signup"}>Sign Up</Link>
-                  </div>
-                  <div className={styles.navLink}>
-                    <Link href={"/oAuthLogin"}>Log In</Link>
+                    <Link href={"/oAuthLogin"}>Log In/Sign Up</Link>
                   </div>
                 </div>
               )}
@@ -114,7 +110,7 @@ const Nav = () => {
                   <div
                     className={styles.navLink}
                     onClick={() =>
-                      signOut({ callbackUrl: "http://localhost:3000/" })
+                      signOut({ callbackUrl: "https://vote.sondeka.org" })
                     }
                   >
                     <div>Log Out</div>
