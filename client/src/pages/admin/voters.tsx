@@ -43,8 +43,7 @@ const Voters = () => {
               <h1>Voters</h1>
               <div className={styles.count}>
                 <p>Voters Count:</p>
-                {/* <span>{votersData.length + 1}</span> */}
-                <span>288</span>
+                <span>{votersData.length + 1}</span>
               </div>
             </div>
             <div className={styles.warning}>
