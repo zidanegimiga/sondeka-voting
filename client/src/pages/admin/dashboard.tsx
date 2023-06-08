@@ -4,6 +4,7 @@ import { Categories, Voters, Nominees } from "features/svgIcons/AdminStatsCard";
 import styles from "../../styles/dashboard.module.scss";
 import StatsCard from "shared/StatsCard";
 import { type } from "os";
+import { useRouter } from "next/router";
 
 interface DashboardDigits {
   Voters: number,
@@ -16,11 +17,15 @@ type DashboardCounts = {
 };
 
 const Dashboard = () => {
+  const router = useRouter()
   const [dashboardCount, setDashboardCount] = useState<DashboardCounts>({});
   const [error, setError] = useState(false);
 
   useEffect(()=>{
     const accessToken = window.localStorage.getItem('admin-auth')
+    if(!accessToken){
+      router.push('/admin/login-admin')
+    }
     const getDashboardDigits = async () =>{
       try{
         const res = await fetch(`https://sondeka-render-api.onrender.com/admin/dashboard`, {
