@@ -94,7 +94,7 @@ const Nav = () => {
                     </div>
                   </div>
                   <div className={styles.navLink}>
-                    <Link href={"/signup"}>Sign Up</Link>
+                    <Link href={"/oAuthLogin"}>Sign Up</Link>
                   </div>
                   <div className={styles.navLink}>
                     <Link href={"/oAuthLogin"}>Log In</Link>
@@ -113,7 +113,7 @@ const Nav = () => {
                   <div
                     className={styles.navLink}
                     onClick={() =>
-                      signOut({ callbackUrl: "http://localhost:3000" })
+                      signOut({ callbackUrl: "https://vote.sondeka.org" })
                     }
                   >
                     <div>Log Out</div>
