@@ -9,7 +9,18 @@ const asyncHandler = require('express-async-handler');
 // @access Private
 const getDashboardCounts = asyncHandler(async (req, res) => {
     const counter = {}
-    const models = { Categories, Nominees, Voters };
+    const models = { Categories, Nominees };
+    const UserModel = mongoose.model("User");
+
+    let userCount;
+
+    UserModel.countDocuments({}, function (err, result) {
+        if (err) {
+            console.error('Failed to count documents:', err);
+            return;
+        }
+        userCount = result; 
+    });
 
     try {
         for (const [modelName, model] of Object.entries(models)) {
@@ -17,7 +28,7 @@ const getDashboardCounts = asyncHandler(async (req, res) => {
             counter[modelName] = count;
         }
 
-        res.status(200).json(counter)
+        res.status(200).json({...counter, Voters: userCount})
 
     } catch (err) {
         console.error('Error getting collection counts:', err);
