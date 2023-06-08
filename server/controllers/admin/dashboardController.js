@@ -9,7 +9,8 @@ const asyncHandler = require('express-async-handler');
 // @access Private
 const getDashboardCounts = asyncHandler(async (req, res) => {
     const counter = {}
-    const models = { Categories, Nominees, Voters };
+    const UserModel = mongoose.model("User");
+    const models = { Categories, Nominees, UserModel };
 
     try {
         for (const [modelName, model] of Object.entries(models)) {

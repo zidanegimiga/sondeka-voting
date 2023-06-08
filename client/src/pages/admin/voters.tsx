@@ -68,7 +68,7 @@ const Voters = () => {
                     <tr key={index}>
                       <td>{index + 1}</td>
                       <td>
-                        <div>{voter.username}</div>
+                        <div>{voter.name}</div>
                       </td>
                       <td>{voter.email}</td>
                       {/* <td>17.03.2023</td> */}
