@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   useEffect(()=>{
     const accessToken = window.localStorage.getItem('admin-auth')
-    if(!accessToken){
+    if(!accessToken || accessToken === ""){
       router.push('/admin/login-admin')
     }
     const getDashboardDigits = async () =>{
