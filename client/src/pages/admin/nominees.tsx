@@ -47,7 +47,7 @@ const Dashboard = () => {
             <div className={styles.header}>
               <h1>Nominees</h1>
               <div className={styles.count}>
-                <p>Voters Count:</p>
+                <p>Nominees count:</p>
                 <span>{nomineesData?.length}</span>
               </div>
             </div>
