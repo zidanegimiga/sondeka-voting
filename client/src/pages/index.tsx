@@ -44,6 +44,12 @@ export default function Index() {
   const [categoryColor, setCategoryColor] = useState("");
   const [responseMessage, setResponseMessage] = useState<any>();
 
+  const [votingTime, setVotingTime] = useState(false);
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
   // @ts-ignore
   const { nomineeModalData, setNomineeModalData } = useContext(VoterContext);
   const { userId } = useContext(AuthContext);
@@ -76,6 +82,33 @@ export default function Index() {
       }
     }
     setTimeout(getCategories, 1000);
+
+    const target = new Date("6/20/2023 23:59:59");
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const difference = target.getTime() - now.getTime();
+
+      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+      setDays(d);
+
+      const h = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      setHours(h);
+
+      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      setMinutes(m);
+
+      const s = Math.floor((difference % (1000 * 60)) / 1000);
+      setSeconds(s);
+
+      if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
+        setVotingTime(true);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleChoiceChange = (category: any, nominee: any) => {
@@ -168,7 +201,12 @@ export default function Index() {
                 />
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
+            <>
+              {
+                votingTime ? (
+                  <h1>Voting Lines Closed!</h1>
+                ) : (
+                  <form onSubmit={handleSubmit}>
                 {/* {status === "unauthenticated" && (
                   <div className={styles.responseMessageE}>
                     You need to{" "}
@@ -208,6 +246,9 @@ export default function Index() {
                   )}
                 </div>
               </form>
+                )
+              }
+            </>
             )}
           </div>
           <div className={styles.subLogo}>
