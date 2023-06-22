@@ -83,7 +83,7 @@ export default function Index() {
     }
     setTimeout(getCategories, 1000);
 
-    const target = new Date("6/20/2023 23:59:59");
+    const target = new Date("6/25/2023 23:59:59");
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -104,7 +104,7 @@ export default function Index() {
       setSeconds(s);
 
       if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
-        setVotingTime(true);
+        setVotingTime(false);
       }
     }, 1000);
 
