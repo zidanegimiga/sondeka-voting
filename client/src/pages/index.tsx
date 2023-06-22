@@ -104,7 +104,7 @@ export default function Index() {
       setSeconds(s);
 
       if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
-        setVotingTime(true);
+        setVotingTime(false);
       }
     }, 1000);
 
