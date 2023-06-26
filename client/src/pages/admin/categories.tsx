@@ -36,7 +36,8 @@ const AdminCategories = () => {
         }
       } catch (err) {
         console.log(err);
-        setError(true);
+        router.push("/admin/login-admin")
+        setError(true);        
       }
     };
 

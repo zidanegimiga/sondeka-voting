@@ -42,7 +42,7 @@ const Countdown = () => {
     <>
       {votingTime ? (
         <>
-          <h1>Voting Lines Open!</h1>
+          <h1>Voting Lines Closed</h1>
         </>
       ) : (
         <>
@@ -50,19 +50,19 @@ const Countdown = () => {
             <div className={styles.timeBox}>
               <div className={styles.time}>{days}</div>
               <div className={styles.timeTitle}>DAYS</div>
-            </div>                        
+            </div>
             <div className={styles.timeBox}>
               <div className={styles.time}>{hours}</div>
               <div className={styles.timeTitle}>HOURS</div>
-            </div>                        
+            </div>
             <div className={styles.timeBox}>
               <div className={styles.time}>{minutes}</div>
               <div className={styles.timeTitle}>MINUTES</div>
-            </div>                        
+            </div>
             <div className={styles.timeBox}>
               <div className={styles.time}>{seconds}</div>
               <div className={styles.timeTitle}>SECONDS</div>
-            </div>                        
+            </div>
           </div>
         </>
       )}

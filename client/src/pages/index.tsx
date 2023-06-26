@@ -201,54 +201,53 @@ export default function Index() {
                 />
               </div>
             ) : (
-            <>
-              {
-                votingTime ? (
+              <>
+                {votingTime ? (
                   <h1>Voting Lines Closed!</h1>
                 ) : (
-                  <form onSubmit={handleSubmit}>
-                {/* {status === "unauthenticated" && (
-                  <div className={styles.responseMessageE}>
-                    You need to{" "}
-                    <Link href={"/oAuthLogin"}>
-                      <span>log in</span>
-                    </Link>{" "}
-                    to vote
-                  </div>
-                )} */}
-                {categoryData?.map((category, index) => {
-                  return (
-                    <CategoryItem
-                      key={category.name}
-                      categoryData={category}
-                      title={category.name}
-                      link={category._id}
-                      color={category.color}
-                      openModal={openModal}
-                      handleChoiceChange={handleChoiceChange}
-                    />
-                  );
-                })}
+                //   <form onSubmit={handleSubmit}>
+                //     {/* {status === "unauthenticated" && (
+                //   <div className={styles.responseMessageE}>
+                //     You need to{" "}
+                //     <Link href={"/oAuthLogin"}>
+                //       <span>log in</span>
+                //     </Link>{" "}
+                //     to vote
+                //   </div>
+                // )} */}
+                //     {categoryData?.map((category, index) => {
+                //       return (
+                //         <CategoryItem
+                //           key={category.name}
+                //           categoryData={category}
+                //           title={category.name}
+                //           link={category._id}
+                //           color={category.color}
+                //           openModal={openModal}
+                //           handleChoiceChange={handleChoiceChange}
+                //         />
+                //       );
+                //     })}
 
-                <div className={styles.votebuttonContainer}>
-                  <button
-                    className={styles.voteButton}
-                    type="submit"
-                    disabled={status === "unauthenticated"}
-                  >
-                    {" "}
-                    {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
-                  </button>
-                  {responseMessage && (
-                    <div className={styles.responseMessage}>
-                      {responseMessage?.message}
-                    </div>
-                  )}
-                </div>
-              </form>
-                )
-              }
-            </>
+                //     <div className={styles.votebuttonContainer}>
+                //       <button
+                //         className={styles.voteButton}
+                //         type="submit"
+                //         disabled={status === "unauthenticated"}
+                //       >
+                //         {" "}
+                //         {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
+                //       </button>
+                //       {responseMessage && (
+                //         <div className={styles.responseMessage}>
+                //           {responseMessage?.message}
+                //         </div>
+                //       )}
+                //     </div>
+                //   </form>
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", fontFamily: "sans-serif", color: "white"}}></div>
+                )}
+              </>
             )}
           </div>
           <div className={styles.subLogo}>
@@ -293,31 +292,19 @@ export default function Index() {
           transition={{ duration: 1 }}
         >
           <div className={styles.contentContainer}>
-            {
-              nomineeModalData?.stageName === "Frank Njugi" && (
-                <FrankNjugi/>
-              )                        
-            }
-            {
-              nomineeModalData?.stageName === "Martin Mururu" && (
-                <MartinMururu/>
-              )                        
-            }
-            {
-              nomineeModalData?.stageName === "Lutivini Majanja" && (
-                <LutiviniMajanja/>
-              )                        
-            }
-            {
-              nomineeModalData?.stageName === "Mishi khalid" && (
-                <MishiKhalid image={nomineeModalData?.submission}/>
-              )                        
-            }
-            {
-              nomineeModalData?.stageName === "Natasha Muhanji" && (
-                <NatashaMuhanji/>
-              )                        
-            }
+            {nomineeModalData?.stageName === "Frank Njugi" && <FrankNjugi />}
+            {nomineeModalData?.stageName === "Martin Mururu" && (
+              <MartinMururu />
+            )}
+            {nomineeModalData?.stageName === "Lutivini Majanja" && (
+              <LutiviniMajanja />
+            )}
+            {nomineeModalData?.stageName === "Mishi khalid" && (
+              <MishiKhalid image={nomineeModalData?.submission} />
+            )}
+            {nomineeModalData?.stageName === "Natasha Muhanji" && (
+              <NatashaMuhanji />
+            )}
             {nomineeModalData?.categoryName ===
               "Traditional/Contemporary Art" && (
               <div className={styles.imageContainer}>
