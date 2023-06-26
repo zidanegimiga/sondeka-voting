@@ -205,47 +205,48 @@ export default function Index() {
                 {votingTime ? (
                   <h1>Voting Lines Closed!</h1>
                 ) : (
-                //   <form onSubmit={handleSubmit}>
-                //     {/* {status === "unauthenticated" && (
-                //   <div className={styles.responseMessageE}>
-                //     You need to{" "}
-                //     <Link href={"/oAuthLogin"}>
-                //       <span>log in</span>
-                //     </Link>{" "}
-                //     to vote
-                //   </div>
-                // )} */}
-                //     {categoryData?.map((category, index) => {
-                //       return (
-                //         <CategoryItem
-                //           key={category.name}
-                //           categoryData={category}
-                //           title={category.name}
-                //           link={category._id}
-                //           color={category.color}
-                //           openModal={openModal}
-                //           handleChoiceChange={handleChoiceChange}
-                //         />
-                //       );
-                //     })}
+                  <form onSubmit={handleSubmit}>
+                    {/* {status === "unauthenticated" && (
+                  <div className={styles.responseMessageE}>
+                    You need to{" "}
+                    <Link href={"/oAuthLogin"}>
+                      <span>log in</span>
+                    </Link>{" "}
+                    to vote
+                  </div>
+                )} */}
+                    {categoryData?.map((category, index) => {
+                      return (
+                        <CategoryItem
+                          key={category.name}
+                          categoryData={category}
+                          title={category.name}
+                          link={category._id}
+                          color={category.color}
+                          openModal={openModal}
+                          handleChoiceChange={handleChoiceChange}
+                        />
+                      );
+                    })}
 
-                //     <div className={styles.votebuttonContainer}>
-                //       <button
-                //         className={styles.voteButton}
-                //         type="submit"
-                //         disabled={status === "unauthenticated"}
-                //       >
-                //         {" "}
-                //         {loading ? "SUBMITING VOTE" : "SUBMIT VOTE"}
-                //       </button>
-                //       {responseMessage && (
-                //         <div className={styles.responseMessage}>
-                //           {responseMessage?.message}
-                //         </div>
-                //       )}
-                //     </div>
-                //   </form>
-                <div style={{display: "flex", justifyContent: "center", alignItems: "center", fontFamily: "sans-serif", color: "white"}}></div>
+                    <div className={styles.votebuttonContainer}>
+                      <button
+                        className={styles.voteButton}
+                        type="submit"
+                        disabled={true}
+                        // disabled={status === "unauthenticated"}
+                      >
+                        {" "}
+                        {loading ? "VOTING CLOSED" : "SUBMIT VOTE"}
+                      </button>
+                      {responseMessage && (
+                        <div className={styles.responseMessage}>
+                          {responseMessage?.message}
+                        </div>
+                      )}
+                    </div>
+                  </form>
+                  // <div style={{display: "flex", justifyContent: "center", alignItems: "center", fontFamily: "sans-serif", color: "white"}}></div>
                 )}
               </>
             )}
